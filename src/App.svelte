@@ -6,16 +6,16 @@
 
 <main>
 	<Graph />
-	<Divider />
 	<Chat />
 </main>
+<Divider />
 
 <style>
 	main {
 		display: grid;
 		width: 100vw;
 		height: 100vh;
-		grid-template-columns: 79.75% 0.25% 20%;
+		grid-template-columns: 80% 20%;
 		grid-template-rows: 100vh;
 
 	}
