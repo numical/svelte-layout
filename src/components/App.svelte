@@ -16,18 +16,20 @@
 	const stopResize = () => {
 		state.resizing = false;
 	};
-	const resize = ({ clientX }) => {
+	const resize = event => {
 		if (state.resizing) {
-			state.graphWidth = `${clientX - main.offsetLeft}px`;
-			state.chatWidth = `${main.clientWidth - clientX + main.offsetLeft}px`;
+			const x = event.clientX || event.touches[0].screenX;
+			console.log(x);
+			state.graphWidth = `${x - main.offsetLeft}px`;
+			state.chatWidth = `${main.clientWidth - x + main.offsetLeft}px`;
 		}
 	};
 </script>
 
-<main on:mousemove={resize} on:mouseup={stopResize} bind:this={main}>
+<main on:mousemove={resize} on:touchmove={resize} on:mouseup={stopResize} on:touchend={stopResize} bind:this={main}>
 	<Graph width={state.graphWidth} />
 	<Chat width={state.chatWidth}>
-		<Divider mouseDown={startResize} />
+		<Divider startResize={startResize} />
 	</Chat>
 </main>
 

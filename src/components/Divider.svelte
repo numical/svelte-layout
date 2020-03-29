@@ -1,28 +1,17 @@
 <script>
-    export let mouseDown;
+    export let startResize;
 </script>
 
-<div class="divider" on:mousedown={mouseDown}>
-    <div class="line"></div>
-    <div class="line"></div>
-</div>
+<div class="divider" on:mousedown={startResize} on:touchstart={startResize} />
+
 
 <style>
     .divider {
         position: absolute;
-        left: -2px;
+        left: -1vw;
         top: 0;
         bottom: 0;
-        width: 6px;
+        width: 2vw;
         cursor: w-resize;
-        background-color: grey;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .line {
-        width: 2px;
-        height: 100%;
-        background: darkgrey;
-        margin-left: 2px;
     }
 </style>
