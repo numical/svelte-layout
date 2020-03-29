@@ -1,5 +1,6 @@
 <script>
-    import chatHistory from "./chatHistory";
+    export let width;
+    import chatHistory from "../data/chatHistory";
     let history = chatHistory.map(s => s.split('.'));
 
     const focus = el => el.focus();
@@ -10,9 +11,11 @@
         history = [...history, [value], [`Sorry, I do not understand '${value}'`]];
     }
 
+
+
 </script>
 
-<main>
+<main style="width:{width}">
     <div id="history" class="history">
         {#each history as item, i}
             <div class={i % 2 === 0 ? "chatItem userHistoryItem" : "chatItem botHistoryItem"}>
@@ -23,11 +26,16 @@
         {/each}
     </div>
     <input id="command" class="chatItem" use:focus on:change={addCommand}/>
+    <slot></slot>
 </main>
 
 <style>
     main {
         color: white;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
         background-color: black;
         display: flex;
         flex-direction: column;
