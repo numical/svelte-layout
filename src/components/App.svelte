@@ -2,6 +2,7 @@
 	import Chat from './Chat.svelte';
 	import Divider from "./Divider.svelte";
 	import Graph from './Graph.svelte';
+	import Toolbar from './Toolbar.svelte';
 
 	let state = {
 		graphWidth: '80%',
@@ -18,18 +19,27 @@
 	};
 	const resize = event => {
 		if (state.resizing) {
-			const x = event.clientX || event.touches[0].screenX;
-			console.log(x);
-			state.graphWidth = `${x - main.offsetLeft}px`;
-			state.chatWidth = `${main.clientWidth - x + main.offsetLeft}px`;
+			const x = event.clientX || event.touches[0].clientX;
+			const w = Math.floor(100 * x / main.clientWidth);
+			state.graphWidth = `${w}%`;
+			state.chatWidth = `${100-w}%`;
 		}
 	};
+
+	const togglePin = () => {
+		console.log('Pin toggled.');
+	}
 </script>
 
 <main on:mousemove={resize} on:touchmove={resize} on:mouseup={stopResize} on:touchend={stopResize} bind:this={main}>
 	<Graph width={state.graphWidth} />
 	<Chat width={state.chatWidth}>
-		<Divider startResize={startResize} />
+		<div slot="toolbar">
+			<Toolbar togglePin={togglePin} />
+		</div>
+		<div slot="divider">
+			<Divider startResize={startResize} />
+		</div>
 	</Chat>
 </main>
 
@@ -38,4 +48,4 @@
 		width: 100%;
 		height: 100%;
 	}
-</style>
+</style>;

@@ -91,3 +91,8 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
+
+
+## Next Steps
+1. change widths to %
+2. orientation event

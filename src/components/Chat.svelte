@@ -1,6 +1,7 @@
 <script>
     export let width;
     import chatHistory from "../data/chatHistory";
+
     let history = chatHistory.map(s => s.split('.'));
 
     const focus = el => el.focus();
@@ -16,6 +17,7 @@
 </script>
 
 <main style="width:{width}">
+    <slot name="toolbar"/>
     <div id="history" class="history">
         {#each history as item, i}
             <div class={i % 2 === 0 ? "chatItem userHistoryItem" : "chatItem botHistoryItem"}>
@@ -26,7 +28,7 @@
         {/each}
     </div>
     <input id="command" class="chatItem" use:focus on:change={addCommand}/>
-    <slot></slot>
+    <slot name="divider"/>
 </main>
 
 <style>
