@@ -5,9 +5,11 @@
 	import Toolbar from './Toolbar.svelte';
 
 	let state = {
-		graphWidth: '80%',
-		chatWidth: '20%',
-		resizing: false
+		graphWidth: 100,
+		chatWidth: 20,
+		resizing: false,
+		overlayChat: true,
+		chatOpacity: 75
 	};
 	let main;
 
@@ -21,21 +23,29 @@
 		if (state.resizing) {
 			const x = event.clientX || event.touches[0].clientX;
 			const w = Math.floor(100 * x / main.clientWidth);
-			state.graphWidth = `${w}%`;
-			state.chatWidth = `${100-w}%`;
+			state.graphWidth = state.overlayChat ? 100 : w;
+			state.chatWidth = 100-w;
 		}
 	};
 
-	const togglePin = () => {
-		console.log('Pin toggled.');
+	const toggleOverlay = () => {
+		if (state.overlayChat) {
+			state.overlayChat = false;
+			state.chatOpacity = 100;
+			state.graphWidth = 100 - state.chatWidth;
+		} else {
+			state.overlayChat = true;
+			state.chatOpacity = 75;
+			state.graphWidth = 100;
+		}
 	}
 </script>
 
 <main on:mousemove={resize} on:touchmove={resize} on:mouseup={stopResize} on:touchend={stopResize} bind:this={main}>
-	<Graph width={state.graphWidth} />
-	<Chat width={state.chatWidth}>
+	<Graph width={`${state.graphWidth}%`} />
+	<Chat width={`${state.chatWidth}%`} opacity={`${state.chatOpacity}%`}>
 		<div slot="toolbar">
-			<Toolbar togglePin={togglePin} />
+			<Toolbar toggleOverlay={toggleOverlay} overlayChat={state.overlayChat} />
 		</div>
 		<div slot="divider">
 			<Divider startResize={startResize} />

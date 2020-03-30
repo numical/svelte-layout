@@ -94,5 +94,5 @@ surge public my-project.surge.sh
 
 
 ## Next Steps
-1. change widths to %
-2. orientation event
+1.opacity
+2.pin behaviours

@@ -1,5 +1,6 @@
 <script>
     export let width;
+    export let opacity;
     import chatHistory from "../data/chatHistory";
 
     let history = chatHistory.map(s => s.split('.'));
@@ -16,7 +17,7 @@
 
 </script>
 
-<main style="width:{width}">
+<main style="width:{width}; opacity:{opacity}">
     <slot name="toolbar"/>
     <div id="history" class="history">
         {#each history as item, i}
@@ -33,11 +34,11 @@
 
 <style>
     main {
-        color: white;
         position: absolute;
         right: 0;
         top: 0;
         bottom: 0;
+        color: white;
         background-color: black;
         display: flex;
         flex-direction: column;

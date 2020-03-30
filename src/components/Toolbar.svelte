@@ -1,12 +1,17 @@
 <script>
-    export let togglePin;
+    export let toggleOverlay;
+    export let overlayChat;
     import Pin from "svelte-material-icons/Pin.svelte";
     import PinOutline from "svelte-material-icons/PinOutline.svelte";
 </script>
 
 <div class="toolbar">
-    <div class="toolbarItem" on:click={togglePin}>
-        <PinOutline />
+    <div class="toolbarItem" on:click={toggleOverlay}>
+        {#if overlayChat}
+            <Pin />
+        {:else}
+            <PinOutline />
+        {/if}
     </div>
 </div>
 
