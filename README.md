@@ -94,5 +94,5 @@ surge public my-project.surge.sh
 
 
 ## Next Steps
-1.opacity
-2.pin behaviours
+1. chat vertical behaviour
+2. swipe
