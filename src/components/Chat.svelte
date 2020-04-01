@@ -54,6 +54,7 @@
         background-color: black;
         display: grid;
         grid-template-rows: 2rem calc(100vh - 4.5rem) 2rem;
+        grid-template-columns: 100%;
         transition: opacity .6s, border-radius .6s, margin 0.6s;
     }
     input {
