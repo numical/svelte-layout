@@ -6,7 +6,7 @@
 
     $: mainStyle =  `
         width:${width};
-        opacity:${overlay ? '75%' : '100%'};
+        background-color:rgb(0,0,0,${overlay ? 0.75 : 1});
         border-radius:${overlay ? '0.5rem' : '0'};
         margin:${overlay ? '0.25rem' : '0'};
     `;
@@ -51,18 +51,17 @@
         top: 0;
         bottom: 0;
         color: white;
-        background-color: black;
         display: grid;
         grid-template-rows: 2rem calc(100vh - 4.5rem) 2rem;
         grid-template-columns: 100%;
-        transition: opacity .6s, border-radius .6s, margin 0.6s;
+        transition: background-color .6s, border-radius .6s, margin 0.6s;
     }
     input {
         color: black;
         background-color: white;
         opacity: 100%;
         font-weight: bold;
-        border: none;
+        border: thin solid black;
         margin: 0.25rem;
         transition: border-radius .6s;
     }
