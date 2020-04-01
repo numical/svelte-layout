@@ -31,7 +31,7 @@
             </div>
         {/each}
     </div>
-    <input id="command" class="chatItem" placeholder="next command..?" bind:this={command} on:change={addCommand}/>
+    <input id="command" placeholder="next command..?" bind:this={command} on:change={addCommand}/>
     <slot name="divider"/>
 </main>
 
@@ -48,11 +48,12 @@
         transition: opacity .6s;
     }
     input {
-        color: white;
-        background-color: black;
+        color: black;
+        background-color: white;
+        opacity: 100%;
         font-weight: bold;
         border: none;
-        padding: 0.5rem;
+        margin: 0.25rem;
     }
     .history {
         overflow-y: auto;

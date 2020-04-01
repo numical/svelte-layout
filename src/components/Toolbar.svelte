@@ -41,6 +41,7 @@
         position: absolute;
         width: 12ch;
         text-align: center;
+        color: grey;
         z-index: 1;
         opacity: 0;
         transition: opacity .6s;
