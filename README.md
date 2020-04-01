@@ -94,5 +94,6 @@ surge public my-project.surge.sh
 
 
 ## Next Steps
-1. chat vertical behaviour
-2. swipe
+1. overlay 'float'
+2. non-transparent input
+3. swipe

@@ -10,7 +10,6 @@
 		resizing: false,
 		overlayChat: true,
 		showChat: true,
-		chatOpacity: 75,
 		transition: 0.6
 	};
 	let main;
@@ -34,11 +33,9 @@
 	const toggleOverlay = () => {
 		if (state.overlayChat) {
 			state.overlayChat = false;
-			state.chatOpacity = 100;
 			state.graphWidth = 100 - state.chatWidth;
 		} else {
 			state.overlayChat = true;
-			state.chatOpacity = 75;
 			state.graphWidth = 100;
 		}
 		state.transition = 0.6;
@@ -48,7 +45,7 @@
 <main on:mousemove={resize} on:touchmove={resize} on:mouseup={stopResize} on:touchend={stopResize} bind:this={main}>
 	<Graph width={`${state.graphWidth}%`} transition="{state.transition}"/>
 	{#if state.showChat}
-		<Chat width={`${state.chatWidth}%`} opacity={`${state.chatOpacity}%`}>
+		<Chat width={`${state.chatWidth}%`} overlay={state.overlayChat}>
 			<div slot="toolbar">
 				<Toolbar toggleOverlay={toggleOverlay} overlayChat={state.overlayChat} />
 			</div>

@@ -1,8 +1,17 @@
 <script>
     export let width;
-    export let opacity;
+    export let overlay;
     import { afterUpdate } from 'svelte';
     import chatHistory from "../data/chatHistory";
+
+    $: mainStyle =  `
+        width:${width};
+        opacity:${overlay ? '75%' : '100%'};
+        border-radius:${overlay ? '0.5rem' : '0'};
+        margin:${overlay ? '0.25rem' : '0'};
+    `;
+
+    $: inputStyle = `border-radius:${overlay ? '0.25rem' : '0'};`;
 
     let historyItems = chatHistory.map(s => s.split('.'));
     let history;
@@ -20,7 +29,7 @@
     });
 </script>
 
-<main style="width:{width}; opacity:{opacity}">
+<main style={mainStyle}>
     <slot name="toolbar"/>
     <div id="history" class="history" bind:this={history}>
         {#each historyItems as item, i}
@@ -31,7 +40,7 @@
             </div>
         {/each}
     </div>
-    <input id="command" placeholder="next command..?" bind:this={command} on:change={addCommand}/>
+    <input id="command" placeholder="next command..?" style={inputStyle} bind:this={command} on:change={addCommand}/>
     <slot name="divider"/>
 </main>
 
@@ -44,8 +53,8 @@
         color: white;
         background-color: black;
         display: grid;
-        grid-template-rows: 2rem calc(100vh - 4rem) 2rem;
-        transition: opacity .6s;
+        grid-template-rows: 2rem calc(100vh - 4.5rem) 2rem;
+        transition: opacity .6s, border-radius .6s, margin 0.6s;
     }
     input {
         color: black;
@@ -54,6 +63,7 @@
         font-weight: bold;
         border: none;
         margin: 0.25rem;
+        transition: border-radius .6s;
     }
     .history {
         overflow-y: auto;
