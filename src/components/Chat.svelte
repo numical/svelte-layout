@@ -1,8 +1,10 @@
 <script>
     export let width;
     export let overlay;
+
     import { afterUpdate } from 'svelte';
     import chatHistory from "../data/chatHistory";
+    import { currentFocus } from '../managers/helpManager';
 
     $: mainStyle =  `
         width:${width};
@@ -11,7 +13,10 @@
         margin:${overlay ? '0.25rem' : '0'};
     `;
 
-    $: inputStyle = `border-radius:${overlay ? '0.25rem' : '0'};`;
+    $: inputStyle = `
+        border-radius:${overlay ? '0.25rem' : '0'};
+        background-color: ${$currentFocus === 'default' ? 'darkorange': 'transparent'};
+    `;
 
     let historyItems = chatHistory.map(s => s.split('.'));
     let history;
@@ -58,12 +63,16 @@
     }
     input {
         color: black;
-        background-color: white;
+        background-color: darkorange;
         opacity: 100%;
         font-weight: bold;
-        border: thin solid black;
+        border: none;
         margin: 0.25rem;
         transition: border-radius .6s;
+    }
+    input::placeholder {
+        color: white;
+        opacity: 1;
     }
     .history {
         overflow-y: auto;

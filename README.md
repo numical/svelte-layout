@@ -94,6 +94,6 @@ surge public my-project.surge.sh
 
 
 ## Next Steps
-1. overlay 'float'
-2. non-transparent input
-3. swipe
+1. swipe
+2. #ff8c00 Color Hex Dark Orange
+https://redketchup.io/icon-editor

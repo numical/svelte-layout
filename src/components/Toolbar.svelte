@@ -1,12 +1,21 @@
 <script>
-    export let toggleOverlay;
-    export let overlayChat;
     import Pin from "svelte-material-icons/Pin.svelte";
     import PinOutline from "svelte-material-icons/PinOutline.svelte";
+    import { setFocus, loseFocus } from '../managers/helpManager';
+
+    export let toggleOverlay;
+    export let overlayChat;
+
+    const gainFocus = setFocus.bind(null, 'toggleOverlay');
+
 </script>
 
 <div class="toolbar">
-    <div class="toolbarItem" on:click={toggleOverlay}>
+    <div class="toolbarItem"
+         on:click={toggleOverlay}
+         on:mouseover={gainFocus}
+         on:mouseleave={loseFocus}
+    >
         <span class="tooltip">
              {#if overlayChat}
                  side-by-side
@@ -34,14 +43,14 @@
         padding: 0.25rem;
     }
     .toolbarItem:hover {
-        background-color: grey;
+        background-color: darkorange;
     }
     .toolbarItem .tooltip {
         visibility: hidden;
         position: absolute;
         width: 12ch;
         text-align: center;
-        color: grey;
+        color: darkorange;
         z-index: 1;
         opacity: 0;
         transition: opacity .6s;
