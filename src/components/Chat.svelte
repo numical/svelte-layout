@@ -1,20 +1,18 @@
 <script>
-    export let width;
-    export let overlay;
-
     import { afterUpdate } from 'svelte';
     import chatHistory from "../data/chatHistory";
     import { currentFocus } from '../managers/helpManager';
+    import { layout } from '../managers/layoutManager';
 
     $: mainStyle =  `
-        width:${width};
-        background-color:rgb(0,0,0,${overlay ? 0.75 : 1});
-        border-radius:${overlay ? '0.5rem' : '0'};
-        margin:${overlay ? '0.25rem' : '0'};
+        width:${$layout.chatWidth}%;
+        background-color:rgb(0,0,0,${$layout.overlayChat ? 0.75 : 1});
+        border-radius:${$layout.overlayChat ? '0.5rem' : '0'};
+        margin:${$layout.overlayChat ? '0.25rem' : '0'};
     `;
 
     $: inputStyle = `
-        border-radius:${overlay ? '0.25rem' : '0'};
+        border-radius:${$layout.overlayChat ? '0.25rem' : '0'};
         background-color: ${$currentFocus === 'default' ? 'darkorange': 'transparent'};
     `;
 

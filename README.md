@@ -95,5 +95,4 @@ surge public my-project.surge.sh
 
 ## Next Steps
 1. swipe
-2. #ff8c00 Color Hex Dark Orange
-https://redketchup.io/icon-editor
+2. toggleOverlay from state

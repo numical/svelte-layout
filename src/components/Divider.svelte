@@ -1,7 +1,6 @@
 <script>
     import { setFocus, loseFocus } from '../managers/helpManager';
-
-    export let startResize;
+    import { startResize } from '../managers/layoutManager';
 
     const gainFocus = setFocus.bind(null, 'divider');
 </script>

@@ -2,9 +2,7 @@
     import Pin from "svelte-material-icons/Pin.svelte";
     import PinOutline from "svelte-material-icons/PinOutline.svelte";
     import { setFocus, loseFocus } from '../managers/helpManager';
-
-    export let toggleOverlay;
-    export let overlayChat;
+    import { layout, toggleOverlay } from '../managers/layoutManager';
 
     const gainFocus = setFocus.bind(null, 'toggleOverlay');
 
@@ -17,13 +15,13 @@
          on:mouseleave={loseFocus}
     >
         <span class="tooltip">
-             {#if overlayChat}
+             {#if $layout.overlayChat}
                  side-by-side
              {:else}
                  overlay chat
              {/if}
         </span>
-        {#if overlayChat}
+        {#if $layout.overlayChat}
             <Pin />
         {:else}
             <PinOutline />
