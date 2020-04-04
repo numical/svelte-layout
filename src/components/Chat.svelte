@@ -9,6 +9,7 @@
         background-color:rgb(0,0,0,${$layout.overlayChat ? 0.75 : 1});
         border-radius:${$layout.overlayChat ? '0.5rem' : '0'};
         margin:${$layout.overlayChat ? '0.25rem' : '0'};
+        transition: width ${$layout.transition}s
     `;
 
     $: inputStyle = `
@@ -57,7 +58,7 @@
         display: grid;
         grid-template-rows: 2rem calc(100vh - 4.5rem) 2rem;
         grid-template-columns: 100%;
-        transition: background-color .6s, border-radius .6s, margin 0.6s;
+        transition: background-color .6s, border-radius .6s, margin .6s;
     }
     input {
         color: black;

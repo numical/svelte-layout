@@ -7,10 +7,12 @@
 	import { gesture } from '../stores/gestureManager';
 </script>
 
-<main on:mousemove={e => $gesture.isDragging && $layout.updateLayout(e)}
+<main on:mousedown={e => !$gesture.startSwipe(e, $layout.maximisePanel)}
+	  on:touchstart={e => $gesture.startSwipe(e, $layout.maximisePanel)}
+	  on:mousemove={e => $gesture.isDragging && $layout.updateLayout(e)}
 	  on:touchmove={e => $gesture.isDragging && $layout.updateLayout(e)}
-	  on:mouseup={$gesture.stopDrag}
-	  on:touchend={$gesture.stopDrag}>
+	  on:mouseup={$gesture.stop}
+	  on:touchend={$gesture.stop}>
 	<Graph />
 	{#if $layout.showChat}
 		<Chat>

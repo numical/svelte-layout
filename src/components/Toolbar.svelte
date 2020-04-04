@@ -8,6 +8,7 @@
 <div class="toolbar">
     <div class="toolbarItem"
          on:click={$layout.toggleOverlay}
+         on:mouseup|stopPropagation={$help.loseFocus}
          on:mouseover={() => $help.setFocus('toggleOverlay')}
          on:mouseleave={$help.loseFocus}
     >

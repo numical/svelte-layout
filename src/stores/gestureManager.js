@@ -1,17 +1,33 @@
 import { writable } from 'svelte/store';
+import { identifySwipe } from "./Swipe";
 
 export const gesture = writable({
     isDragging: false,
+    possibleSwipe: false,
     startDrag: () => {
         gesture.update(state => ({
             ...state,
-            isDragging: true
+            isDragging: true,
+            possibleSwipe: false
         }));
     },
-    stopDrag: () => {
+    startSwipe: (event, callback) => {
         gesture.update(state => ({
             ...state,
-            isDragging: false
+            possibleSwipe: state.isDragging ? false : { start: event, callback }
         }));
+    },
+    stop: event => {
+        gesture.update(state => {
+            if (state.possibleSwipe) {
+                const { start, callback } = state.possibleSwipe;
+                callback(identifySwipe(start, event));
+            }
+            return {
+                ...state,
+                isDragging: false,
+                possibleSwipe: false
+            }
+        });
     }
 });
