@@ -1,17 +1,15 @@
 <script>
     import Pin from "svelte-material-icons/Pin.svelte";
     import PinOutline from "svelte-material-icons/PinOutline.svelte";
-    import { setFocus, loseFocus } from '../managers/helpManager';
-    import { layout, toggleOverlay } from '../managers/layoutManager';
-
-    const gainFocus = setFocus.bind(null, 'toggleOverlay');
+    import { help } from '../managers/helpManager';
+    import { layout } from '../managers/layoutManager';
 </script>
 
 <div class="toolbar">
     <div class="toolbarItem"
-         on:click={toggleOverlay}
-         on:mouseover={gainFocus}
-         on:mouseleave={loseFocus}
+         on:click={$layout.toggleOverlay}
+         on:mouseover={() => $help.setFocus('toggleOverlay')}
+         on:mouseleave={$help.loseFocus}
     >
         <span class="tooltip">
              {#if $layout.overlayChat}

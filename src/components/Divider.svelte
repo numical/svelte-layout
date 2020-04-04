@@ -1,16 +1,14 @@
 <script>
-    import { setFocus, loseFocus } from '../managers/helpManager';
-    import { startDrag } from '../managers/dragManager';
-
-    const gainFocus = setFocus.bind(null, 'divider');
+    import { help } from '../managers/helpManager';
+    import { gesture } from '../managers/gestureManager';
 </script>
 
 <div class="divider"
-     on:mouseover={gainFocus}
-     on:mousedown={startDrag}
-     on:touchstart={startDrag}
-     on:mouseleave={loseFocus}
-     on:touchend={loseFocus}
+     on:mouseover={() => $help.setFocus('divider')}
+     on:mousedown={$gesture.startDrag}
+     on:touchstart={$gesture.startDrag}
+     on:mouseleave={$help.loseFocus}
+     on:touchend={$help.loseFocus}
 />
 
 <style>

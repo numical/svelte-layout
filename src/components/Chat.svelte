@@ -1,7 +1,7 @@
 <script>
     import { afterUpdate } from 'svelte';
     import chatHistory from "../data/chatHistory";
-    import { currentFocus } from '../managers/helpManager';
+    import { help } from '../managers/helpManager';
     import { layout } from '../managers/layoutManager';
 
     $: mainStyle =  `
@@ -13,7 +13,7 @@
 
     $: inputStyle = `
         border-radius:${$layout.overlayChat ? '0.25rem' : '0'};
-        background-color: ${$currentFocus === 'default' ? 'darkorange': 'transparent'};
+        background-color: ${$help.currentFocus === 'default' ? 'darkorange': 'transparent'};
     `;
 
     let historyItems = chatHistory.map(s => s.split('.'));

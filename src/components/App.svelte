@@ -3,14 +3,14 @@
 	import Divider from "./Divider.svelte";
 	import Graph from './Graph.svelte';
 	import Toolbar from './Toolbar.svelte';
-	import { layout, updateLayout} from '../managers/layoutManager';
-	import { stopDrag } from '../managers/dragManager';
+	import { layout } from '../managers/layoutManager';
+	import { gesture } from '../managers/gestureManager';
 </script>
 
-<main on:mousemove={updateLayout}
-	  on:touchmove={updateLayout}
-	  on:mouseup={stopDrag}
-	  on:touchend={stopDrag}>
+<main on:mousemove={e => $gesture.isDragging && $layout.updateLayout(e)}
+	  on:touchmove={e => $gesture.isDragging && $layout.updateLayout(e)}
+	  on:mouseup={$gesture.stopDrag}
+	  on:touchend={$gesture.stopDrag}>
 	<Graph />
 	{#if $layout.showChat}
 		<Chat>

@@ -1,11 +1,13 @@
 import { writable } from 'svelte/store';
 
-export const currentFocus = writable('default');
-
-export const setFocus = focus => {
-    currentFocus.update(() => focus);
-};
-
-export const loseFocus = () => {
-    currentFocus.update(() => 'default');
-};
+export const help = writable({
+    currentFocus: 'default',
+    setFocus: focus => help.update(help => ({
+        ...help,
+        currentFocus: focus
+    })),
+    loseFocus: () => help.update( help => ({
+        ...help,
+        currentFocus: 'default'
+    }))
+});
