@@ -1,5 +1,5 @@
 <script>
-    import { layout } from '../managers/layoutManager';
+    import { layout } from '../stores/layoutManager';
     $: style = `
         width:${$layout.graphWidth}%;
         transition: width ${$layout.transition}s

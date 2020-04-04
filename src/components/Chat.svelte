@@ -1,8 +1,8 @@
 <script>
     import { afterUpdate } from 'svelte';
     import chatHistory from "../data/chatHistory";
-    import { help } from '../managers/helpManager';
-    import { layout } from '../managers/layoutManager';
+    import { help } from '../stores/helpManager';
+    import { layout } from '../stores/layoutManager';
 
     $: mainStyle =  `
         width:${$layout.chatWidth}%;

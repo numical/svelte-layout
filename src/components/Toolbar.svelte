@@ -1,8 +1,8 @@
 <script>
     import Pin from "svelte-material-icons/Pin.svelte";
     import PinOutline from "svelte-material-icons/PinOutline.svelte";
-    import { help } from '../managers/helpManager';
-    import { layout } from '../managers/layoutManager';
+    import { help } from '../stores/helpManager';
+    import { layout } from '../stores/layoutManager';
 </script>
 
 <div class="toolbar">

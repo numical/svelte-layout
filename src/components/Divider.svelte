@@ -1,6 +1,6 @@
 <script>
-    import { help } from '../managers/helpManager';
-    import { gesture } from '../managers/gestureManager';
+    import { help } from '../stores/helpManager';
+    import { gesture } from '../stores/gestureManager';
 </script>
 
 <div class="divider"

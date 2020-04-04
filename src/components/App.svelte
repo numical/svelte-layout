@@ -3,8 +3,8 @@
 	import Divider from "./Divider.svelte";
 	import Graph from './Graph.svelte';
 	import Toolbar from './Toolbar.svelte';
-	import { layout } from '../managers/layoutManager';
-	import { gesture } from '../managers/gestureManager';
+	import { layout } from '../stores/layoutManager';
+	import { gesture } from '../stores/gestureManager';
 </script>
 
 <main on:mousemove={e => $gesture.isDragging && $layout.updateLayout(e)}

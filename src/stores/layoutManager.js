@@ -7,27 +7,27 @@ export const layout = writable({
     showChat: true,
     transition: 0.6,
     updateLayout: event => {
-        layout.update(layout => {
+        layout.update(state => {
             const x = event.clientX || event.touches[0].clientX;
             const w = Math.floor(100 * x / event.currentTarget.clientWidth);
             return {
-                ...layout,
-                graphWidth: layout.overlayChat ? 100 : w,
+                ...state,
+                graphWidth: state.overlayChat ? 100 : w,
                 chatWidth: 100 - w,
                 transition: 0
             };
         });
     },
     toggleOverlay: () => {
-        layout.update(layout => layout.overlayChat
+        layout.update(state => state.overlayChat
             ? {
-                ...layout,
+                ...state,
                 overlayChat: false,
-                graphWidth: 100 - layout.chatWidth,
+                graphWidth: 100 - state.chatWidth,
                 transition: 0.6
             }
             : {
-                ...layout,
+                ...state,
                 overlayChat: true,
                 graphWidth: 100,
                 transition: 0.6
