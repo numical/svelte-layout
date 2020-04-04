@@ -3,16 +3,14 @@
 	import Divider from "./Divider.svelte";
 	import Graph from './Graph.svelte';
 	import Toolbar from './Toolbar.svelte';
-	import { layout,
-			 stopResize,
-			 resize} from '../managers/layoutManager';
-
-	let main;
-	const resized = event => resize(main, event);
-
+	import { layout, updateLayout} from '../managers/layoutManager';
+	import { stopDrag } from '../managers/dragManager';
 </script>
 
-<main on:mousemove={resized} on:touchmove={resized} on:mouseup={stopResize} on:touchend={stopResize} bind:this={main}>
+<main on:mousemove={updateLayout}
+	  on:touchmove={updateLayout}
+	  on:mouseup={stopDrag}
+	  on:touchend={stopDrag}>
 	<Graph />
 	{#if $layout.showChat}
 		<Chat>

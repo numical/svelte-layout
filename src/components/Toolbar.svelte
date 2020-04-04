@@ -5,7 +5,6 @@
     import { layout, toggleOverlay } from '../managers/layoutManager';
 
     const gainFocus = setFocus.bind(null, 'toggleOverlay');
-
 </script>
 
 <div class="toolbar">

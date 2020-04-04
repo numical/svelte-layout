@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { isDragging } from "./dragManager";
 
 const defaultLayout = {
     graphWidth: 100,
@@ -8,20 +9,13 @@ const defaultLayout = {
     transition: 0.6
 };
 
-let resizing = false;
-
 export const layout = writable(defaultLayout);
 
-export const startResize = () => resizing = true;
-
-export const stopResize = () => resizing = false;
-
-export const resize = (container, event) => {
-    if (resizing) {
+export const updateLayout = event => {
+    if (isDragging()) {
         layout.update(layout => {
-            console.log(`resize event `);
             const x = event.clientX || event.touches[0].clientX;
-            const w = Math.floor(100 * x / container.clientWidth);
+            const w = Math.floor(100 * x / event.currentTarget.clientWidth);
             return {
                 ...layout,
                 graphWidth: layout.overlayChat ? 100 : w,

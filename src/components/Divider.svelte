@@ -1,14 +1,14 @@
 <script>
     import { setFocus, loseFocus } from '../managers/helpManager';
-    import { startResize } from '../managers/layoutManager';
+    import { startDrag } from '../managers/dragManager';
 
     const gainFocus = setFocus.bind(null, 'divider');
 </script>
 
 <div class="divider"
      on:mouseover={gainFocus}
-     on:mousedown={startResize}
-     on:touchstart={startResize}
+     on:mousedown={startDrag}
+     on:touchstart={startDrag}
      on:mouseleave={loseFocus}
      on:touchend={loseFocus}
 />
