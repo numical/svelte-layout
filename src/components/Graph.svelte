@@ -1,23 +1,27 @@
 <script>
     import XAxis from './graph/XAxis.svelte';
     import YAxis from './graph/YAxis.svelte';
+    import Product from './graph/Product.svelte';
     import { layout } from '../stores/layoutManager';
-    import { pension } from '../stores/modelManager';
-    import { convertToPoints, viewBox } from './graph/coordinates';
+    import { products } from '../stores/modelManager';
+    import { viewBox } from './graph/coordinates';
+
+    const colours = ['darkblue', 'blue', 'cornflowerblue', 'lightblue'];
 
     $: style = `
         width:${$layout.graphWidth}%;
         transition: width ${$layout.transition}s
      `;
-    $: points = convertToPoints($pension)
 
-    //console.log(points);
+    $: maxValue = Math.max(...$products.flat());
 </script>
 
 <svg style={style} width="100%" height="100%" viewBox={viewBox} preserveAspectRatio="none">
     <YAxis />
     <XAxis />
-    <polyline points={points} stroke="blue" stroke-width="2" fill="none" />
+    {#each $products as product, index}
+        <Product product={product} colour={colours[(index % colours.length)]} maxValue={maxValue} />
+    {/each}
 </svg>
 
 

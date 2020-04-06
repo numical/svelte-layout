@@ -1,8 +1,9 @@
-import { readable } from 'svelte/store';
-import { getPension } from "../data/personalFinancialModel";
+import {get, readable} from 'svelte/store';
+import { getProducts } from "../data/personalFinancialModel";
 
-export const pension = readable(null, set => {
-    set(getPension());
+export const products = readable(null, set => {
+    const products = getProducts();
+    set(products);
     return () => {};
 });
 

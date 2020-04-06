@@ -1,10 +1,16 @@
 export const intervals = 301;
 
-const generateAmount = (_, index) => {
-    const min = 100000 * index / intervals;
-    const diff = min * 0.2 * Math.random();
+const generateAmount = (max, volatility, _, index) => {
+    const min = max * index / intervals;
+    const diff = min * volatility * Math.random();
     return Math.floor(min + diff);
 }
 
-export const getPension = () => Array.from({ length: intervals }, generateAmount);
+const getProduct = (max, volatility) => Array.from({ length: intervals }, generateAmount.bind(null, max, volatility));
+
+const getPension = () => getProduct(100000, 0.2);
+
+const getSavings = () => getProduct(30000, 0.1);
+
+export const getProducts = () => [getPension(), getSavings()];
 

@@ -35,8 +35,7 @@ export const yAxis = {
     y2: header.height + chart.height
 };
 
-export const convertToPoints = array => {
-    const maxValue = Math.max(...array);
+export const convertToPoints = (array, maxValue) => {
     const unitHeight = chart.height/maxValue;
     const intervalWidth = chart.width/array.length;
     const xOffset = left.width;
