@@ -1,25 +1,26 @@
 <script>
     import { chart, header, left } from './dimensions';
 
-    export let maxValue;
+    export let scale;
 
-    const unitHeight = chart.height/maxValue;
-    const fractions = [0, 0.25, 0.5, 0.75];
-    const gridLines = fractions.map(f => ({
-        dimensions: {
-            x1: left.width,
-            x2: left.width + chart.width,
-            y1: header.height + f * chart.height,
-            y2: header.height + f * chart.height
-        },
-        label: {
+    const gridLines = scale.y.intervals.map((value, index) => {
+        const y = header.height + chart.height - (value * scale.y.unitHeight);
+        return {
             dimensions: {
-                x: left.margin,
-                y: header.height + f * chart.height
+                x1: left.width,
+                x2: left.width + chart.width,
+                y1: y,
+                y2: y
             },
-            text: `£${Math.round((1 -f) * maxValue)}`
-        }
-    }));
+            label: {
+                dimensions: {
+                    x: left.margin,
+                    y
+                },
+                text: value % 1000 === 0 ? `£${value/1000}k` : `£${value}`
+            }
+        };
+    });
 
 </script>
 
@@ -30,7 +31,6 @@
 
 <style>
     .label {
-        color: red;
         font-size: x-small;
     }
 </style>

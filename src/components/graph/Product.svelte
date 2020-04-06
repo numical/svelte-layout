@@ -3,14 +3,12 @@
 
     export let product;
     export let colour;
-    export let maxValue;
+    export let scale;
 
-    const unitHeight = chart.height/maxValue;
-    const intervalWidth = chart.width/product.length;
     const xOffset = left.width;
     const yOffset = chart.height + header.height;
     const points = product.reduce((points, value, interval) =>
-        `${points} ${xOffset + interval * intervalWidth},${yOffset - value * unitHeight}`,
+        `${points} ${xOffset + interval * scale.x.intervalWidth},${yOffset - value * scale.y.unitHeight}`,
         "");
 
 </script>
