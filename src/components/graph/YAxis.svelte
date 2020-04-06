@@ -1,5 +1,12 @@
 <script>
-    import { yAxis } from './coordinates';
+    import { chart, header, left } from './dimensions';
+
+    const dimensions = {
+        x1: left.width,
+        x2: left.width,
+        y1: header.height,
+        y2: header.height + chart.height
+    };
 </script>
 
-<line {...yAxis} stroke="black" stroke-width="2" />
+<line {...dimensions} stroke="black" stroke-width="2" />
