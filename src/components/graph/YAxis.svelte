@@ -9,4 +9,4 @@
     };
 </script>
 
-<line {...dimensions} stroke="black" stroke-width="2" />
+<line {...dimensions} stroke="black" stroke-width="1" />

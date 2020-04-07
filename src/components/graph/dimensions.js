@@ -7,7 +7,7 @@ export const footer = {
 };
 
 export const left = {
-    margin: 10,
+    margin: 2,
     width: 50
 };
 

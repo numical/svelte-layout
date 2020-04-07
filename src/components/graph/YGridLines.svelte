@@ -14,7 +14,7 @@
             },
             label: {
                 dimensions: {
-                    x: left.margin,
+                    x: left.width - left.margin,
                     y
                 },
                 text: value % 1000 === 0 ? `£${value/1000}k` : `£${value}`
@@ -26,7 +26,7 @@
 
 {#each gridLines as gridLine}
     <line {...gridLine.dimensions} stroke="darkgrey" stroke-width="1" stroke-dasharray="2" />
-    <text {...gridLine.label.dimensions} class="label">{gridLine.label.text}</text>
+    <text {...gridLine.label.dimensions} text-anchor="end" class="label">{gridLine.label.text}</text>
 {/each}
 
 <style>
