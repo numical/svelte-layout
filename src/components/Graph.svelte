@@ -2,6 +2,7 @@
     import Product from './graph/Product.svelte';
     import XAxis from './graph/XAxis.svelte';
     import YAxis from './graph/YAxis.svelte';
+    import XGridLines from './graph/XGridLines.svelte';
     import YGridLines from './graph/YGridLines.svelte';
     import { chart, header, footer, left, right } from './graph/dimensions';
     import { calculateScale } from './graph/calculateScale';
@@ -24,6 +25,7 @@
     <YAxis />
     <YGridLines scale={scale} />
     <XAxis />
+    <XGridLines scale={scale} />
     {#each $products as product, index}
         <Product product={product} colour={colours[(index % colours.length)]} scale={scale} />
     {/each}

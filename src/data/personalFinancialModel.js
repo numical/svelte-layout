@@ -14,3 +14,5 @@ const getSavings = () => getProduct(30000, 0.1);
 
 export const getProducts = () => [getPension(), getSavings()];
 
+export const getStartDate = () => new Date(2020, 0, 1);
+

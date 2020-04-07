@@ -1,5 +1,5 @@
 <script>
-    import { chart, header, left } from './dimensions';
+    import { chart, header, left, margin } from './dimensions';
 
     export let scale;
 
@@ -14,7 +14,7 @@
             },
             label: {
                 dimensions: {
-                    x: left.width - left.margin,
+                    x: left.width - margin,
                     y
                 },
                 text: value % 1000 === 0 ? `£${value/1000}k` : `£${value}`
@@ -25,12 +25,18 @@
 </script>
 
 {#each gridLines as gridLine}
-    <line {...gridLine.dimensions} stroke="darkgrey" stroke-width="1" stroke-dasharray="2" />
-    <text {...gridLine.label.dimensions} text-anchor="end" class="label">{gridLine.label.text}</text>
+    <line {...gridLine.dimensions} />
+    <text {...gridLine.label.dimensions} >{gridLine.label.text}</text>
 {/each}
 
 <style>
-    .label {
+    line {
+        stroke: darkgrey;
+        stroke-width: 1;
+        stroke-dasharray: 2;
+    }
+    text {
+        text-anchor: end;
         font-size: x-small;
     }
 </style>

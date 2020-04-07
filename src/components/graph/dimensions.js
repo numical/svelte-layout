@@ -19,3 +19,5 @@ export const chart = {
     height: 1000,
     width: 1000
 };
+
+export const margin = 2;
