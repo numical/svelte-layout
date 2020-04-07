@@ -2,7 +2,17 @@ import { chart } from './dimensions';
 
 const calcX = products => {
     const numIntervals = products[0].length;
-    const intervals = [0, numIntervals * 0.25, numIntervals * 0.5, numIntervals * 0.75, numIntervals].map(i => Math.floor(i));
+    // assuming months
+    let units = 1;
+    let numUnits = Math.floor((numIntervals - 1) / 12);
+    while (numUnits > 5) {
+        units++;
+        numUnits = Math.floor((numIntervals - 1) / (12 * units));
+    }
+    const intervals = Array.from({ length: numUnits}, (_, index) => index * units * 12);
+    console.log(intervals);
+    intervals.push(numIntervals);
+
     return {
         intervals,
         intervalWidth: chart.width / numIntervals

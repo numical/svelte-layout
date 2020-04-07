@@ -1,18 +1,18 @@
 export const header = {
-    height: 50
+    height: 25
 };
 
 export const footer = {
-    height: 50
+    height: 25
 };
 
 export const left = {
     margin: 2,
-    width: 50
+    width: 40
 };
 
 export const right = {
-    width: 50
+    width: 25
 };
 
 export const chart = {

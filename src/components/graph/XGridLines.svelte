@@ -1,18 +1,16 @@
 <script>
+    import { help } from '../../stores/helpManager';
     import { chart, header, left, margin } from './dimensions';
 
     export let scale;
 
-    const printDate = d => {
-        const month = d.getMonth();
-        return `${month > 9 ? month : "0" + month}/${d.getFullYear()}`;
-    };
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    const printInterval = i => printDate( new Date(2020, i === 0 ? 1 : i, 1));
-
-    const ticks = scale.x.intervals.map(interval => {
+    const maxIndex = scale.x.intervals.length - 1;
+    const ticks = scale.x.intervals.map((interval, index) => {
         const x = left.width + interval * scale.x.intervalWidth;
         const y = header.height + chart.height;
+        const date = new Date(2020, index === maxIndex ? interval - 1 : interval, 1);
         return {
             dimensions: {
                 x1: x,
@@ -25,7 +23,7 @@
                     x,
                     y: y + margin
                 },
-                text: printInterval(interval)
+                text: `${months[date.getMonth()]} ${date.getFullYear()}`
             }
         };
     });
@@ -33,8 +31,12 @@
 </script>
 
 {#each ticks as tick}
-    <line {...tick.dimensions} />
-    <text {...tick.label.dimensions} >{tick.label.text}</text>
+    <line {...tick.dimensions} />[p-k
+    <text {...tick.label.dimensions}
+          on:mouseover={() => $help.setFocus('product')}
+          on:mouseleave={$help.loseFocus}>
+        {tick.label.text}
+    </text>
 {/each}
 
 <style>
@@ -46,5 +48,8 @@
         text-anchor: middle;
         dominant-baseline: hanging;
         font-size: x-small;
+    }
+    text:hover {
+        fill: darkorange;
     }
 </style>
