@@ -1,21 +1,22 @@
 <script>
-    import Product from './graph/Product.svelte';
-    import XAxis from './graph/XAxis.svelte';
-    import YAxis from './graph/YAxis.svelte';
-    import XGridLines from './graph/XGridLines.svelte';
-    import YGridLines from './graph/YGridLines.svelte';
-    import { chart, header, footer, left, right } from './graph/dimensions';
-    import { calculateScale } from './graph/calculateScale';
-    import { layout } from '../stores/layoutManager';
-    import { products } from '../stores/modelManager';
+    import Product from './Product.svelte';
+    import XAxis from './XAxis.svelte';
+    import YAxis from './YAxis.svelte';
+    import XGridLines from './XGridLines.svelte';
+    import YGridLines from './YGridLines.svelte';
+    import { chart, header, footer, left, right } from './dimensions';
+    import { calculateScale } from './calculateScale';
+    import { layout } from '../../stores/layoutManager';
+    import { products } from '../../stores/modelManager';
 
 
     const colours = ['darkblue', 'blue', 'cornflowerblue', 'lightblue'];
     const viewBox = `0 0 ${left.width + chart.width + right.width} ${header.height + chart.height + footer.height}`;
 
     $: style = `
+        ${$layout.chatRight ? 'left' : 'right'}: 0;
         width:${$layout.graphWidth}%;
-        transition: width ${$layout.transition}s
+        transition: width ${$layout.transition}s;
      `;
 
     $: scale = calculateScale($products);
@@ -35,7 +36,6 @@
 <style>
     svg {
         position: absolute;
-        left: 0;
         top: 0;
         bottom: 0;
     }

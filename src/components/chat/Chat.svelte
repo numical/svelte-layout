@@ -1,10 +1,12 @@
 <script>
-    import { afterUpdate } from 'svelte';
-    import chatHistory from "../data/chatHistory";
-    import { help } from '../stores/helpManager';
-    import { layout } from '../stores/layoutManager';
+    import {afterUpdate} from 'svelte';
+    import chatHistory from "../../data/chatHistory";
+    import {help} from '../../stores/helpManager';
+    import {layout} from '../../stores/layoutManager';
+    import HistoryItem from "./HistoryItem.svelte";
 
-    $: mainStyle =  `
+    $: mainStyle = `
+        ${$layout.chatRight ? 'right' : 'left'}: 0;
         width:${$layout.chatWidth}%;
         background-color:rgb(0,0,0,${$layout.overlayChat ? 0.75 : 1});
         border-radius:${$layout.overlayChat ? '0.5rem' : '0'};
@@ -14,15 +16,15 @@
 
     $: inputStyle = `
         border-radius:${$layout.overlayChat ? '0.25rem' : '0'};
-        background-color: ${$help.currentFocus === 'default' ? 'darkorange': 'transparent'};
+        background-color: ${$help.currentFocus === 'default' ? 'darkorange' : 'transparent'};
     `;
 
     let historyItems = chatHistory.map(s => s.split('.'));
     let history;
     let command;
 
-    const addCommand = ({ target }) => {
-        const { value } = target;
+    const addCommand = ({target}) => {
+        const {value} = target;
         target.value = '';
         historyItems = [...historyItems, [value], [`Sorry, I do not understand '${value}'`]];
     };
@@ -37,11 +39,7 @@
     <slot name="toolbar"/>
     <div id="history" class="history" bind:this={history}>
         {#each historyItems as item, i}
-            <div class={i % 2 === 0 ? "chatItem userHistoryItem" : "chatItem botHistoryItem"}>
-                {#each item as line}
-                    <div>{line}</div>
-                {/each}
-            </div>
+            <HistoryItem item={item} isUser={i % 2 === 0} />
         {/each}
     </div>
     <input id="command" placeholder="next command..?" style={inputStyle} bind:this={command} on:change={addCommand}/>
@@ -75,16 +73,5 @@
     }
     .history {
         overflow-y: auto;
-    }
-    .chatItem {
-        padding: 0.5rem;
-    }
-    .userHistoryItem {
-        text-align: left;
-        font-style: italic;
-    }
-    .botHistoryItem {
-        text-align: right;
-        font-weight: bold;
     }
 </style>
