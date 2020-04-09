@@ -16,6 +16,7 @@ export const layout = writable({
                 ...state,
                 graphWidth: state.overlayChat ? 100 : w,
                 chatWidth: 100 - w,
+                previousChatWidth: 100-w,
                 transition: 0
             };
         });
