@@ -1,5 +1,4 @@
 <script>
-    import MinimisedButton from './MinimisedButton.svelte';
     import { help } from '../../stores/helpManager';
     import { gesture } from '../../stores/gestureManager';
     import { layout } from '../../stores/layoutManager';
@@ -15,9 +14,7 @@
      on:mousedown={$gesture.startDrag}
      on:touchstart={$gesture.startDrag}
      on:mouseleave={$help.loseFocus}
-     on:touchend={$help.loseFocus} >
-    <MinimisedButton />
-</div>
+     on:touchend={$help.loseFocus} />
 
 <style>
     .divider {

@@ -1,10 +1,12 @@
 <script>
 	import Chat from './chat/Chat.svelte';
-	import Divider from "./divider/Divider.svelte";
+	import Divider from "./layout/Divider.svelte";
 	import Graph from './graph/Graph.svelte';
 	import Toolbar from './toolbar/Toolbar.svelte';
-	import { layout } from '../stores/layoutManager';
-	import { gesture } from '../stores/gestureManager';
+	import {layout} from '../stores/layoutManager';
+	import {gesture} from '../stores/gestureManager';
+	import MinimisedLeft from "./layout/MinimisedLeft.svelte";
+	import MinimisedRight from "./layout/MinimisedRight.svelte";
 </script>
 
 <main on:mousedown={e => !$gesture.startSwipe(e, $layout.swipe)}
@@ -13,17 +15,17 @@
 	  on:touchmove={e => $gesture.isDragging && $layout.drag(e)}
 	  on:mouseup={$gesture.stop}
 	  on:touchend={$gesture.stop}>
+	<MinimisedLeft />
 	<Graph />
-	{#if $layout.showChat}
-		<Chat>
-			<div slot="toolbar">
-				<Toolbar />
-			</div>
-			<div slot="divider">
-				<Divider />
-			</div>
-		</Chat>
-	{/if}
+	<Chat>
+		<div slot="toolbar">
+			<Toolbar />
+		</div>
+		<div slot="divider">
+			<Divider />
+		</div>
+	</Chat>
+	<MinimisedRight />
 </main>
 
 <style>

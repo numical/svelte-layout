@@ -9,7 +9,6 @@ export const layout = writable({
     chatRight: true,
     previousChatWidth: 20,
     overlayChat: true,
-    showChat: true,
     transition: 0.6,
     drag: event => {
         layout.update(state => {

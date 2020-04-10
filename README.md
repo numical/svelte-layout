@@ -94,5 +94,5 @@ surge public my-project.surge.sh
 
 
 ## Next Steps
-1. swipe
-2. toggleOverlay from state
+1. drag from minimized
+2. button on right when ..?

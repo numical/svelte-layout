@@ -1,10 +1,11 @@
 export const chatRight = {
     drag: (state, w) => ({
-       ...state,
-       current: w === 100 ? minimisedRight : chatRight,
-       graphWidth: w,
-       chatWidth: 100 - w,
-       transition: 0
+        ...state,
+        current: w === 100 ? minimisedRight : chatRight,
+        graphWidth: w,
+        chatWidth: 100 - w,
+        previousChatWidth: w === 100 ? state.previousChatWidth : 100-w,
+        transition: 0
     }),
     swipeLeft: state => ({
         ...state,
@@ -41,7 +42,7 @@ export const overlayRight = {
         ...state,
         current: w === 100 ? minimisedRight : overlayRight,
         chatWidth: 100 - w,
-        previousChatWidth: 100-w,
+        previousChatWidth: w === 100 ? state.previousChatWidth : 100-w,
         transition: 0
     }),
     swipeLeft: state => ({
@@ -72,7 +73,14 @@ export const overlayRight = {
 };
 
 export const minimisedRight = {
-    drag: state => state,
+    drag: (state, w) => ({
+        ...state,
+        current: state.overlayChat ? overlayRight : chatRight,
+        graphWidth: state.overlayChat ? 100 : w,
+        chatWidth: 100 - w,
+        previousChatWidth: 100- w,
+        transition: 0
+    }),
     swipeLeft: state => ({
         ...state,
         current: state.overlayChat ? overlayRight : chatRight,
@@ -83,4 +91,6 @@ export const minimisedRight = {
     swipeRight: state => state,
     toggleOverlay: state => state
 };
+
+export const minimisedLeft = {};
 

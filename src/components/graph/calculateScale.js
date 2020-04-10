@@ -10,7 +10,6 @@ const calcX = products => {
         numUnits = Math.floor((numIntervals - 1) / (12 * units));
     }
     const intervals = Array.from({ length: numUnits}, (_, index) => index * units * 12);
-    console.log(intervals);
     intervals.push(numIntervals);
 
     return {
