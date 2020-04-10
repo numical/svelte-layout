@@ -16,13 +16,10 @@ export const identifySwipe = (start, end) => {
 
     const xDiff = (end.screenX || end.changedTouches[0].screenX) - (start.screenX || start.touches[0].screenX);
     if (Math.abs(xDiff) < window.innerWidth/6) {
-        console.log('invalid swipe');
         return InvalidSwipe;
     } else if (xDiff > 0) {
-        console.log('swipe right');
         return SwipeRight;
     } else {
-        console.log('swipe left');
         return SwipeLeft;
     }
 };

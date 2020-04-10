@@ -5,14 +5,19 @@
     import {layout} from '../../stores/layoutManager';
     import HistoryItem from "./HistoryItem.svelte";
 
-    $: mainStyle = `
-        ${$layout.chatRight ? 'right' : 'left'}: 0;
-        width:${$layout.chatWidth}%;
-        background-color:rgb(0,0,0,${$layout.overlayChat ? 0.75 : 1});
-        border-radius:${$layout.overlayChat ? '0.5rem' : '0'};
-        margin:${$layout.overlayChat ? '0.25rem' : '0'};
-        transition: width ${$layout.transition}s
-    `;
+    $: mainStyle = $layout.overlayChat
+        ? ` ${$layout.chatRight ? 'right' : 'left'}: 0;
+            width:calc(${$layout.chatWidth}% - 0.5rem);
+            background-color:rgb(0,0,0,0.75);
+            border-radius:0.5rem;
+            margin:0.25rem;
+            transition: width ${$layout.transition}s`
+        : `${$layout.chatRight ? 'right' : 'left'}: 0;
+            width:${$layout.chatWidth}%;
+            background-color:black;
+            border-radius:0;
+            margin:0,
+            transition: width ${$layout.transition}s`;
 
     $: inputStyle = `
         border-radius:${$layout.overlayChat ? '0.25rem' : '0'};

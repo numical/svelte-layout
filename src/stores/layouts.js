@@ -1,96 +1,107 @@
-export const chatRight = {
-    drag: (state, w) => ({
+const drag = (state, w) => {
+    const chatWidth = state.chatRight ? 100 - w : w;
+    const graphWidth = state.overlayChat ? 100 : state.chatRight ? w : 100 - w;
+    const current = state.chatRight
+        ? ( w === 100 ? minimised : w === 0 ? maximised : right)
+        : ( w === 100 ? maximised : w === 0 ? minimised : left);
+    const previousChatWidth = state.chatRight
+        ? ( w === 100 ? state.previousChatWidth : chatWidth < state.minAutoChatWidth ? state.minAutoChatWidth : chatWidth)
+        : ( w === 0 ? state.previousChatWidth : chatWidth < state.minAutoChatWidth ? state.minAutoChatWidth : chatWidth)
+    return {
         ...state,
-        current: w === 100 ? minimisedRight : chatRight,
-        graphWidth: w,
-        chatWidth: 100 - w,
-        previousChatWidth: w === 100 ? state.previousChatWidth : 100-w,
+        current,
+        graphWidth,
+        chatWidth,
+        previousChatWidth,
         transition: 0
-    }),
-    swipeLeft: state => ({
+    }
+};
+
+const toggleOverlay = state => ({
+    ...state,
+    overlayChat: !state.overlayChat,
+    graphWidth: state.overlayChat ? 100 - state.chatWidth : 100,
+    transition: 0.6
+});
+
+export const left = {
+    drag,
+    swipeRight: state => ({
         ...state,
-        graphWidth: 0,
+        current: maximised,
+        graphWidth: state.overlayChat ? 100 : 0,
         chatWidth: 100,
         transition: 0.6
     }),
-    swipeRight: state => state.chatWidth === 100
-        ? {
-            ...state,
-            current: chatRight,
-            graphWidth: 100 - state.previousChatWidth,
-            chatWidth: state.previousChatWidth,
-            transition: 0.6
-        }
-        : {
-            ...state,
-            current: minimisedRight,
-            graphWidth: 100,
-            chatWidth: 0,
-            transition: 0.6
-        },
-    toggleOverlay: state => ({
-        ...state,
-        current: overlayRight,
-        overlayChat: true,
-        graphWidth: 100,
-        transition: 0.6
-    })
-};
-
-export const overlayRight = {
-    drag: (state, w) => ({
-        ...state,
-        current: w === 100 ? minimisedRight : overlayRight,
-        chatWidth: 100 - w,
-        previousChatWidth: w === 100 ? state.previousChatWidth : 100-w,
-        transition: 0
-    }),
     swipeLeft: state => ({
         ...state,
+        current: minimised,
+        graphWidth: state.overlayChat ? 100 : state.graphWidth,
+        chatWidth: 0,
+        transition: 0.6
+    }),
+    toggleOverlay
+};
+
+export const right = {
+    drag,
+    swipeLeft: state => ({
+        ...state,
+        current: maximised,
+        graphWidth: state.overlayChat ? 100 : 0,
         chatWidth: 100,
         transition: 0.6
     }),
-    swipeRight: state => state.chatWidth === 100
-        ? {
-            ...state,
-            current: chatRight,
-            chatWidth: state.previousChatWidth,
-            transition: 0.6
-        }
-        : {
-            ...state,
-            current: minimisedRight,
-            chatWidth: 0,
-            transition: 0.6
-        },
-    toggleOverlay: state => ({
+    swipeRight: state => ({
         ...state,
-        current: chatRight,
-        overlayChat: false,
-        graphWidth: 100 - state.chatWidth,
+        current: minimised,
+        graphWidth: state.overlayChat ? 100 : state.graphWidth,
+        chatWidth: 0,
         transition: 0.6
-    })
+    }),
+    toggleOverlay
 };
 
-export const minimisedRight = {
-    drag: (state, w) => ({
-        ...state,
-        current: state.overlayChat ? overlayRight : chatRight,
-        graphWidth: state.overlayChat ? 100 : w,
-        chatWidth: 100 - w,
-        previousChatWidth: 100- w,
-        transition: 0
-    }),
+export const maximised = {
+    drag,
     swipeLeft: state => ({
         ...state,
-        current: state.overlayChat ? overlayRight : chatRight,
-        chatWidth: state.previousChatWidth,
+        current: left,
+        chatRight: false,
         graphWidth: state.overlayChat ? 100 : 100 - state.previousChatWidth,
+        chatWidth: state.previousChatWidth,
         transition: 0.6
     }),
-    swipeRight: state => state,
+    swipeRight: state => ({
+        ...state,
+        current: right,
+        chatRight: true,
+        graphWidth: state.overlayChat ? 100 : 100 - state.previousChatWidth,
+        chatWidth: state.previousChatWidth,
+        transition: 0.6
+    }),
+    toggleOverlay
+};
+
+export const minimised = {
+    drag,
+    swipeLeft: state => state.chatRight
+        ? {
+            ...state,
+            current: right,
+            chatWidth: state.previousChatWidth,
+            graphWidth: state.overlayChat ? 100 : 100 - state.previousChatWidth,
+            transition: 0.6
+        }
+        : state,
+    swipeRight: state => state.chatRight
+        ? state
+        : {
+            ...state,
+            current: left,
+            chatWidth: state.previousChatWidth,
+            graphWidth: state.overlayChat ? 100 : 100 - state.previousChatWidth,
+            transition: 0.6
+        },
     toggleOverlay: state => state
 };
-
-export const minimisedLeft = {};
-

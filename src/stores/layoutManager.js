@@ -1,10 +1,11 @@
 import { writable } from 'svelte/store';
-import { overlayRight } from "./layouts";
+import { right } from "./layouts";
 import { SwipeLeft, SwipeRight } from "./swipes";
 
 export const layout = writable({
-    current: overlayRight,
+    current: right,
     graphWidth: 100,
+    minAutoChatWidth: 20,
     chatWidth: 20,
     chatRight: true,
     previousChatWidth: 20,
