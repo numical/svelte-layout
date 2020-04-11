@@ -1,9 +1,9 @@
 <script>
-    import ToolbarItem from './ToolbarItem.svelte';
+    import Overlay from './Overlay.svelte';
 </script>
 
 <div class="toolbar">
-    <ToolbarItem />
+    <Overlay />
 </div>
 
 <style>

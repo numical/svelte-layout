@@ -1,28 +1,19 @@
 <script>
-    import Pin from "svelte-material-icons/Pin.svelte";
-    import PinOutline from "svelte-material-icons/PinOutline.svelte";
     import { help } from '../../stores/helpManager';
-    import { layout } from '../../stores/layoutManager';
+    export let onClick;
+    export let helpId;
 </script>
 
 <div class="toolbarItem"
-     on:click={$layout.toggleOverlay}
+     on:click={onClick}
      on:mouseup|stopPropagation={$help.loseFocus}
-     on:mouseover={() => $help.setFocus('toggleOverlay')}
+     on:mouseover={() => $help.setFocus({helpId})}
      on:mouseleave={$help.loseFocus}
 >
     <span class="tooltip">
-         {#if $layout.overlayPanel}
-             side-by-side
-         {:else}
-             overlay chat
-         {/if}
+        <slot name="tooltip" />
     </span>
-    {#if $layout.overlayPanel}
-        <Pin />
-    {:else}
-        <PinOutline />
-    {/if}
+    <slot name="icon" />
 </div>
 
 <style>
