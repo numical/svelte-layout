@@ -14,7 +14,7 @@
     const viewBox = `0 0 ${left.width + chart.width + right.width} ${header.height + chart.height + footer.height}`;
 
     $: style = `
-        ${$layout.chatRight ? 'left' : 'right'}: 0;
+        ${$layout.restorePanelPosition.graphPos}: 0;
         width:${$layout.graphWidth}%;
         transition: width ${$layout.transition}s;
      `;

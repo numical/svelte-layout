@@ -1,36 +1,35 @@
 import { writable } from 'svelte/store';
-import { right } from "./layouts";
+import { right } from "./panelPositions";
 import { SwipeLeft, SwipeRight } from "./swipes";
 
 export const layout = writable({
-    current: right,
+    panelPosition: right,
     graphWidth: 100,
-    minAutoChatWidth: 20,
-    chatWidth: 20,
-    chatRight: true,
-    previousChatWidth: 20,
-    overlayChat: true,
+    panelWidth: 20,
+    restorePanelWidth: 20,
+    restorePanelPosition: right,
+    overlayPanel: true,
     transition: 0.6,
     drag: event => {
         layout.update(state => {
             const x = event.clientX || event.touches[0].clientX;
             const w = Math.floor(100 * x / event.currentTarget.clientWidth);
-            return state.current.drag(state, w);
+            return state.panelPosition.drag(state, w);
         });
     },
     swipe: swipe => {
         layout.update( state => {
             switch (swipe) {
                 case SwipeLeft:
-                    return state.current.swipeLeft(state);
+                    return state.panelPosition.swipeLeft(state);
                 case SwipeRight:
-                    return state.current.swipeRight(state);
+                    return state.panelPosition.swipeRight(state);
                 default:
                     return state;
             }
         })
     },
     toggleOverlay: () => {
-        layout.update(state => state.current.toggleOverlay(state));
+        layout.update(state => state.panelPosition.toggleOverlay(state));
     }
 });

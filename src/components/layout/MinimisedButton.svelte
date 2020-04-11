@@ -2,6 +2,7 @@
     import { fade } from 'svelte/transition';
     export let onClick;
     export let style;
+    export let tooltip;
     export let tooltipStyle;
 </script>
 
@@ -9,7 +10,7 @@
 <div style={style}
      transition:fade="{{duration: 600}}"
      on:click={onClick}>
-    <span style={tooltipStyle}>show panel</span>
+    <span style={tooltipStyle}>{tooltip}</span>
     <slot></slot>
 </div>
 

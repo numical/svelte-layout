@@ -4,7 +4,7 @@
     import { layout } from '../../stores/layoutManager';
 
     $: dividerStyle =  `
-        ${$layout.chatRight ? 'left' : 'right'}: -1vw;
+        ${$layout.restorePanelPosition.graphPos}: -1vw;
     `;
 </script>
 

@@ -52,13 +52,13 @@
 | uni-directional data flow: `props` | uni-directional data flow: `export let` |  
 | `Context` | `Store` |
 | `useXXX` | 'reactive declarations' - weird syntax |
+| composition: `children` | composition: `slots` |
 
 ## Demo
 https://github.com/numical/svelte-layout
 
 ## Outstanding Questions
-1. component `Class`'s?
-2. 
+1. 
 
 
 

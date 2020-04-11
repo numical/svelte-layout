@@ -12,13 +12,13 @@
      on:mouseleave={$help.loseFocus}
 >
     <span class="tooltip">
-         {#if $layout.overlayChat}
+         {#if $layout.overlayPanel}
              side-by-side
          {:else}
              overlay chat
          {/if}
     </span>
-    {#if $layout.overlayChat}
+    {#if $layout.overlayPanel}
         <Pin />
     {:else}
         <PinOutline />
