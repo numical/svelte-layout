@@ -2,6 +2,7 @@
     import Pin from "svelte-material-icons/Pin.svelte";
     import PinOutline from "svelte-material-icons/PinOutline.svelte";
     import ToolbarItem from './ToolbarItem.svelte';
+    import { iconProps } from './commonProps';
     import { layout } from '../../stores/layoutManager';
 </script>
 
@@ -15,9 +16,9 @@
     </div>
     <div slot="icon">
         {#if $layout.overlayPanel}
-            <Pin />
+            <Pin {...iconProps} />
         {:else}
-            <PinOutline />
+            <PinOutline {...iconProps} />
         {/if}
     </div>
 </ToolbarItem>

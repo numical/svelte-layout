@@ -1,7 +1,7 @@
 <script>
-	import Chat from './chat/Chat.svelte';
 	import Divider from "./layout/Divider.svelte";
 	import Graph from './graph/Graph.svelte';
+	import Panel from "./panel/Panel.svelte";
 	import Toolbar from './toolbar/Toolbar.svelte';
 	import {layout} from '../stores/layoutManager';
 	import {gesture} from '../stores/gestureManager';
@@ -17,14 +17,14 @@
 	  on:touchend={$gesture.stop}>
 	<MinimisedLeft />
 	<Graph />
-	<Chat>
+	<Panel>
 		<div slot="toolbar">
 			<Toolbar />
 		</div>
 		<div slot="divider">
 			<Divider />
 		</div>
-	</Chat>
+	</Panel>
 	<MinimisedRight />
 </main>
 

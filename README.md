@@ -94,5 +94,4 @@ surge public my-project.surge.sh
 
 
 ## Next Steps
-1. drag from minimized
-2. button on right when ..?
+1. <svelte:options immutable={true}/>

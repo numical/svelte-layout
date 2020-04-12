@@ -1,0 +1,1 @@
+export const iconProps = { width: '1.5vw', height: '1.5vw' };

@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import { right } from "./panelPositions";
 import { SwipeLeft, SwipeRight } from "./swipes";
+import { chat, info } from './panelContents';
 
 export const layout = writable({
     panelPosition: right,
@@ -9,6 +10,7 @@ export const layout = writable({
     restorePanelWidth: 20,
     restorePanelPosition: right,
     overlayPanel: true,
+    panelContent: chat,
     transition: 0.6,
     drag: event => {
         layout.update(state => {
@@ -28,6 +30,12 @@ export const layout = writable({
                     return state;
             }
         })
+    },
+    togglePanelContent: () => {
+        layout.update(state => ({
+            ... state,
+            panelContent : state.panelContent === chat ? info : chat
+        }));
     },
     toggleOverlay: () => {
         layout.update(state => state.panelPosition.toggleOverlay(state));

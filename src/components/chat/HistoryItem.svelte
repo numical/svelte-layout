@@ -11,7 +11,7 @@
 
 <style>
     .historyItem {
-        padding: 0.5rem;
+        padding: 0.25rem;
     }
     .userHistoryItem {
         text-align: left;

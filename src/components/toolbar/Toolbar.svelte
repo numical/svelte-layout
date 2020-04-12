@@ -1,14 +1,16 @@
 <script>
-    import Overlay from './Overlay.svelte';
+    import ToggleOverlay from './ToggleOverlay.svelte';
+    import ToggleChat from "./ToggleContent.svelte";
 </script>
 
-<div class="toolbar">
-    <Overlay />
+<div>
+    <ToggleChat />
+    <ToggleOverlay />
 </div>
 
 <style>
-    .toolbar {
-        display: grid;
-        justify-items: end;
+    div {
+        display: flex;
+        justify-content: flex-end;
     }
 </style>
