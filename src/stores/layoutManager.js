@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
-import { right } from "./panelPositions";
+import { right } from "../components/panel/panelPositions";
 import { SwipeLeft, SwipeRight } from "./swipes";
-import { chat, info } from './panelContents';
+import { chat, info } from '../components/panel/panelContents';
 
 export const layout = writable({
     panelPosition: right,

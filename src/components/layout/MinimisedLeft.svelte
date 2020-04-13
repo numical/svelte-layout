@@ -2,7 +2,7 @@
     import MenuRight from "svelte-material-icons/MenuRight.svelte";
     import MinimisedButton from './MinimisedButton.svelte';
     import { layout } from '../../stores/layoutManager';
-    import { maximised, minimised, left } from '../../stores/panelPositions';
+    import { maximised, minimised, left } from '../panel/panelPositions';
     import { SwipeRight } from "../../stores/swipes";
 
     const onClick = () => $layout.swipe(SwipeRight);

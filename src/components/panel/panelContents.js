@@ -1,6 +1,6 @@
-import Chat from '../components/chat/Chat.svelte';
+import Chat from '../chat/Chat.svelte';
 import ChatOutline from "svelte-material-icons/ChatOutline.svelte";
-import Info from '../components/info/Info.svelte';
+import Info from '../info/Info.svelte';
 import InformationOutline from "svelte-material-icons/InformationOutline.svelte";
 
 export const chat = {

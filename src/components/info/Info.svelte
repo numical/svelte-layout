@@ -1,7 +1,6 @@
 <script>
-
+    import { products } from '../../stores/productPresenter';
 </script>
 
-<div >
-    Info Panel
-</div>
+<svelte:component this={$products.display.component} />
+

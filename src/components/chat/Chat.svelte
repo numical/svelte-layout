@@ -21,8 +21,10 @@
     };
 
     afterUpdate(() => {
-        history.scrollTop = history.scrollHeight;
-        command.focus();
+        if (history) {
+            history.scrollTop = history.scrollHeight;
+            command.focus();
+        }
     });
 </script>
 

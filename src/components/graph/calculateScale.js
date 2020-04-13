@@ -37,7 +37,10 @@ const calcY = products => {
     }
 }
 
-export const calculateScale = products => ({
-    x: calcX(products),
-    y: calcY(products)
-});
+export const calculateScale = products => {
+    const productsData = products.map( product => product.data );
+    return {
+        x: calcX(productsData),
+        y: calcY(productsData)
+    }
+};

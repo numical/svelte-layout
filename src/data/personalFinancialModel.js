@@ -6,13 +6,22 @@ const generateAmount = (max, volatility, _, index) => {
     return Math.floor(min + diff);
 }
 
-const getProduct = (max, volatility) => Array.from({ length: intervals }, generateAmount.bind(null, max, volatility));
+const generateData = (max, volatility) => Array.from({ length: intervals }, generateAmount.bind(null, max, volatility));
 
-const getPension = () => getProduct(100000, 0.2);
+const getPensionData = () => generateData(100000, 0.2);
 
-const getSavings = () => getProduct(30000, 0.1);
+const getSavingsData = () => generateData(30000, 0.1);
 
-export const getProducts = () => [getPension(), getSavings()];
+export const getProducts = () => [
+    {
+        name: 'Pension',
+        data: getPensionData()
+    },
+    {
+        name: 'Savings',
+        data: getSavingsData()
+    }
+];
 
 export const getStartDate = () => new Date(2020, 0, 1);
 

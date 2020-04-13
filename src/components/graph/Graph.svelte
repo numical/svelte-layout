@@ -7,8 +7,7 @@
     import { chart, header, footer, left, right } from './dimensions';
     import { calculateScale } from './calculateScale';
     import { layout } from '../../stores/layoutManager';
-    import { products } from '../../stores/modelManager';
-
+    import { products } from '../../stores/productPresenter';
 
     const colours = ['darkblue', 'blue', 'cornflowerblue', 'lightblue'];
     const viewBox = `0 0 ${left.width + chart.width + right.width} ${header.height + chart.height + footer.height}`;
@@ -19,7 +18,7 @@
         transition: width ${$layout.transition}s;
      `;
 
-    $: scale = calculateScale($products);
+    $: scale = calculateScale($products.visible);
 </script>
 
 <svg style={style} width="100%" height="100%" viewBox={viewBox} preserveAspectRatio="none">
@@ -27,7 +26,7 @@
     <YGridLines scale={scale} />
     <XAxis />
     <XGridLines scale={scale} />
-    {#each $products as product, index}
+    {#each $products.visible as product, index}
         <Product product={product} colour={colours[(index % colours.length)]} scale={scale} />
     {/each}
 </svg>
