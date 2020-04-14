@@ -1,5 +1,7 @@
 <script>
     import {layout} from '../../stores/layoutManager';
+    import Toolbar from "../toolbar/Toolbar.svelte";
+    import Divider from "./Divider.svelte";
 
     $: mainStyle = $layout.overlayPanel
         ? ` ${$layout.restorePanelPosition.panelPos}: 0;
@@ -17,11 +19,11 @@
 </script>
 
 <main style={mainStyle}>
-    <slot name="toolbar"/>
+    <Toolbar />
     <div class="container">
         <svelte:component this={$layout.panelContent.component} />
     </div>
-    <slot name="divider"/>
+    <Divider />
 </main>
 
 <style>
@@ -32,7 +34,7 @@
         bottom: 0;
         color: white;
         display: grid;
-        grid-template-rows: 2rem calc(100vh - 3rem);
+        grid-template-rows: 5vmin 1fr;
         grid-template-columns: 100%;
         transition: background-color .6s, border-radius .6s, margin .6s;
     }

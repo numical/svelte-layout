@@ -4,7 +4,7 @@
     import YAxis from './YAxis.svelte';
     import XGridLines from './XGridLines.svelte';
     import YGridLines from './YGridLines.svelte';
-    import { chart, header, footer, left, right } from './dimensions';
+    import { chart, header, footer, left, right } from '../../common/svgDimensions';
     import { calculateScale } from './calculateScale';
     import { layout } from '../../stores/layoutManager';
     import { products } from '../../stores/productPresenter';

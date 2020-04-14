@@ -55,7 +55,7 @@
 | composition: `children` | composition: `slots` |
 
 ## Links
-* demo: https://zeit.co/numical/svelte-layout
+* demo: https://svelte-layout.now.sh/
 * repo: https://github.com/numical/svelte-layout
 
 ## Outstanding Questions

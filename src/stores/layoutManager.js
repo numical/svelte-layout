@@ -1,13 +1,19 @@
 import { writable } from 'svelte/store';
 import { right } from "../components/panel/panelPositions";
-import { SwipeLeft, SwipeRight } from "./swipes";
+import { SwipeLeft, SwipeRight } from "../common/swipes";
 import { chat, info } from '../components/panel/panelContents';
+
+const calcInitialWidth = () => {
+    let percent = 20000 /  window.innerWidth
+    return percent > 20 ? Math.floor(percent) : 20;
+}
+const panelWidth = calcInitialWidth();
 
 export const layout = writable({
     panelPosition: right,
     graphWidth: 100,
-    panelWidth: 20,
-    restorePanelWidth: 20,
+    panelWidth,
+    restorePanelWidth: panelWidth,
     restorePanelPosition: right,
     overlayPanel: true,
     panelContent: chat,

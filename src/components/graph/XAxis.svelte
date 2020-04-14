@@ -1,5 +1,5 @@
 <script>
-    import { chart, header, left } from './dimensions';
+    import { chart, header, left } from '../../common/svgDimensions';
 
     const dimensions = {
         x1: left.width,

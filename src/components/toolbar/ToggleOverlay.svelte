@@ -2,7 +2,7 @@
     import Pin from "svelte-material-icons/Pin.svelte";
     import PinOutline from "svelte-material-icons/PinOutline.svelte";
     import ToolbarItem from './ToolbarItem.svelte';
-    import { iconProps } from './commonProps';
+    import { iconProps } from '../../common/iconProps';
     import { layout } from '../../stores/layoutManager';
 </script>
 

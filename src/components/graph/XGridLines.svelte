@@ -1,6 +1,6 @@
 <script>
     import { help } from '../../stores/helpManager';
-    import { chart, header, left, margin } from './dimensions';
+    import { chart, header, left, margin } from '../../common/svgDimensions';
 
     export let scale;
 

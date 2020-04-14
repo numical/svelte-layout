@@ -1,12 +1,10 @@
 <script>
-	import Divider from "./layout/Divider.svelte";
 	import Graph from './graph/Graph.svelte';
 	import Panel from "./panel/Panel.svelte";
-	import Toolbar from './toolbar/Toolbar.svelte';
 	import {layout} from '../stores/layoutManager';
 	import {gesture} from '../stores/gestureManager';
-	import MinimisedLeft from "./layout/MinimisedLeft.svelte";
-	import MinimisedRight from "./layout/MinimisedRight.svelte";
+	import MinimisedLeft from "./panel/MinimisedLeft.svelte";
+	import MinimisedRight from "./panel/MinimisedRight.svelte";
 </script>
 
 <main on:mousedown={e => !$gesture.startSwipe(e, $layout.swipe)}
@@ -17,14 +15,7 @@
 	  on:touchend={$gesture.stop}>
 	<MinimisedLeft />
 	<Graph />
-	<Panel>
-		<div slot="toolbar">
-			<Toolbar />
-		</div>
-		<div slot="divider">
-			<Divider />
-		</div>
-	</Panel>
+	<Panel />
 	<MinimisedRight />
 </main>
 

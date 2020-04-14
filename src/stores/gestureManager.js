@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { identifySwipe } from "./swipes";
+import { identifySwipe } from "../common/swipes";
 
 export const gesture = writable({
     isDragging: false,

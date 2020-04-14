@@ -1,4 +1,4 @@
-import { chart } from './dimensions';
+import { chart } from '../../common/svgDimensions';
 
 const calcX = products => {
     const numIntervals = products[0].length;

@@ -3,6 +3,7 @@
     import chatHistory from "../../data/chatHistory";
     import {layout} from '../../stores/layoutManager';
     import {help} from '../../stores/helpManager';
+    import { minimised } from '../panel/panelPositions';
     import HistoryItem from "./HistoryItem.svelte";
 
     $: inputStyle = `
@@ -21,7 +22,7 @@
     };
 
     afterUpdate(() => {
-        if (history) {
+        if ($layout.panelPosition !== minimised ) {
             history.scrollTop = history.scrollHeight;
             command.focus();
         }
@@ -34,7 +35,7 @@
             <HistoryItem item={item} isUser={i % 2 === 0} />
         {/each}
     </div>
-    <input id="command" placeholder="next command..?" style={inputStyle} bind:this={command} on:change={addCommand}/>
+    <input placeholder="next command..?" style={inputStyle} bind:this={command} on:change={addCommand}/>
 </div>
 
 <style>

@@ -3,8 +3,8 @@
     import { layout } from '../../stores/layoutManager';
     import { products } from '../../stores/productPresenter';
     import { info } from '../panel/panelContents';
-    import { chart, header, left } from './dimensions';
-    import { delayedAction } from '../../stores/delayedAction';
+    import { chart, header, left } from '../../common/svgDimensions';
+    import { delayedAction } from '../../common/delayedAction';
 
     export let product;
     export let colour;
