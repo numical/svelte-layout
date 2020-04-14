@@ -62,9 +62,3 @@
 1. 
 
 
-
-
-
-## Links
-* https://svelte.dev/
-
