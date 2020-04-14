@@ -54,8 +54,9 @@
 | `useXXX` | 'reactive declarations' - weird syntax |
 | composition: `children` | composition: `slots` |
 
-## Demo
-https://github.com/numical/svelte-layout
+## Links
+* demo: https://zeit.co/numical/svelte-layout
+* repo: https://github.com/numical/svelte-layout
 
 ## Outstanding Questions
 1. 

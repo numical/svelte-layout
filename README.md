@@ -94,4 +94,5 @@ surge public my-project.surge.sh
 
 
 ## Next Steps
+1. add to ZEIT
 1. <svelte:options immutable={true}/>
