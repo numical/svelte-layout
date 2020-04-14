@@ -1,9 +1,8 @@
 <script>
-    import { afterUpdate } from 'svelte';
+    import { afterUpdate, tick } from 'svelte';
     import chatHistory from "../../data/chatHistory";
     import {layout} from '../../stores/layoutManager';
     import {help} from '../../stores/helpManager';
-    import { minimised } from '../panel/panelPositions';
     import HistoryItem from "./HistoryItem.svelte";
 
     $: inputStyle = `
@@ -13,35 +12,33 @@
 
     let historyItems = chatHistory.map(s => s.split('.'));
     let history;
-    let command;
 
-    const addCommand = ({target}) => {
+    const addCommand = async({target}) => {
         const {value} = target;
         target.value = '';
         historyItems = [...historyItems, [value], [`Sorry, I do not understand '${value}'`]];
+        await tick();
+        scrollDown(history);
     };
 
-    afterUpdate(() => {
-        if ($layout.panelPosition !== minimised ) {
-            history.scrollTop = history.scrollHeight;
-            command.focus();
-        }
-    });
+    const scrollDown = element => {
+        element.scrollTop = element.scrollHeight;
+    };
 </script>
 
 <div class='container'>
-    <div class="history" bind:this={history} >
+    <div class="history" bind:this={history} use:scrollDown>
         {#each historyItems as item, i}
             <HistoryItem item={item} isUser={i % 2 === 0} />
         {/each}
     </div>
-    <input placeholder="next command..?" style={inputStyle} bind:this={command} on:change={addCommand}/>
+    <input placeholder="next command..?" style={inputStyle} on:change={addCommand}/>
 </div>
 
 <style>
     .container {
         display: grid;
-        grid-template-rows: calc(100vh - 5rem) 2rem;
+        grid-template-rows: calc(100vh - 5vmin - 3rem) 2rem;
         grid-template-columns: 100%;
     }
     input {

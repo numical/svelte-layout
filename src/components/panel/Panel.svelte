@@ -34,7 +34,7 @@
         bottom: 0;
         color: white;
         display: grid;
-        grid-template-rows: 5vmin 1fr;
+        grid-template-rows: 5vmin calc(100vh - 5vmin);
         grid-template-columns: 100%;
         transition: background-color .6s, border-radius .6s, margin .6s;
     }
