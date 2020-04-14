@@ -5,7 +5,7 @@
     $: data = $products.display.product.data;
 </script>
 
-<div in:fade="{{duration: 600}}">
+<div in:fade="{{duration: 300}}">
     <h2>{title}</h2>
     <div>
         {`Start amount: £${data[0]}`}

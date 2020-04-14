@@ -4,39 +4,42 @@
     import { products } from '../../stores/productPresenter';
     import { info } from '../panel/panelContents';
     import { chart, header, left } from './dimensions';
+    import { delayedAction } from '../../stores/delayedAction';
 
     export let product;
     export let colour;
     export let scale;
 
-    let state = 'unselected';
+    let endDisplay;
 
     const xOffset = left.width;
     const yOffset = chart.height + header.height;
     const points = product.data.reduce((points, value, interval) =>
         `${points} ${xOffset + interval * scale.x.intervalWidth},${yOffset - value * scale.y.unitHeight}`,
         "");
-    const displayProduct = () => {
-        if (state === 'selected') {
-            $products.displayProduct(product);
-            if ($layout.panelContent !== info) {
+    const displayProduct = () => ($layout.panelContent !== info)
+        ? delayedAction(
+            300,
+            () => {
+                $products.displayProduct(product);
                 $layout.togglePanelContent();
-            }
-            state = 'displaying'
-        }
-    }
+            },
+            () => {
+                $products.displayProductsList();
+                $layout.togglePanelContent();
+            })
+        : delayedAction(
+            300,
+            () => $products.displayProduct(product),
+            () =>  $products.displayProductsList()
+            );
     const mouseOver = () => {
         $help.setFocus('product');
-        state = 'selected';
-        setTimeout(displayProduct, 600);
+        endDisplay = displayProduct();
     };
     const mouseLeave = () => {
         $help.loseFocus();
-        if (state === 'displaying') {
-            $layout.togglePanelContent();
-            $products.displayProductsList();
-        }
-        state = 'unselected';
+        endDisplay();
     };
 </script>
 
