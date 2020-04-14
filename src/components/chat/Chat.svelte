@@ -1,5 +1,6 @@
 <script>
-    import { afterUpdate, tick } from 'svelte';
+    import { tick } from 'svelte';
+    import { fade } from 'svelte/transition';
     import chatHistory from "../../data/chatHistory";
     import {layout} from '../../stores/layoutManager';
     import {help} from '../../stores/helpManager';
@@ -26,7 +27,7 @@
     };
 </script>
 
-<div class='container'>
+<div class='container' in:fade="{{duration: 300}}">
     <div class="history" bind:this={history} use:scrollDown>
         {#each historyItems as item, i}
             <HistoryItem item={item} isUser={i % 2 === 0} />
