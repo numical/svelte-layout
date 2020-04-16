@@ -3,6 +3,8 @@
     import Toolbar from "../toolbar/Toolbar.svelte";
     import Divider from "./Divider.svelte";
 
+    const lines = Array.from({ length: 100 }, (_, index) => `line ${index}`);
+
     $: mainStyle = $layout.overlayPanel
         ? ` ${$layout.restorePanelPosition.panelPos}: 0;
             width:calc(${$layout.panelWidth}% - 0.5rem);
@@ -20,7 +22,11 @@
 
 <main style={mainStyle}>
     <Toolbar />
-    <svelte:component this={$layout.panelContent.component} />
+    <div class="temp">
+        {#each lines as line}
+            <div>{line}</div>
+        {/each}
+    </div>
     <Divider />
 </main>
 
@@ -31,9 +37,13 @@
         top: 0;
         bottom: 0;
         color: white;
-        display: grid;
-        grid-template-rows: 5vmin calc(100vh - 5vmin);
-        grid-template-columns: 100%;
+        display: flex;
+        flex-flow: column nowrap;
         transition: background-color .6s, border-radius .6s, margin .6s;
+    }
+    .temp {
+        flex: 1 1 10%;
+        background-color: seagreen;
+        overflow-y: auto;
     }
 </style>

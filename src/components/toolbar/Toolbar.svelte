@@ -10,6 +10,7 @@
 
 <style>
     div {
+        flex: none;
         display: flex;
         justify-content: flex-end;
     }
