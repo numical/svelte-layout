@@ -27,6 +27,9 @@
             <div>{line}</div>
         {/each}
     </div>
+    <div class="foot">
+        The footer
+    </div>
     <Divider />
 </main>
 
@@ -45,5 +48,9 @@
         flex: 1 1 10%;
         background-color: seagreen;
         overflow-y: auto;
+    }
+    .foot {
+        flex: none;
+        background-color: darkorange;
     }
 </style>
