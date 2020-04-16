@@ -38,12 +38,17 @@
 
 <style>
     .container {
-        display: grid;
-        grid-template-rows: calc(100vh - 5vmin - 3rem) 2rem;
-        grid-template-columns: 100%;
+        flex: 1 1 0;
+        display: flex;
+        flex-flow: column nowrap;
         padding: 0.25rem;
     }
+    .history {
+        flex: 1 1 0;
+        overflow-y: auto;
+    }
     input {
+        flex: none;
         color: black;
         background-color: darkorange;
         opacity: 100%;
@@ -55,8 +60,5 @@
     input::placeholder {
         color: white;
         opacity: 1;
-    }
-    .history {
-        overflow-y: auto;
     }
 </style>
