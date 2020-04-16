@@ -31,7 +31,7 @@
 </script>
 
 {#each ticks as tick}
-    <line {...tick.dimensions} />[p-k
+    <line {...tick.dimensions} />
     <text {...tick.label.dimensions}
           on:mouseover={() => $help.setFocus('product')}
           on:mouseleave={$help.loseFocus}>
