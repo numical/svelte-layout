@@ -41,6 +41,7 @@
         display: grid;
         grid-template-rows: calc(100vh - 5vmin - 3rem) 2rem;
         grid-template-columns: 100%;
+        padding: 0.25rem;
     }
     input {
         color: black;
