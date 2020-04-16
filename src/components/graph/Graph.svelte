@@ -9,7 +9,6 @@
     import { layout } from '../../stores/layoutManager';
     import { products } from '../../stores/productPresenter';
 
-    const colours = ['darkblue', 'blue', 'cornflowerblue', 'lightblue'];
     const viewBox = `0 0 ${left.width + chart.width + right.width} ${header.height + chart.height + footer.height}`;
 
     $: style = `
@@ -27,7 +26,7 @@
     <XAxis />
     <XGridLines scale={scale} />
     {#each $products.visible as product, index}
-        <Product product={product} colour={colours[(index % colours.length)]} scale={scale} />
+        <Product product={product} colour={product.colour} scale={scale} />
     {/each}
 </svg>
 

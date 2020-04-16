@@ -8,18 +8,18 @@ const generateAmount = (max, volatility, _, index) => {
 
 const generateData = (max, volatility) => Array.from({ length: intervals }, generateAmount.bind(null, max, volatility));
 
-const getPensionData = () => generateData(100000, 0.2);
-
-const getSavingsData = () => generateData(30000, 0.1);
-
 export const getProducts = () => [
     {
         name: 'Pension',
-        data: getPensionData()
+        data: generateData(100000, 0.1)
     },
     {
         name: 'Savings',
-        data: getSavingsData()
+        data: generateData(30000, 0.05)
+    },
+    {
+        name: 'Investments',
+        data: generateData(75000, 0.3)
     }
 ];
 

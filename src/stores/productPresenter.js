@@ -1,35 +1,29 @@
 import { writable } from 'svelte/store';
-import ProductDetails from '../components/info/ProductDetails.svelte';
-import ProductsList from '../components/info/ProductsList.svelte';
 import { getProducts } from "../data/personalFinancialModel";
+
+const colours = ['darkblue', 'blue', 'cornflowerblue', 'lightblue'];
 
 const all = getProducts().map((product, id) => ({
     ...product,
     id,
+    colour: colours[(id % colours.length)],
     visible: true
 }));
 
 export const products = writable({
     all,
     visible: all,
-    display: {
-        component: ProductsList
-    },
-    displayProduct: product => {
+    highlighted: undefined,
+    highlightProduct: product => {
         products.update(state => ({
             ...state,
-            display: {
-                component: ProductDetails,
-                product
-            }
+            highlighted: product
         }));
     },
-    displayProductsList: () => {
+    noHighlight: () => {
         products.update(state => ({
             ...state,
-            display: {
-                component: ProductsList
-            }
+            highlighted: undefined
         }));
     },
 });

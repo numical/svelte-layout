@@ -21,17 +21,17 @@
         ? delayedAction(
             300,
             () => {
-                $products.displayProduct(product);
+                $products.highlightProduct(product);
                 $layout.togglePanelContent();
             },
             () => {
-                $products.displayProductsList();
+                $products.noHighlight();
                 $layout.togglePanelContent();
             })
         : delayedAction(
             300,
-            () => $products.displayProduct(product),
-            () =>  $products.displayProductsList()
+            () => $products.highlightProduct(product),
+            () =>  $products.noHighlight()
             );
     const mouseOver = () => {
         $help.setFocus('product');

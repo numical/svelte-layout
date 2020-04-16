@@ -1,10 +1,13 @@
 <script>
     import { fade } from 'svelte/transition';
     import { products } from '../../stores/productPresenter';
+    import ProductDetails from './ProductDetails.svelte';
 </script>
 
 <div class='container' in:fade="{{duration: 300}}">
-    <svelte:component this={$products.display.component} />
+    {#each $products.all as product}
+        <ProductDetails product={product} />
+    {/each}
 </div>
 
 <style>
