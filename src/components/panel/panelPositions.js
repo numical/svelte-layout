@@ -1,6 +1,6 @@
 const minAutoPanelWidth = 20;
 
-const drag = (state, w) => ({
+const resize = (state, w) => ({
     ...state,
     panelPosition: state.restorePanelPosition.calcPanelPosition(w),
     graphWidth: state.overlayPanel ? 100 : state.restorePanelPosition.calcGraphWidth(w),
@@ -17,7 +17,7 @@ const toggleOverlay = state => ({
 });
 
 export const left = {
-    drag,
+    resize,
     graphPos: 'right',
     calcGraphWidth: w => 100 - w,
     calcPanelPosition: w => w === 100
@@ -50,7 +50,7 @@ export const left = {
 };
 
 export const right = {
-    drag,
+    resize,
     graphPos: 'left',
     calcGraphWidth: w => w,
     calcPanelPosition: w => w === 100
@@ -83,7 +83,7 @@ export const right = {
 };
 
 export const maximised = {
-    drag,
+    resize,
     swipeLeft: state => ({
         ...state,
         panelPosition: left,
@@ -104,7 +104,7 @@ export const maximised = {
 };
 
 export const minimised = {
-    drag,
+    resize,
     swipeLeft: state => state.restorePanelPosition === right
         ? {
             ...state,

@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 import { right } from "../components/panel/panelPositions";
 import { SwipeLeft, SwipeRight } from "../common/swipes";
 import { chat, info } from '../components/panel/panelContents';
+import { toCoords, toSVGCoords } from "../common/eventUtils";
 
 const calcInitialWidth = () => {
     let percent = 20000 /  window.innerWidth
@@ -9,7 +10,10 @@ const calcInitialWidth = () => {
 }
 const panelWidth = calcInitialWidth();
 
+const getX = event => event.clientX || event.touches[0].clientX;
+
 export const layout = writable({
+    dateLineX: 0,
     panelPosition: right,
     graphWidth: 100,
     panelWidth,
@@ -18,11 +22,11 @@ export const layout = writable({
     overlayPanel: true,
     panelContent: chat,
     transition: 0.6,
-    drag: event => {
+    resize: event => {
         layout.update(state => {
-            const x = event.clientX || event.touches[0].clientX;
+            const { x } = toCoords(event);
             const w = Math.floor(100 * x / event.currentTarget.clientWidth);
-            return state.panelPosition.drag(state, w);
+            return state.panelPosition.resize(state, w);
         });
     },
     swipe: swipe => {
@@ -36,6 +40,12 @@ export const layout = writable({
                     return state;
             }
         })
+    },
+    updateDateLine: event => {
+        layout.update(state => ({
+            ... state,
+            dateLineX: event ? toSVGCoords(event).x : 0
+        }));
     },
     togglePanelContent: () => {
         layout.update(state => ({

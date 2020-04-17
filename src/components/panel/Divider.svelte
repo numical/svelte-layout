@@ -3,6 +3,8 @@
     import { gesture } from '../../stores/gestureManager';
     import { layout } from '../../stores/layoutManager';
 
+    const startResize = () => $gesture.setDragBehaviour(event => $layout.resize(event));
+
     $: dividerStyle =  `
         ${$layout.restorePanelPosition.graphPos}: -1vw;
     `;
@@ -11,8 +13,8 @@
 <div class="divider"
      style={dividerStyle}
      on:mouseover={() => $help.setFocus('divider')}
-     on:mousedown={$gesture.startDrag}
-     on:touchstart={$gesture.startDrag}
+     on:mousedown={startResize}
+     on:touchstart={startResize}
      on:mouseleave={$help.loseFocus}
      on:touchend={$help.loseFocus} />
 

@@ -5,4 +5,5 @@ Exploring dynamic UI layout with Svelte
 https://svelte-layout.now.sh
 
 # Next Steps
-1. Add `<svelte:options immutable={true}/>` to reduce blinking
+1. Change drag to resize
+2. Add chart manager?

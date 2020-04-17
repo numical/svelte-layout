@@ -1,5 +1,5 @@
 <script>
-    import { help } from '../../stores/helpManager';
+    import {layout} from '../../stores/layoutManager';
     import { chart, header, left, margin } from '../../common/svgDimensions';
 
     export let scale;
@@ -30,14 +30,14 @@
 
 </script>
 
-{#each ticks as tick}
-    <line {...tick.dimensions} />
-    <text {...tick.label.dimensions}
-          on:mouseover={() => $help.setFocus('product')}
-          on:mouseleave={$help.loseFocus}>
-        {tick.label.text}
-    </text>
-{/each}
+{#if !$layout.dateLineX}
+    {#each ticks as tick}
+        <line {...tick.dimensions} />
+        <text {...tick.label.dimensions}>
+            {tick.label.text}
+        </text>
+    {/each}
+{/if}
 
 <style>
     line {
@@ -48,8 +48,5 @@
         text-anchor: middle;
         dominant-baseline: hanging;
         font-size: x-small;
-    }
-    text:hover {
-        fill: darkorange;
     }
 </style>

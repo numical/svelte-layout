@@ -1,20 +1,22 @@
 import { writable } from 'svelte/store';
 import { identifySwipe } from "../common/swipes";
 
+const none = () => undefined;
+
 export const gesture = writable({
-    isDragging: false,
+    dragBehaviour: none,
     possibleSwipe: false,
-    startDrag: () => {
+    setDragBehaviour: callback => {
         gesture.update(state => ({
             ...state,
-            isDragging: true,
+            dragBehaviour: callback,
             possibleSwipe: false
         }));
     },
     startSwipe: (event, callback) => {
         gesture.update(state => ({
             ...state,
-            possibleSwipe: state.isDragging ? false : { start: event, callback }
+            possibleSwipe: state.dragBehaviour !== none ? false : { start: event, callback }
         }));
     },
     stop: event => {
@@ -25,7 +27,7 @@ export const gesture = writable({
             }
             return {
                 ...state,
-                isDragging: false,
+                dragBehaviour: none,
                 possibleSwipe: false
             }
         });

@@ -9,8 +9,8 @@
 
 <main on:mousedown={e => !$gesture.startSwipe(e, $layout.swipe)}
 	  on:touchstart={e => $gesture.startSwipe(e, $layout.swipe)}
-	  on:mousemove={e => $gesture.isDragging && $layout.drag(e)}
-	  on:touchmove={e => $gesture.isDragging && $layout.drag(e)}
+	  on:mousemove={e => $gesture.dragBehaviour(e)}
+	  on:touchmove={e => $gesture.dragBehaviour(e)}
 	  on:mouseup={$gesture.stop}
 	  on:touchend={$gesture.stop}>
 	<MinimisedLeft />
