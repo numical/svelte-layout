@@ -1,4 +1,5 @@
 <script>
+    import { help } from '../../stores/helpManager';
     import {layout} from '../../stores/layoutManager';
     import { chart, header, left, margin } from '../../common/svgDimensions';
     import { fromIntervalToText } from '../../common/dates';
@@ -25,22 +26,19 @@
             visible: !$layout.dateLineX || Math.abs($layout.dateLineX - x) > 50
         };
     });
+    $: colour = $help.currentFocus === 'date' ? "darkorange" : "black";
 </script>
 
 {#each ticks as tick}
     {#if tick.visible}
-        <line {...tick.dimensions} />
-        <text {...tick.label.dimensions}>
+        <line {...tick.dimensions} stroke={colour} />
+        <text {...tick.label.dimensions} fill={colour} >
             {tick.label.text}
         </text>
     {/if}
 {/each}
 
 <style>
-    line {
-        stroke: black;
-        stroke-width: 1;
-    }
     text {
         text-anchor: middle;
         dominant-baseline: hanging;
