@@ -5,5 +5,5 @@ Exploring dynamic UI layout with Svelte
 https://svelte-layout.now.sh
 
 # Next Steps
-1. Change drag to resize
-2. Add chart manager?
+1. keys to move DateLine
+2. how to zoom

@@ -36,6 +36,6 @@ export const fromEventToSVGCoords = event => {
 
 export const fromSVGCoordsToInterval = ({ x }) => {
     const interval = Math.floor((x - left.width) * intervals/chart.width);
-    return interval === intervals ? intervals -1 : interval;
+    return interval >= intervals ? intervals -1 : interval;
 }
 

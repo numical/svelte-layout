@@ -18,17 +18,22 @@
         : $layout.dateLineX;
     $: interval = fromSVGCoordsToInterval({ x });
     $: dimensions = {
-        x1: x,
-        x2: x,
-        y1: header.height,
-        y2: header.height + chart.height
-    };
-    $: label = {
-        dimensions: {
+        rect: {
+            x: x - 12,
+            y: header.height,
+            width: 25,
+            height: chart.height
+        },
+        line: {
+            x1: x,
+            x2: x,
+            y1: header.height,
+            y2: header.height + chart.height
+        },
+        label: {
             x,
             y: header.height + chart.height + margin
-        },
-        text: fromIntervalToText(interval)
+        }
     };
     $: values = $products.visible.map((product, index) => ({
         colour: product.colour,
@@ -41,14 +46,17 @@
 </script>
 
 {#if $layout.dateLineX}
-    <line {...dimensions}
+    <rect {...dimensions.rect}
           on:mousedown={startDrag}
           on:touchstart={startDrag} />
-    <text {...label.dimensions}
+    <line {...dimensions.line}
+          on:mousedown={startDrag}
+          on:touchstart={startDrag} />
+    <text {...dimensions.label}
           class="label"
           on:mousedown={startDrag}
           on:touchstart={startDrag} >
-        {label.text}
+        {fromIntervalToText(interval)}
     </text>
     {#each values as value}
         <text {...value.dimensions} class="background" >
@@ -61,6 +69,10 @@
 {/if}
 
 <style>
+    rect {
+        opacity: 0;
+        cursor: url(horizontalResize.png), col-resize;
+    }
     line {
         stroke: darkorange;
         stroke-width: 2;

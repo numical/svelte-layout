@@ -58,7 +58,11 @@
 * demo: https://svelte-layout.now.sh/
 * repo: https://github.com/numical/svelte-layout
 
+## Constraints
+* only template components are reactive
+* 'transition' gotchas
+
 ## Outstanding Questions
-1. 
+1. rollup build - images / deferred load
 
 
