@@ -9,15 +9,21 @@
     $: style = product === $products.highlighted
             ? `
                 background-color: darkorange;
-                border-radius:${$layout.overlayPanel ? '0.25rem' : '0'};
+                border-radius: ${$layout.overlayPanel ? '0.25rem' : '0'};
+                border: solid ${product.colour};
               `
             : '';
+    $: titleStyle = product === $products.highlighted
+        ? `
+            color: ${product.colour}
+        `
+        : '';
     $: interval = $layout.dateLineX ? fromSVGCoordsToInterval({ x: $layout.dateLineX }) : fromTodayToInterval();
     $: label = $layout.dateLineX ? `Value at ${fromIntervalToText(interval)}:` : "Today's value:";
 </script>
 
 <div class="container" style={style}>
-    <div class="title">{product.name}</div>
+    <div class="title" style={titleStyle}>{product.name}</div>
     <div class="values">
         <div>Start value:</div>
         <div>{format(product.data[0])}</div>
