@@ -29,7 +29,7 @@
     {#each $products.visible as product, index}
         <Product product={product} colour={product.colour} scale={scale} />
     {/each}
-    <DateLine />
+    <DateLine scale={scale} />
 </svg>
 
 

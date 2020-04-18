@@ -25,7 +25,7 @@ export const fromEventToDomCoords = event => ({
     y: event.clientY || event.touches[0].clientY
 });
 
-export const toSVGCoords = event => {
+export const fromEventToSVGCoords = event => {
     const coords = fromEventToDomCoords(event);
     const pt = getPoint();
     pt.x = coords.x;
@@ -34,5 +34,8 @@ export const toSVGCoords = event => {
     return { x, y };
 }
 
-export const fromSVGCoordsToInterval = ({ x }) => Math.floor((x - left.width) * intervals/chart.width);
+export const fromSVGCoordsToInterval = ({ x }) => {
+    const interval = Math.floor((x - left.width) * intervals/chart.width);
+    return interval === intervals ? intervals -1 : interval;
+}
 
