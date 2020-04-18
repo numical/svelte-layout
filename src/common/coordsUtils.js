@@ -1,3 +1,6 @@
+import { chart, left } from './svgDimensions';
+import { intervals } from "../data/personalFinancialModel";
+
 let svg;
 let pt;
 
@@ -17,16 +20,19 @@ const getPoint = () => {
     return pt;
 }
 
-export const toCoords = event => ({
+export const fromEventToDomCoords = event => ({
     x: event.clientX || event.touches[0].clientX,
     y: event.clientY || event.touches[0].clientY
 });
 
 export const toSVGCoords = event => {
-    const coords = toCoords(event);
+    const coords = fromEventToDomCoords(event);
     const pt = getPoint();
     pt.x = coords.x;
     pt.y = coords.y;
     const { x, y, ...rest } = pt.matrixTransform(getMatrix());
     return { x, y };
 }
+
+export const fromSVGCoordsToInterval = ({ x }) => Math.floor((x - left.width) * intervals/chart.width);
+

@@ -1,6 +1,7 @@
 <script>
     import { gesture } from '../../stores/gestureManager';
     import {layout} from '../../stores/layoutManager';
+    import { fromSVGCoordsToText } from '../../common/dateUtils';
     import { chart, header, left, margin } from '../../common/svgDimensions';
 
     const startDrag = () => $gesture.setDragBehaviour(event => $layout.updateDateLine(event));
@@ -14,14 +15,14 @@
         x1: x,
         x2: x,
         y1: header.height,
-        y2: header.height + chart.height + margin
+        y2: header.height + chart.height
     };
     $: label = {
         dimensions: {
             x,
             y: header.height + chart.height + margin
         },
-        text: `interval ${Math.floor((x - left.width) * 301/chart.width)}`
+        text: fromSVGCoordsToText({ x })
     }
 </script>
 
@@ -42,6 +43,7 @@
     }
     text {
         fill: darkorange;
+        background-color: white;
         text-anchor: middle;
         dominant-baseline: hanging;
         font-size: x-small;

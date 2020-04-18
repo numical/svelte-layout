@@ -1,16 +1,13 @@
 <script>
     import {layout} from '../../stores/layoutManager';
     import { chart, header, left, margin } from '../../common/svgDimensions';
+    import { fromIntervalToText } from '../../common/dateUtils';
 
     export let scale;
 
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    const maxIndex = scale.x.intervals.length - 1;
-    const ticks = scale.x.intervals.map((interval, index) => {
+    $: ticks = scale.x.intervals.map(interval => {
         const x = left.width + interval * scale.x.intervalWidth;
         const y = header.height + chart.height;
-        const date = new Date(2020, index === maxIndex ? interval - 1 : interval, 1);
         return {
             dimensions: {
                 x1: x,
@@ -23,21 +20,21 @@
                     x,
                     y: y + margin
                 },
-                text: `${months[date.getMonth()]} ${date.getFullYear()}`
-            }
+                text: fromIntervalToText(interval)
+            },
+            visible: !$layout.dateLineX || Math.abs($layout.dateLineX - x) > 50
         };
     });
-
 </script>
 
-{#if !$layout.dateLineX}
-    {#each ticks as tick}
+{#each ticks as tick}
+    {#if tick.visible}
         <line {...tick.dimensions} />
         <text {...tick.label.dimensions}>
             {tick.label.text}
         </text>
-    {/each}
-{/if}
+    {/if}
+{/each}
 
 <style>
     line {

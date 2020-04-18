@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import { right } from "../components/panel/panelPositions";
 import { SwipeLeft, SwipeRight } from "../common/swipes";
 import { chat, info } from '../components/panel/panelContents';
-import { toCoords, toSVGCoords } from "../common/eventUtils";
+import { fromEventToDomCoords, toSVGCoords } from "../common/coordsUtils";
 
 const calcInitialWidth = () => {
     let percent = 20000 /  window.innerWidth
@@ -24,7 +24,7 @@ export const layout = writable({
     transition: 0.6,
     resize: event => {
         layout.update(state => {
-            const { x } = toCoords(event);
+            const { x } = fromEventToDomCoords(event);
             const w = Math.floor(100 * x / event.currentTarget.clientWidth);
             return state.panelPosition.resize(state, w);
         });

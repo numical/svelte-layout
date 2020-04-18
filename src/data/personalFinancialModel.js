@@ -23,5 +23,3 @@ export const getProducts = () => [
     }
 ];
 
-export const getStartDate = () => new Date(2020, 0, 1);
-
