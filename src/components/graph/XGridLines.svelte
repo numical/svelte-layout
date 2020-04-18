@@ -1,7 +1,7 @@
 <script>
     import {layout} from '../../stores/layoutManager';
     import { chart, header, left, margin } from '../../common/svgDimensions';
-    import { fromIntervalToText } from '../../common/dateUtils';
+    import { fromIntervalToText } from '../../common/dates';
 
     export let scale;
 

@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 import { right } from "../components/panel/panelPositions";
 import { SwipeLeft, SwipeRight } from "../common/swipes";
 import { chat, info } from '../components/panel/panelContents';
-import { fromEventToDomCoords, fromEventToSVGCoords } from "../common/coordsUtils";
+import { fromEventToDomCoords, fromEventToSVGCoords } from "../common/coords";
 
 const calcInitialWidth = () => {
     let percent = 20000 /  window.innerWidth

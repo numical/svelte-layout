@@ -2,8 +2,8 @@
     import { gesture } from '../../stores/gestureManager';
     import { layout } from '../../stores/layoutManager';
     import { products } from '../../stores/productPresenter';
-    import { fromIntervalToText } from '../../common/dateUtils';
-    import { fromSVGCoordsToInterval } from '../../common/coordsUtils';
+    import { fromIntervalToText } from '../../common/dates';
+    import { fromSVGCoordsToInterval } from '../../common/coords';
     import { chart, header, left, margin } from '../../common/svgDimensions';
     import { format } from '../../common/currency';
 
