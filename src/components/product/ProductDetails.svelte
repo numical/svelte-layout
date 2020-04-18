@@ -43,7 +43,7 @@
     }
     .values {
         display: grid;
-        grid-template-columns: auto auto 1fr;
+        grid-template-columns: 16ch auto 1fr;
         grid-column-gap: 0.5rem;
     }
     .values div {

@@ -1,7 +1,7 @@
 <script>
     import { help } from '../../stores/helpManager';
     import { layout } from '../../stores/layoutManager';
-    import { chart, header, left, margin } from '../../common/svgDimensions';
+    import { chart, footer, header, left, margin } from '../../common/svgDimensions';
 
     const dimensions = {
         line: {
@@ -9,6 +9,12 @@
             x2: left.width + chart.width,
             y1: header.height + chart.height,
             y2: header.height + chart.height
+        },
+        rect: {
+            x: left.width,
+            y: header.height + chart.height,
+            width: chart.width,
+            height: footer.height
         },
         tooltip: {
             x: left.width + chart.width / 2,
@@ -20,14 +26,19 @@
         $layout.updateDateLine( $layout.dateLineX ? null : event);
     };
 
+    $: lineStyle = $help.currentFocus === 'date' ? "stroke: darkorange" : "";
     $: toolTipText = $layout.dateLineX ? "click to hide date line" : "click to show date line";
 </script>
 
-<line {...dimensions.line}
+<rect {...dimensions.rect}
       on:mouseover={() => $help.setFocus('date')}
       on:mouseleave={$help.loseFocus}
-      on:click={toggleDateLine}
-/>
+      on:click={toggleDateLine} />
+<line {...dimensions.line}
+      style={lineStyle}
+      on:mouseover={() => $help.setFocus('date')}
+      on:mouseleave={$help.loseFocus}
+      on:click={toggleDateLine} />
 {#if $help.currentFocus === 'date'}
     <text {...dimensions.tooltip}>
         {toolTipText}
@@ -35,13 +46,13 @@
 {/if}
 
 <style>
+    rect {
+        opacity: 0;
+    }
     line {
         stroke: black;
         stroke-width: 2;
         padding: 5px;
-    }
-    line:hover {
-      stroke: darkorange;
     }
     text {
         fill: darkorange;
