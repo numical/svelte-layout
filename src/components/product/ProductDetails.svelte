@@ -8,8 +8,7 @@
     export let product;
     $: style = product === $products.highlighted
             ? `
-                background-color: orange;
-                opacity:${$layout.overlayPanel ? '0.75' : '1'};
+                background-color: darkorange;
                 border-radius:${$layout.overlayPanel ? '0.25rem' : '0'};
               `
             : '';
