@@ -5,6 +5,7 @@
     import { fromIntervalToText } from '../../common/dateUtils';
     import { fromSVGCoordsToInterval } from '../../common/coordsUtils';
     import { chart, header, left, margin } from '../../common/svgDimensions';
+    import { format } from '../../common/currency';
 
     export let scale;
 
@@ -35,7 +36,7 @@
             x,
             y: header.height + chart.height  - product.data[interval] * scale.y.unitHeight
         },
-        text: `£${product.data[interval]}`
+        text: format(product.data[interval])
     }));
 </script>
 

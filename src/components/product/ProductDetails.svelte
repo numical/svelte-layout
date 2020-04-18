@@ -1,6 +1,8 @@
 <script>
     import { layout } from '../../stores/layoutManager';
     import { products } from '../../stores/productPresenter';
+    import { format } from '../../common/currency';
+
     export let product;
     $: style = product === $products.highlighted
             ? `
@@ -14,10 +16,10 @@
 <div class="container" style={style}>
     <div class="title">{product.name}</div>
     <div>
-        {`Start amount: £${product.data[0]}`}
+        {`Start amount: ${format(product.data[0])}`}
     </div>
     <div>
-        {`End amount: £${product.data[product.data.length - 1]}`}
+        {`End amount: ${format(product.data[product.data.length - 1])}`}
     </div>
 </div>
 
