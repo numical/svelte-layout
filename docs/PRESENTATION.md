@@ -60,7 +60,9 @@
 |      composition: `children`       |          composition: `slots`           |
 
 ## Links
+
 format
+
 - demo: https://svelte-layout.now.sh/
 - repo: https://github.com/numical/svelte-layout
 

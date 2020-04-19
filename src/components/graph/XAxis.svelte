@@ -12,9 +12,9 @@
         },
         rect: {
             x: left.width,
-            y: header.height + chart.height,
+            y: header.height + chart.height - footer.height,
             width: chart.width,
-            height: footer.height
+            height: footer.height * 2
         },
         tooltip: {
             x: left.width + chart.width / 2,
