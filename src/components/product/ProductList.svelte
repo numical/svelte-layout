@@ -14,6 +14,7 @@
     .container {
         flex: 1 1 0;
         padding: 0.25rem;
+        overflow: auto;
     }
 </style>
 
