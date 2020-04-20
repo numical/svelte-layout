@@ -1,35 +1,48 @@
 import { writable } from "svelte/store";
 import { identifySwipe } from "../common/swipes";
 
-const none = () => undefined;
+const DRAG = Symbol('drag');
+const SWIPE = Symbol('swipe');
+const PINCH = Symbol('pinch');
+const NONE = Symbol('none');
+
+const none = {
+  type: NONE
+};
 
 export const gesture = writable({
-  dragBehaviour: none,
-  possibleSwipe: false,
+  currentGesture: none,
   setDragBehaviour: (callback) => {
     gesture.update((state) => ({
       ...state,
-      dragBehaviour: callback,
-      possibleSwipe: false,
+      currentGesture: state.currentGesture || {
+        type: DRAG,
+        callback
+      }
     }));
   },
   startSwipe: (event, callback) => {
     gesture.update((state) => ({
       ...state,
-      possibleSwipe:
-        state.dragBehaviour !== none ? false : { start: event, callback },
+      currentGesture: state.currentGesture || {
+        type: SWIPE,
+        start: event,
+        callback
+      }
     }));
   },
   stop: (event) => {
     gesture.update((state) => {
-      if (state.possibleSwipe) {
-        const { start, callback } = state.possibleSwipe;
-        callback(identifySwipe(start, event));
+      if (state.currentGesture) {
+        const { callback, start, type } = state.currentGesture;
+        switch(state.currentGesture.type) {
+          case SWIPE:
+            callback(identifySwipe(start, event));
+        }
       }
       return {
         ...state,
-        dragBehaviour: none,
-        possibleSwipe: false,
+        currentGesture: none
       };
     });
   },
