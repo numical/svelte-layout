@@ -1,5 +1,5 @@
 <script>
-    import { gesture } from '../../stores/gestureManager';
+    import { startDrag } from '../../gestures/gestureManager';
     import { layout } from '../../stores/layoutManager';
     import { products } from '../../stores/productPresenter';
     import { fromIntervalToText } from '../../common/dates';
@@ -9,7 +9,7 @@
 
     export let scale;
 
-    const startDrag = () => $gesture.setDragBehaviour(event => $layout.updateDateLine(event));
+    const drag = () => startDrag(event => $layout.updateDateLine(event));
 
     $: x = $layout.dateLineX < left.width
         ? left.width
@@ -47,15 +47,15 @@
 
 {#if $layout.dateLineX}
     <rect {...dimensions.rect}
-          on:mousedown={startDrag}
-          on:touchstart={startDrag} />
+          on:mousedown={drag}
+          on:touchstart={drag} />
     <line {...dimensions.line}
-          on:mousedown={startDrag}
-          on:touchstart={startDrag} />
+          on:mousedown={drag}
+          on:touchstart={drag} />
     <text {...dimensions.label}
           class="label"
-          on:mousedown={startDrag}
-          on:touchstart={startDrag} >
+          on:mousedown={drag}
+          on:touchstart={drag} >
         {fromIntervalToText(interval)}
     </text>
     {#each values as value}
