@@ -13,7 +13,7 @@
    - CGI / Perl etc.
 1. server-generated pages - frameworks
    - architectures - MVC / MVP etc.
-   - technologies - Java / JSP / ASP etc.
+   - technologies - Velocity / JSP / ASP etc.
    - separation of concerns == separation of technologies
    - **templates**
 1. AJAX! (XHR revolution)
@@ -49,28 +49,39 @@
 
 ## React vs Svelte
 
-|               React                |                 Svelte                  |
-| :--------------------------------: | :-------------------------------------: |
-|             components             |               components                |
-|            single state            |                 **not**                 |
-|            virtual DOM             |       architecture compiled away        |
-| uni-directional data flow: `props` | uni-directional data flow: `export let` |
-|             `Context`              |                 `Store`                 |
-|              `useXXX`              | 'reactive declarations' - weird syntax  |
-|      composition: `children`       |          composition: `slots`           |
+|                  |          React           |                   Svelte                    |
+| :--------------: | :----------------------: | :-----------------------------------------: |
+|    structure     |        components        |                 components                  |
+|      model       |       single state       |                   **not**                   |
+|     runtime      |       virtual DOM        |         architecture compiled away          |
+|    data flow     | uni-directional: `props` |   uni-directional data flow: `export let`   |
+|     globals      |        `Context`         |                   `Store`                   |
+|      mixin       |         `useXXX`         | 'reactive declarations' - weird syntax `$:` |
+|   composition    |        `children`        |                   `slots`                   |
+| API surface area |           big!           |                pretty small                 |
+|     tooling      |           good           |                   minimal                   |
+|  documentation   |        excellent         |                  excellent                  |
+
+## Demo
+
+- single viewport app
+- dense data representation
+- responsive
+- touch or mouse-driven
+- challenge limitations of templates
 
 ## Links
-
-format
 
 - demo: https://svelte-layout.now.sh/
 - repo: https://github.com/numical/svelte-layout
 
-## Constraints
+## Constraints / Observations
 
 - only template components are reactive
 - 'transition' gotchas
+- have to re-learn the DOM!
 
 ## Outstanding Questions
 
-1. rollup build - images / deferred load
+1. rollup build - resources / deferred load
+1. unit testing
