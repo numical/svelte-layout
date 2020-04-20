@@ -72,8 +72,11 @@
 
 ## Links
 
-- demo: https://svelte-layout.now.sh/
-- repo: https://github.com/numical/svelte-layout
+- first demo:
+    - repo: https://github.com/numical/svelte-start
+- second demo
+    - web: https://svelte-layout.now.sh/
+    - repo: https://github.com/numical/svelte-layout
 
 ## Constraints / Observations
 
