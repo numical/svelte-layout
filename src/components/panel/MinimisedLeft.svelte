@@ -4,7 +4,7 @@
     import { layout } from '../../stores/layoutManager';
     import { iconProps } from '../../common/iconProps';
     import { maximised, minimised, left } from './panelPositions';
-    import { SwipeRight } from "../../common/swipes";
+    import { SwipeRight } from "../../gestures/swipes";
 
     const onClick = () => $layout.swipe(SwipeRight);
     const style = "left: 1vw";

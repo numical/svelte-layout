@@ -12,7 +12,7 @@ export const identifySwipe = (start, end) => {
   const yDiff =
     (end.screenY || end.changedTouches[0].screenY) -
     (start.screenY || start.touches[0].screenY);
-  if (Math.abs(yDiff) > window.innerHeight / 8) {
+  if (Math.abs(yDiff) > window.innerHeight / 6) {
     return InvalidSwipe;
   }
 

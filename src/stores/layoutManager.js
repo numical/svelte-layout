@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import { right } from "../components/panel/panelPositions";
-import { SwipeLeft, SwipeRight } from "../common/swipes";
+import { SwipeLeft, SwipeRight } from "../gestures/swipes";
 import { chat, info } from "../components/panel/panelContents";
 import { fromEventToDomCoords, fromEventToSVGCoords } from "../common/coords";
 
