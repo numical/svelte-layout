@@ -7,6 +7,7 @@
     import YGridLines from './YGridLines.svelte';
     import {chart, header, footer, left, right} from '../../common/svgDimensions';
     import {calculateScale} from './calculateScale';
+    import {graph} from '../../stores/graphManager';
     import {layout} from '../../stores/layoutManager';
     import {products} from '../../stores/productPresenter';
 
@@ -18,7 +19,7 @@
         transition: width ${$layout.transition}s;
      `;
 
-    $: scale = calculateScale($products.visible);
+    $: scale = calculateScale($products);
 </script>
 
 <svg id="svg" style={style} width="100%" height="100%" viewBox={viewBox} preserveAspectRatio="none">

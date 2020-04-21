@@ -1,6 +1,6 @@
 <script>
     import { startDrag } from '../../gestures/gestureManager';
-    import { layout } from '../../stores/layoutManager';
+    import { graph } from '../../stores/graphManager';
     import { products } from '../../stores/productPresenter';
     import { fromIntervalToText } from '../../common/dates';
     import { fromSVGCoordsToInterval } from '../../common/coords';
@@ -9,13 +9,13 @@
 
     export let scale;
 
-    const drag = () => startDrag(event => $layout.updateDateLine(event));
+    const drag = () => startDrag(event => chart.updateDateLine(event));
 
-    $: x = $layout.dateLineX < left.width
+    $: x = $graph.dateLineX < left.width
         ? left.width
-        : $layout.dateLineX > left.width + chart.width
+        : $graph.dateLineX > left.width + chart.width
         ? left.width + chart.width
-        : $layout.dateLineX;
+        : $graph.dateLineX;
     $: interval = fromSVGCoordsToInterval({ x });
     $: dimensions = {
         rect: {
@@ -45,7 +45,7 @@
     }));
 </script>
 
-{#if $layout.dateLineX}
+{#if $graph.dateLineX}
     <rect {...dimensions.rect}
           on:mousedown={drag}
           on:touchstart={drag} />

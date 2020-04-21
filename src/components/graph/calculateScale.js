@@ -1,7 +1,7 @@
 import { chart } from "../../common/svgDimensions";
 
-const calcX = (products) => {
-  const numIntervals = products[0].length;
+const calcX = (minInterval, maxInterval) => {
+  const numIntervals = maxInterval - minInterval;
   // assuming months
   let units = 1;
   let numUnits = Math.floor((numIntervals - 1) / 12);
@@ -11,9 +11,9 @@ const calcX = (products) => {
   }
   const intervals = Array.from(
     { length: numUnits },
-    (_, index) => index * units * 12
+    (_, index) => minInterval + index * units * 12
   );
-  intervals.push(numIntervals);
+  intervals.push(maxInterval);
 
   return {
     intervals,
@@ -43,10 +43,12 @@ const calcY = (products) => {
   };
 };
 
-export const calculateScale = (products) => {
-  const productsData = products.map((product) => product.data);
+export const calculateScale = products => {
+  const { minInterval, maxInterval, visible } = products;
   return {
-    x: calcX(productsData),
-    y: calcY(productsData),
+    minInterval,
+    maxInterval,
+    x: calcX(minInterval, maxInterval),
+    y: calcY(visible.map(product => product.data)),
   };
 };
