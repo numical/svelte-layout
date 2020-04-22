@@ -7,11 +7,14 @@
     import YGridLines from './YGridLines.svelte';
     import {chart, header, footer, left, right} from '../../common/svgDimensions';
     import {calculateScale} from './calculateScale';
+    import { startPinch } from '../../gestures/gestureManager';
     import {graph} from '../../stores/graphManager';
     import {layout} from '../../stores/layoutManager';
     import {products} from '../../stores/productPresenter';
 
     const viewBox = `0 0 ${left.width + chart.width + right.width} ${header.height + chart.height + footer.height}`;
+
+    const pinch = startPinch.bind(null, () => console.log('Graph pinched.'));
 
     $: style = `
         ${$layout.restorePanelPosition.graphPos}: 0;
@@ -22,7 +25,13 @@
     $: scale = calculateScale($products);
 </script>
 
-<svg id="svg" style={style} width="100%" height="100%" viewBox={viewBox} preserveAspectRatio="none">
+<svg id="svg"
+     style={style}
+     width="100%"
+     height="100%"
+     viewBox={viewBox}
+     preserveAspectRatio="none"
+     on:touchstart={pinch}>
     <YAxis />
     <YGridLines scale={scale} />
     <XAxis />
@@ -39,6 +48,7 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        touch-action: none;
     }
 </style>

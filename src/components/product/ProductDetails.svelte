@@ -1,5 +1,6 @@
 <script>
     import { graph } from '../../stores/graphManager';
+    import { layout } from '../../stores/layoutManager';
     import { products } from '../../stores/productPresenter';
     import { format } from '../../common/currency';
     import { fromTodayToInterval, fromIntervalToText } from '../../common/dates';
