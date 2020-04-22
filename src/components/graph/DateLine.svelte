@@ -9,7 +9,7 @@
 
     export let scale;
 
-    const drag = () => startDrag(event => chart.updateDateLine(event));
+    const drag = () => startDrag(event => graph.updateDateLine(event));
 
     $: x = $graph.dateLineX < left.width
         ? left.width
