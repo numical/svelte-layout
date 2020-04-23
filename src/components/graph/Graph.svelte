@@ -12,7 +12,6 @@
     import {graph} from '../../stores/graphManager';
     import {layout} from '../../stores/layoutManager';
     import {products} from '../../stores/productPresenter';
-    import TouchLib from './TouchLib';
 
     const viewBox = `0 0 ${left.width + chart.width + right.width} ${header.height + chart.height + footer.height}`;
 
@@ -25,16 +24,6 @@
      `;
 
     $: scale = calculateScale($products);
-
-    let svg;
-
-    onMount(() => {
-        const touch = new TouchLib(svg, {
-            pinch: function (evt) {
-                console.log(evt.zoom);
-            }
-        });
-    });
 </script>
 
 <svg id="svg"
@@ -43,7 +32,7 @@
      height="100%"
      viewBox={viewBox}
      preserveAspectRatio="none"
-     bind:this={svg}
+     on:touchstart={pinch}
     >
     <YAxis />
     <YGridLines scale={scale} />

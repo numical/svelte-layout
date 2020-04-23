@@ -2,7 +2,7 @@
 	import Graph from './graph/Graph.svelte';
 	import Panel from "./panel/Panel.svelte";
 	import {layout} from '../stores/layoutManager';
-	import { startSwipe, drag, stop } from '../gestures/gestureManager';
+	import { startSwipe, move, stop } from '../gestures/gestureManager';
 	import MinimisedLeft from "./panel/MinimisedLeft.svelte";
 	import MinimisedRight from "./panel/MinimisedRight.svelte";
 
@@ -11,8 +11,8 @@
 
 <main on:mousedown={swipe}
 	  on:touchstart={swipe}
-	  on:mousemove={drag}
-	  on:touchmove={drag}
+	  on:mousemove={move}
+	  on:touchmove={move}
 	  on:mouseup={stop}
 	  on:touchend={stop}>
 	<MinimisedLeft />
