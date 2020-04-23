@@ -2,11 +2,11 @@
 	import Graph from './graph/Graph.svelte';
 	import Panel from "./panel/Panel.svelte";
 	import {layout} from '../stores/layoutManager';
-	import { startSwipe, move, stop } from '../gestures/gestureManager';
+	import { start, move, stop } from '../gestures/gestureManager';
 	import MinimisedLeft from "./panel/MinimisedLeft.svelte";
 	import MinimisedRight from "./panel/MinimisedRight.svelte";
 
-	const swipe = startSwipe.bind(null, $layout.swipe);
+	const swipe = start.bind(null, $layout.swipe);
 </script>
 
 <main on:mousedown={swipe}

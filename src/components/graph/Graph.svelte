@@ -8,14 +8,14 @@
     import YGridLines from './YGridLines.svelte';
     import {chart, header, footer, left, right} from '../../common/svgDimensions';
     import {calculateScale} from './calculateScale';
-    import { startPinch } from '../../gestures/gestureManager';
+    import { start } from '../../gestures/gestureManager';
     import {graph} from '../../stores/graphManager';
     import {layout} from '../../stores/layoutManager';
     import {products} from '../../stores/productPresenter';
 
     const viewBox = `0 0 ${left.width + chart.width + right.width} ${header.height + chart.height + footer.height}`;
 
-    const pinch = startPinch.bind(null, () => console.log('Graph pinched.'));
+    const pinch = start.bind(null, () => console.log('Graph pinched.'));
 
     $: style = `
         ${$layout.restorePanelPosition.graphPos}: 0;

@@ -1,73 +1,61 @@
-import { InvalidSwipe, SwipeLeft, SwipeRight } from "./swipes";
+import { domCoordDelta } from '../common/coords';
+import { identifySwipe } from "./swipes";
 
-const DRAG = Symbol("drag");
-const SWIPE = Symbol("swipe");
-const PINCH = Symbol("pinch");
-const NONE = Symbol("none");
+const Type = {
+  UNKNOWN: Symbol("unknown"),
+  DRAG: Symbol("drag"),
+  SWIPE: Symbol("swipe"),
+  PINCH: Symbol("pinch"),
+}
 
-const none = {
-  type: NONE,
-};
+const getX = event => event.clientX || event.touches[0].clientX;
 
-const identifySwipe = (start, end) => {
-  if (end.timeStamp - start.timeStamp > 500) {
-    return InvalidSwipe;
-  }
+const isPinch = event => event.touches && event.touches.length === 2;
 
-  const yDiff =
-    (end.screenY || end.changedTouches[0].screenY) -
-    (start.screenY || start.touches[0].screenY);
-  if (Math.abs(yDiff) > window.innerHeight / 6) {
-    return InvalidSwipe;
-  }
+const isSwipe = (event1, event2) => domCoordDelta(event1, event2) > 15;
 
-  const xDiff =
-    (end.screenX || end.changedTouches[0].screenX) -
-    (start.screenX || start.touches[0].screenX);
-  if (Math.abs(xDiff) < window.innerWidth / 6) {
-    return InvalidSwipe;
-  } else if (xDiff > 0) {
-    return SwipeRight;
-  } else {
-    return SwipeLeft;
-  }
-};
+let currentGesture = undefined;
 
-let currentGesture = none;
-
-export const startSwipe = (action, startEvent) => {
-  if (currentGesture === none) {
+export const start = (action, startEvent) => {
+  if (!currentGesture) {
     currentGesture = {
-      type: SWIPE,
-      endAction: (stopEvent) => action(identifySwipe(startEvent, stopEvent)),
-    };
-  }
-};
-
-export const startPinch = (action, startEvent) => {
-  if (currentGesture) {
-    currentGesture = {
-      type: PINCH,
+      action,
       startEvent,
-      moveAction: moveEvent =>
-        moveEvent.touches && moveEvent.touches.length === 2 && action(startEvent, action)
+      type: Type.UNKNOWN,
     };
+    console.log('to Unknown');
   }
 };
 
-export const startDrag = (action) => {
-  if (currentGesture === none)
-    currentGesture = {
-      type: DRAG,
-      moveAction: action
-    };
-};
+export const move = moveEvent => {
+  if (currentGesture) {
+    const { action, startEvent } = currentGesture;
+    if (currentGesture.type === Type.UNKNOWN) {
+      if (isPinch(moveEvent)) {
+        currentGesture.type = Type.PINCH;
+      } else if (isSwipe(startEvent, moveEvent)){
+        currentGesture.type = Type.SWIPE;
+      } else {
+        currentGesture.type = Type.DRAG;
+      }
+      console.log(`Unknown to ${currentGesture.type.toString()}`);
+    }
+    if (currentGesture.type !== Type.SWIPE) {
+      action(moveEvent);
+    }
+  }
+}
 
-export const move = (event) => {
-  currentGesture.moveAction && currentGesture.moveAction(event);
-};
-
-export const stop = (stopEvent) => {
-  currentGesture.endAction && currentGesture.endAction(stopEvent);
-  currentGesture = none;
-};
+export const stop = stopEvent => {
+  try {
+    if (currentGesture) {
+      const {action, startEvent, type} = currentGesture;
+      if (type === Type.SWIPE) {
+        action(identifySwipe(startEvent, stopEvent));
+      }
+    }
+  } finally {
+    currentGesture = undefined;
+    console.log('to undefined');
+  }
+}
