@@ -25,14 +25,6 @@ export const fromEventToDomCoords = (event) => ({
   y: event.clientY || event.touches[0].clientY,
 });
 
-export const domCoordDelta = (event1, event2) => {
-  const c1 = fromEventToDomCoords(event1);
-  const c2 = fromEventToDomCoords(event2);
-  const delta = Math.hypot((c1.x - c2.x), (c1.y - c2.y));
-  console.log(`delta: ${delta}`);
-  return delta;
-}
-
 export const fromEventToSVGCoords = (event) => {
   const coords = fromEventToDomCoords(event);
   const pt = getPoint();

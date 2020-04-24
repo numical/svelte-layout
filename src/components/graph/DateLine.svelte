@@ -1,5 +1,5 @@
 <script>
-    import { start } from '../../gestures/gestureManager';
+    import { start, DRAG } from '../../gestures/gestureManager';
     import { graph } from '../../stores/graphManager';
     import { products } from '../../stores/productPresenter';
     import { fromIntervalToText } from '../../common/dates';
@@ -9,7 +9,7 @@
 
     export let scale;
 
-    const drag = start.bind(null, graph.updateDateLine);
+    const drag = start.bind(null, { [DRAG]: graph.updateDateLine });
 
     $: x = $graph.dateLineX < left.width
         ? left.width

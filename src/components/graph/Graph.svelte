@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from 'svelte';
     import DateLine from "./DateLine.svelte";
     import Product from './Product.svelte';
     import XAxis from './XAxis.svelte';
@@ -8,14 +7,17 @@
     import YGridLines from './YGridLines.svelte';
     import {chart, header, footer, left, right} from '../../common/svgDimensions';
     import {calculateScale} from './calculateScale';
-    import { start } from '../../gestures/gestureManager';
+    import { start, PINCH, SWIPE } from '../../gestures/gestureManager';
     import {graph} from '../../stores/graphManager';
     import {layout} from '../../stores/layoutManager';
     import {products} from '../../stores/productPresenter';
 
     const viewBox = `0 0 ${left.width + chart.width + right.width} ${header.height + chart.height + footer.height}`;
 
-    const pinch = start.bind(null, () => console.log('Graph pinched.'));
+    const pinch = start.bind(null, {
+        [PINCH]: ()  => console.log('Graph pinched.'),
+        [SWIPE]: $layout.swipe
+    });
 
     $: style = `
         ${$layout.restorePanelPosition.graphPos}: 0;
