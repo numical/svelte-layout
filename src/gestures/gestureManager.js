@@ -24,7 +24,6 @@ export const start = (actions, startEvent) => {
       startEvent,
       type: UNKNOWN,
     };
-    console.log('to Unknown');
   }
 };
 
@@ -37,7 +36,6 @@ export const move = moveEvent => {
       } else {
         currentGesture.type = SWIPE_OR_DRAG;
       }
-      console.log(`Unknown to ${currentGesture.type.toString()}`);
     }
     switch (currentGesture.type) {
       case PINCH:
@@ -60,5 +58,4 @@ export const stop = stopEvent => {
     }
   }
   currentGesture = undefined;
-  console.log('to undefined');
 };

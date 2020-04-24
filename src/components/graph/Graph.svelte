@@ -23,8 +23,8 @@
     right.width} ${header.height + chart.height + footer.height}`;
 
   const pinch = start.bind(null, {
-    [PINCH]: () => console.log('Graph pinched.'),
-    [SWIPE]: $layout.swipe,
+    [PINCH]: $products.pinch,
+    [SWIPE]: $layout.swipe
   });
 
   $: style = `

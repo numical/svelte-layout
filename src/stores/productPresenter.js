@@ -41,4 +41,7 @@ export const products = writable({
       highlighted: undefined,
     }));
   },
+  pinch: () => {
+    console.log('Graph pinched.');
+  }
 });
