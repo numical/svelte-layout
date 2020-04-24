@@ -1,12 +1,12 @@
 import { fromEventToDomCoords } from '../common/coords';
-import { identifySwipe } from "./swipes";
+import { identifySwipe } from './swipes';
 
-export const DRAG = Symbol("drag");
-export const SWIPE = Symbol("swipe");
-export const PINCH = Symbol("pinch");
+export const DRAG = Symbol('drag');
+export const SWIPE = Symbol('swipe');
+export const PINCH = Symbol('pinch');
 
-const UNKNOWN = Symbol("unknown");
-const SWIPE_OR_DRAG = Symbol("swipe or drag");
+const UNKNOWN = Symbol('unknown');
+const SWIPE_OR_DRAG = Symbol('swipe or drag');
 
 const getX = event => event.clientX || event.touches[0].clientX;
 
@@ -16,8 +16,8 @@ let currentGesture = undefined;
 
 export const start = (actions, startEvent) => {
   if (!currentGesture) {
-    if( actions[SWIPE] && actions[DRAG]) {
-      throw new Error("Unsupported gesture alternatives - swipe and drag.")
+    if (actions[SWIPE] && actions[DRAG]) {
+      throw new Error('Unsupported gesture alternatives - swipe and drag.');
     }
     currentGesture = {
       actions,
@@ -39,7 +39,7 @@ export const move = moveEvent => {
       }
       console.log(`Unknown to ${currentGesture.type.toString()}`);
     }
-    switch(currentGesture.type) {
+    switch (currentGesture.type) {
       case PINCH:
         actions[PINCH] && actions[PINCH](moveEvent);
         break;
@@ -47,18 +47,18 @@ export const move = moveEvent => {
         actions[DRAG] && actions[DRAG](moveEvent);
         break;
       default:
-        // do nothing
+      // do nothing
     }
   }
-}
+};
 
 export const stop = stopEvent => {
-    if (currentGesture) {
-      const {actions, startEvent, type} = currentGesture;
-      if (type === SWIPE_OR_DRAG && actions[SWIPE]) {
-        actions[SWIPE](identifySwipe(startEvent, stopEvent));
-      }
+  if (currentGesture) {
+    const { actions, startEvent, type } = currentGesture;
+    if (type === SWIPE_OR_DRAG && actions[SWIPE]) {
+      actions[SWIPE](identifySwipe(startEvent, stopEvent));
     }
-    currentGesture = undefined;
-    console.log('to undefined');
-}
+  }
+  currentGesture = undefined;
+  console.log('to undefined');
+};

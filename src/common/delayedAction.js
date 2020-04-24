@@ -1,6 +1,6 @@
-const waiting = Symbol("waiting");
-const cancelled = Symbol("cancelled");
-const completed = Symbol("completed");
+const waiting = Symbol('waiting');
+const cancelled = Symbol('cancelled');
+const completed = Symbol('completed');
 
 export const delayedAction = (delay, doAction, undoAction) => {
   let state = waiting;

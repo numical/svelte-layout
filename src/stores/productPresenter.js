@@ -1,12 +1,12 @@
-import { writable } from "svelte/store";
-import { getProducts, intervals } from "../data/personalFinancialModel";
+import { writable } from 'svelte/store';
+import { getProducts, intervals } from '../data/personalFinancialModel';
 
 const initialValues = {
   dateLineX: 0,
   minInterval: 0,
   maxInterval: intervals,
 };
-const colours = ["darkblue", "blue", "cornflowerblue", "lightblue"];
+const colours = ['darkblue', 'blue', 'cornflowerblue', 'lightblue'];
 
 const all = getProducts().map((product, id) => ({
   ...product,
@@ -16,7 +16,7 @@ const all = getProducts().map((product, id) => ({
 }));
 
 const getVisible = ({ minInterval, maxInterval }) =>
-  all.map((product) => ({
+  all.map(product => ({
     ...product,
     data:
       maxInterval === product.data.length
@@ -29,14 +29,14 @@ export const products = writable({
   visible: getVisible(initialValues),
   highlighted: undefined,
   ...initialValues,
-  highlightProduct: (product) => {
-    products.update((state) => ({
+  highlightProduct: product => {
+    products.update(state => ({
       ...state,
       highlighted: product,
     }));
   },
   noHighlight: () => {
-    products.update((state) => ({
+    products.update(state => ({
       ...state,
       highlighted: undefined,
     }));

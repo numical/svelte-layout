@@ -1,17 +1,20 @@
-import { chart, left } from "./svgDimensions";
-import { intervals } from "../data/personalFinancialModel";
+import { chart, left } from './svgDimensions';
+import { intervals } from '../data/personalFinancialModel';
 
 let svg;
 let pt;
 
 const getSVG = () => {
   if (!svg) {
-    svg = document.getElementById("svg");
+    svg = document.getElementById('svg');
   }
   return svg;
 };
 
-const getMatrix = () => getSVG().getScreenCTM().inverse();
+const getMatrix = () =>
+  getSVG()
+    .getScreenCTM()
+    .inverse();
 
 const getPoint = () => {
   if (!pt) {
@@ -20,12 +23,12 @@ const getPoint = () => {
   return pt;
 };
 
-export const fromEventToDomCoords = (event) => ({
+export const fromEventToDomCoords = event => ({
   x: event.clientX || event.touches[0].clientX,
   y: event.clientY || event.touches[0].clientY,
 });
 
-export const fromEventToSVGCoords = (event) => {
+export const fromEventToSVGCoords = event => {
   const coords = fromEventToDomCoords(event);
   const pt = getPoint();
   pt.x = coords.x;

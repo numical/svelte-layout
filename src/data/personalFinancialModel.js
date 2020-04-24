@@ -14,15 +14,15 @@ const generateData = (min, max, volatility) =>
 
 export const getProducts = () => [
   {
-    name: "Pension",
+    name: 'Pension',
     data: generateData(0, 100000, 0.1),
   },
   {
-    name: "Savings",
+    name: 'Savings',
     data: generateData(5000, 30000, 0.05),
   },
   {
-    name: "Investments",
+    name: 'Investments',
     data: generateData(10000, 75000, 0.3),
   },
 ];

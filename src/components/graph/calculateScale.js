@@ -1,4 +1,4 @@
-import { chart } from "../../common/svgDimensions";
+import { chart } from '../../common/svgDimensions';
 
 const calcX = (minInterval, maxInterval) => {
   const numIntervals = maxInterval - minInterval;
@@ -21,7 +21,7 @@ const calcX = (minInterval, maxInterval) => {
   };
 };
 
-const calcY = (products) => {
+const calcY = products => {
   const maxProductValue = Math.max(...products.flat());
   const maxLines = 5;
   const multipliers = [1, 1, 2, 3, 4, 5, 8, 8, 10, 10, 10];

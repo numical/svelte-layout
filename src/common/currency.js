@@ -1,6 +1,6 @@
-const formatter = new Intl.NumberFormat("en-UK", {
-  style: "currency",
-  currency: "GBP",
+const formatter = new Intl.NumberFormat('en-UK', {
+  style: 'currency',
+  currency: 'GBP',
   minimumFractionDigits: 0,
 });
 
