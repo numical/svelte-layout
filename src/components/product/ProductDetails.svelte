@@ -1,4 +1,5 @@
 <script>
+    import { graph } from '../../stores/graphManager';
     import { layout } from '../../stores/layoutManager';
     import { products } from '../../stores/productPresenter';
     import { format } from '../../common/currency';
@@ -18,8 +19,8 @@
             color: ${product.colour}
         `
         : '';
-    $: interval = $layout.dateLineX ? fromSVGCoordsToInterval({ x: $layout.dateLineX }) : fromTodayToInterval();
-    $: label = $layout.dateLineX ? `Value at ${fromIntervalToText(interval)}:` : "Today's value:";
+    $: interval = $graph.dateLineX ? fromSVGCoordsToInterval({ x: $graph.dateLineX }) : fromTodayToInterval();
+    $: label = $graph.dateLineX ? `Value at ${fromIntervalToText(interval)}:` : "Today's value:";
 </script>
 
 <div class="container" style={style}>

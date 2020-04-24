@@ -2,7 +2,7 @@ import { writable } from "svelte/store";
 import { right } from "../components/panel/panelPositions";
 import { SwipeLeft, SwipeRight } from "../gestures/swipes";
 import { chat, info } from "../components/panel/panelContents";
-import { fromEventToDomCoords, fromEventToSVGCoords } from "../common/coords";
+import { fromEventToDomCoords } from "../common/coords";
 
 const calcInitialWidth = () => {
   let percent = 20000 / window.innerWidth;
@@ -13,7 +13,6 @@ const panelWidth = calcInitialWidth();
 const getX = (event) => event.clientX || event.touches[0].clientX;
 
 export const layout = writable({
-  dateLineX: 0,
   panelPosition: right,
   graphWidth: 100,
   panelWidth,
@@ -40,12 +39,6 @@ export const layout = writable({
           return state;
       }
     });
-  },
-  updateDateLine: (event) => {
-    layout.update((state) => ({
-      ...state,
-      dateLineX: event ? fromEventToSVGCoords(event).x : 0,
-    }));
   },
   togglePanelContent: () => {
     layout.update((state) => ({

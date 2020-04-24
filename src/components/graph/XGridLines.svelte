@@ -1,13 +1,13 @@
 <script>
     import { help } from '../../stores/helpManager';
-    import {layout} from '../../stores/layoutManager';
+    import { graph } from '../../stores/graphManager';
     import { chart, header, left, margin } from '../../common/svgDimensions';
     import { fromIntervalToText } from '../../common/dates';
 
     export let scale;
 
-    $: ticks = scale.x.intervals.map(interval => {
-        const x = left.width + interval * scale.x.intervalWidth;
+    $: ticks = scale.x.intervals.map((interval, index) => {
+        const x = left.width + (interval - scale.minInterval) * scale.x.intervalWidth;
         const y = header.height + chart.height;
         return {
             dimensions: {
@@ -23,7 +23,7 @@
                 },
                 text: fromIntervalToText(interval)
             },
-            visible: !$layout.dateLineX || Math.abs($layout.dateLineX - x) > 50
+            visible: !$graph.dateLineX || Math.abs($graph.dateLineX - x) > 50
         };
     });
     $: colour = $help.currentFocus === 'date' ? "darkorange" : "black";

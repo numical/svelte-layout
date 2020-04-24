@@ -1,6 +1,6 @@
 <script>
     import { help } from '../../stores/helpManager';
-    import { layout } from '../../stores/layoutManager';
+    import { graph } from '../../stores/graphManager';
     import { chart, footer, header, left, margin } from '../../common/svgDimensions';
 
     const dimensions = {
@@ -23,11 +23,11 @@
     };
 
     const toggleDateLine = event => {
-        $layout.updateDateLine( $layout.dateLineX ? null : event);
+        $graph.updateDateLine( $graph.dateLineX ? null : event);
     };
 
     $: lineStyle = $help.currentFocus === 'date' ? "stroke: darkorange" : "";
-    $: toolTipText = $layout.dateLineX ? "click to hide date line" : "click to show date line";
+    $: toolTipText = $graph.dateLineX ? "click to hide date line" : "click to show date line";
 </script>
 
 <rect {...dimensions.rect}

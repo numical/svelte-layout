@@ -1,9 +1,9 @@
 <script>
     import { help } from '../../stores/helpManager';
-    import { startDrag } from '../../gestures/gestureManager';
+    import { start, DRAG } from '../../gestures/gestureManager';
     import { layout } from '../../stores/layoutManager';
 
-    const resize = () => startDrag($layout.resize);
+    const drag = start.bind(null, { [DRAG]: $layout.resize });
 
     $: dividerStyle =  `
         ${$layout.restorePanelPosition.graphPos}: -1vw;
@@ -13,8 +13,8 @@
 <div class="divider"
      style={dividerStyle}
      on:mouseover={() => $help.setFocus('divider')}
-     on:mousedown={resize}
-     on:touchstart={resize}
+     on:mousedown={drag}
+     on:touchstart={drag}
      on:mouseleave={$help.loseFocus}
      on:touchend={$help.loseFocus} />
 
