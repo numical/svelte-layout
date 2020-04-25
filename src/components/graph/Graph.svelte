@@ -60,8 +60,8 @@
   <YGridLines {scale} />
   <XAxis />
   <XGridLines {scale} />
-  {#each $products.visible as product, index}
-    <Product {product} colour={product.colour} {scale} />
+  {#each $products.visible as product}
+    <Product {product} {scale} />
   {/each}
   <DateLine {scale} />
 </svg>

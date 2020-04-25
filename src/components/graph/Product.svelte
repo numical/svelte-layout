@@ -7,19 +7,13 @@
   import { delayedAction } from '../../common/delayedAction';
 
   export let product;
-  export let colour;
   export let scale;
 
   let endDisplay;
 
   const xOffset = left.width;
   const yOffset = chart.height + header.height;
-  const points = product.data.reduce(
-    (points, value, interval) =>
-      `${points} ${xOffset + interval * scale.x.intervalWidth},${yOffset -
-        value * scale.y.unitHeight}`,
-    ''
-  );
+
   const displayProduct = () =>
     $layout.panelContent !== info
       ? delayedAction(
@@ -46,6 +40,13 @@
     $help.loseFocus();
     endDisplay();
   };
+
+  $: points = product.data.reduce(
+          (points, value, interval) =>
+                  `${points} ${xOffset + interval * scale.x.intervalWidth},${yOffset -
+                  value * scale.y.unitHeight}`,
+          ''
+  );
 </script>
 
 <style>
@@ -60,6 +61,6 @@
 
 <polyline
   {points}
-  stroke={colour}
+  stroke={product.colour}
   on:mouseover={mouseOver}
   on:mouseleave={mouseLeave} />

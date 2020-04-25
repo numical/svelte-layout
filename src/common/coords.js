@@ -35,8 +35,7 @@ export const fromEventToPinchCoords = event => {
     x1: c1.x,
     x2: c2.x,
     y1: c1.y,
-    y2: c2.y,
-    distance: Math.hypot((c1.x - c2.x), (c1.y - c2.y))
+    y2: c2.y
   }
 }
 

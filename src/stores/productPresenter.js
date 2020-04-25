@@ -1,6 +1,6 @@
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 import { getProducts, intervals } from '../data/personalFinancialModel';
-import { fromEventToPinchCoords } from '../common/coords';
+import { fromEventToPinchCoords, fromSVGCoordsToInterval } from '../common/coords';
 
 const initialValues = {
   dateLineX: 0,
@@ -25,18 +25,47 @@ const getVisible = ({ minInterval, maxInterval }) =>
         : product.data.slice(minInterval, maxInterval),
   }));
 
-let eventCount = 0;
+const pinch = state => {
+  if (!debounce) return state;
+  const { startEvent, endEvent } = debounce;
+  if (!endEvent) return state;
+  const { minInterval, maxInterval } = state;
+  const currentRange = maxInterval - minInterval;
+  const p1 = fromEventToPinchCoords(startEvent);
+  const p2 = fromEventToPinchCoords(endEvent);
+  const ratio = (p1.x2 - p1.x1) / (p2.x2 - p2.x1);
+  const range = Math.ceil(currentRange * ratio);
+  if (range > intervals) {
+    return {
+      ...state,
+      minInterval: 0,
+      maxInterval: intervals,
+      visible: all
+    }
+  }
+  const midInterval = fromSVGCoordsToInterval({ x: p2.x1 + 0.5 * (p2.x1 - p2.x2) });
+  const min = Math.floor(midInterval - range / 2);
+  const pinched = {
+    minInterval: min,
+    maxInterval: min + range
+  };
+  if (pinched.minInterval < 0) {
+    pinched.minInterval = 0;
+    pinched.maxInterval = range;
+  }
+  if (pinched.maxInterval  > intervals) {
+    pinched.minInterval = intervals - range;
+    pinched.maxInterval  = intervals;
+  }
+  return  {
+    ...state,
+    ...pinched,
+    visible: getVisible(pinched)
+  };
+};
 
-const pinch = (event1, event2) => {
-  eventCount++;
-  console.log(`event: ${eventCount}`);
-  const p1 = fromEventToPinchCoords(event1);
-  console.log(`p1: ${JSON.stringify(p1)}`);
-  const p2 = fromEventToPinchCoords(event2);
-  console.log(`p2: ${JSON.stringify(p2)}`);
-  const ratio = p1.distance / p2.distance;
-  console.log(`Pinch ratio ${ratio}`);
-}
+let debounce;
+
 export const products = writable({
   all,
   visible: getVisible(initialValues),
@@ -54,5 +83,17 @@ export const products = writable({
       highlighted: undefined,
     }));
   },
-  pinch
+  pinch: event => {
+    if (debounce) {
+      debounce.endEvent = event;
+    } else {
+      debounce = {
+        startEvent: event
+      };
+      setTimeout(() => {
+        products.update(pinch);
+        debounce = undefined;
+      }, 32);
+    }
+  }
 });

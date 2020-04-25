@@ -37,10 +37,7 @@ export const move = moveEvent => {
     }
     switch (currentGesture.type) {
       case PINCH:
-        actions[PINCH]
-          && currentGesture.previousEvent
-          && actions[PINCH](currentGesture.previousEvent, moveEvent);
-        currentGesture.previousEvent = moveEvent;
+        actions[PINCH] && actions[PINCH](moveEvent);
         break;
       case SWIPE_OR_DRAG:
         actions[DRAG] && actions[DRAG](moveEvent);
