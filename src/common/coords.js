@@ -23,10 +23,22 @@ const getPoint = () => {
   return pt;
 };
 
-export const fromEventToDomCoords = event => ({
-  x: event.clientX || event.touches[0].clientX,
-  y: event.clientY || event.touches[0].clientY,
+export const fromEventToDomCoords = (event, touchIndex = 0) => ({
+  x: event.clientX || event.touches[touchIndex].clientX,
+  y: event.clientY || event.touches[touchIndex].clientY,
 });
+
+export const fromEventToPinchCoords = event => {
+  const c1 = fromEventToDomCoords(event, 0);
+  const c2 = fromEventToDomCoords(event, 1);
+  return {
+    x1: c1.x,
+    x2: c2.x,
+    y1: c1.y,
+    y2: c2.y,
+    distance: Math.hypot((c1.x - c2.x), (c1.y - c2.y))
+  }
+}
 
 export const fromEventToSVGCoords = event => {
   const coords = fromEventToDomCoords(event);

@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { getProducts, intervals } from '../data/personalFinancialModel';
+import { fromEventToPinchCoords } from '../common/coords';
 
 const initialValues = {
   dateLineX: 0,
@@ -24,6 +25,18 @@ const getVisible = ({ minInterval, maxInterval }) =>
         : product.data.slice(minInterval, maxInterval),
   }));
 
+let eventCount = 0;
+
+const pinch = (event1, event2) => {
+  eventCount++;
+  console.log(`event: ${eventCount}`);
+  const p1 = fromEventToPinchCoords(event1);
+  console.log(`p1: ${JSON.stringify(p1)}`);
+  const p2 = fromEventToPinchCoords(event2);
+  console.log(`p2: ${JSON.stringify(p2)}`);
+  const ratio = p1.distance / p2.distance;
+  console.log(`Pinch ratio ${ratio}`);
+}
 export const products = writable({
   all,
   visible: getVisible(initialValues),
@@ -41,7 +54,5 @@ export const products = writable({
       highlighted: undefined,
     }));
   },
-  pinch: () => {
-    console.log('Graph pinched.');
-  }
+  pinch
 });

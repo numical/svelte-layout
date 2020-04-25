@@ -8,8 +8,6 @@ export const PINCH = Symbol('pinch');
 const UNKNOWN = Symbol('unknown');
 const SWIPE_OR_DRAG = Symbol('swipe or drag');
 
-const getX = event => event.clientX || event.touches[0].clientX;
-
 const isPinch = event => event.touches && event.touches.length === 2;
 
 let currentGesture = undefined;
@@ -39,7 +37,10 @@ export const move = moveEvent => {
     }
     switch (currentGesture.type) {
       case PINCH:
-        actions[PINCH] && actions[PINCH](moveEvent);
+        actions[PINCH]
+          && currentGesture.previousEvent
+          && actions[PINCH](currentGesture.previousEvent, moveEvent);
+        currentGesture.previousEvent = moveEvent;
         break;
       case SWIPE_OR_DRAG:
         actions[DRAG] && actions[DRAG](moveEvent);
