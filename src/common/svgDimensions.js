@@ -21,3 +21,10 @@ export const chart = {
 };
 
 export const margin = 2;
+
+export const breakpoint = {
+  zig: 5,
+  zag: 10,
+  width: 25,
+  height: 20
+};

@@ -1,7 +1,7 @@
 <script>
   import { graph } from '../../stores/graphManager';
   import { layout } from '../../stores/layoutManager';
-  import { products } from '../../stores/productPresenter';
+  import { products } from '../../products/productPresenter';
   import { format } from '../../common/currency';
   import { fromTodayToInterval, fromIntervalToText } from '../../common/dates';
   import { fromSVGCoordsToInterval } from '../../common/coords';

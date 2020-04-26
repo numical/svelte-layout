@@ -16,7 +16,7 @@
   import { start, PINCH, SWIPE } from '../../gestures/gestureManager';
   import { graph } from '../../stores/graphManager';
   import { layout } from '../../stores/layoutManager';
-  import { products } from '../../stores/productPresenter';
+  import { products } from '../../products/productPresenter';
 
   const viewBox = `0 0 ${left.width +
     chart.width +

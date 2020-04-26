@@ -1,6 +1,6 @@
 <script>
   import { fade } from 'svelte/transition';
-  import { products } from '../../stores/productPresenter';
+  import { products } from '../../products/productPresenter';
   import ProductDetails from './ProductDetails.svelte';
 </script>
 

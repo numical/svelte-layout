@@ -1,7 +1,7 @@
 <script>
   import { start, DRAG } from '../../gestures/gestureManager';
   import { graph } from '../../stores/graphManager';
-  import { products } from '../../stores/productPresenter';
+  import { products } from '../../products/productPresenter';
   import { fromIntervalToText } from '../../common/dates';
   import { fromSVGCoordsToInterval } from '../../common/coords';
   import { chart, header, left, margin } from '../../common/svgDimensions';
