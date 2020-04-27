@@ -7,7 +7,7 @@
   import { chart, header, left, margin } from '../../common/svgDimensions';
   import { format } from '../../common/currency';
 
-  const drag = start.bind(null, { [DRAG]: graph.updateDateLine });
+  const drag = start.bind(null, { [DRAG]: $graph.updateDateLine });
 
   $: x =
     $graph.dateLineX < left.width
