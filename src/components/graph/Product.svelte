@@ -3,15 +3,14 @@
   import { layout } from '../../stores/layoutManager';
   import { products } from '../../products/productPresenter';
   import { info } from '../panel/panelContents';
-  import { chart, header, left } from '../../common/svgDimensions';
+  import { breakpoint, chart, header, left } from '../../common/svgDimensions';
   import { delayedAction } from '../../common/delayedAction';
 
   export let product;
-  export let scale;
 
   let endDisplay;
 
-  const xOffset = left.width;
+  $: xOffset = left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
   const yOffset = chart.height + header.height;
 
   const displayProduct = () =>
@@ -43,8 +42,8 @@
 
   $: points = product.data.reduce(
     (points, value, interval) =>
-      `${points} ${xOffset + interval * scale.x.intervalWidth},${yOffset -
-        value * scale.y.unitHeight}`,
+      `${points} ${xOffset + interval * $products.scaleX.intervalWidth},${yOffset -
+        value * $products.scaleY.unitHeight}`,
     ''
   );
 </script>

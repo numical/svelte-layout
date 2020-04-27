@@ -7,8 +7,6 @@
   import { chart, header, left, margin } from '../../common/svgDimensions';
   import { format } from '../../common/currency';
 
-  export let scale;
-
   const drag = start.bind(null, { [DRAG]: graph.updateDateLine });
 
   $: x =
@@ -43,7 +41,7 @@
       y:
         header.height +
         chart.height -
-        product.data[interval] * scale.y.unitHeight,
+        product.data[interval] * $products.scaleY.unitHeight,
     },
     text: format(product.data[interval]),
   }));

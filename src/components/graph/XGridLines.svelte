@@ -1,14 +1,14 @@
 <script>
   import { help } from '../../stores/helpManager';
   import { graph } from '../../stores/graphManager';
-  import { chart, header, left, margin } from '../../common/svgDimensions';
+  import { products } from '../../products/productPresenter';
+  import { breakpoint, chart, header, left, margin } from '../../common/svgDimensions';
   import { fromIntervalToText } from '../../common/dates';
 
-  export let scale;
-
-  $: ticks = scale.x.intervals.map((interval, index) => {
-    const x =
-      left.width + (interval - scale.minInterval) * scale.x.intervalWidth;
+  $: ticks = $products.scaleX.intervals.map((interval, index, array) => {
+    const x = left.width
+            + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0)
+            + (interval - $products.minInterval) * $products.scaleX.intervalWidth;
     const y = header.height + chart.height;
     return {
       dimensions: {
@@ -23,6 +23,11 @@
           y: y + margin,
         },
         text: fromIntervalToText(interval),
+        textAnchor: index === 0
+          ? 'start'
+          : index === array.length -1
+          ? 'end'
+          : 'middle'
       },
       visible: !$graph.dateLineX || Math.abs($graph.dateLineX - x) > 50,
     };
@@ -32,7 +37,6 @@
 
 <style>
   text {
-    text-anchor: middle;
     dominant-baseline: hanging;
     font-size: x-small;
   }
@@ -41,6 +45,8 @@
 {#each ticks as tick}
   {#if tick.visible}
     <line {...tick.dimensions} stroke={colour} />
-    <text {...tick.label.dimensions} fill={colour}>{tick.label.text}</text>
+    <text {...tick.label.dimensions} fill={colour} text-anchor={tick.label.textAnchor}>
+      {tick.label.text}
+    </text>
   {/if}
 {/each}

@@ -2,7 +2,9 @@ import {
   fromEventToPinchCoords,
   fromSVGCoordsToInterval,
 } from '../common/coords';
-import visible from './visible';
+import calcScaleX from './scaleX';
+import calcScaleY from './scaleY';
+import calcVisible from './visible';
 
 let debounce;
 
@@ -21,8 +23,8 @@ const pinch = state => {
       ...state,
       minInterval: 0,
       maxInterval: totalIntervals,
-      showLeftBreakpoint: false,
-      showRightBreakpoint: false,
+      scaleX: calcScaleX(0, totalIntervals, totalIntervals),
+      scaleY: calcScaleY(all),
       visible: all,
     };
   }
@@ -44,10 +46,13 @@ const pinch = state => {
   }
   pinched.showLeftBreakpoint = pinched.minInterval !== 0;
   pinched.showRightBreakpoint = pinched.maxInterval !== totalIntervals;
+  const visible = calcVisible(all, pinched.minInterval, pinched.maxInterval);
   return {
     ...state,
     ...pinched,
-    visible: visible(all, pinched.minInterval, pinched.maxInterval),
+    scaleX: calcScaleX(pinched.minInterval, pinched.maxInterval, totalIntervals),
+    scaleY: calcScaleY(visible),
+    visible
   };
 };
 

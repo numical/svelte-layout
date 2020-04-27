@@ -1,10 +1,9 @@
 <script>
+  import { products } from '../../products/productPresenter';
   import { chart, header, left, margin } from '../../common/svgDimensions';
 
-  export let scale;
-
-  const gridLines = scale.y.intervals.map((value, index) => {
-    const y = header.height + chart.height - value * scale.y.unitHeight;
+  $: gridLines = $products.scaleY.intervals.map((value, index) => {
+    const y = header.height + chart.height - value * $products.scaleY.unitHeight;
     return {
       dimensions: {
         x1: left.width,

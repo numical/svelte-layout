@@ -12,7 +12,7 @@ export const left = {
 };
 
 export const right = {
-  width: 25,
+  width: 10,
 };
 
 export const chart = {

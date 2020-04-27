@@ -1,6 +1,8 @@
 import { getProducts, intervals } from '../data/personalFinancialModel';
+import calcScaleX from './scaleX';
+import calcScaleY from './scaleY';
+import calcVisible from './visible';
 import colours from './colours';
-import visible from './visible';
 
 export default () => {
   const all = getProducts().map((product, id) => ({
@@ -9,16 +11,21 @@ export default () => {
     colour: colours[id % colours.length],
     visible: true,
   }));
-
+  const minInterval = 0;
+  const maxInterval = intervals;
+  const totalIntervals = intervals;
+  const visible = calcVisible(all, minInterval, maxInterval);
+  const scaleX = calcScaleX(minInterval, maxInterval, totalIntervals);
+  const scaleY = calcScaleY(all);
   return {
     all,
-    visible: visible(all, 0, intervals),
     dateLineX: 0,
     highlighted: undefined,
-    minInterval: 0,
-    maxInterval: intervals,
-    showLeftBreakpoint: false,
-    showRightBreakpoint: false,
-    totalIntervals: intervals,
+    minInterval,
+    maxInterval,
+    scaleX,
+    scaleY,
+    totalIntervals,
+    visible
   };
 };

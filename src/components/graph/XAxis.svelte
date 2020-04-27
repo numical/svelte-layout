@@ -30,12 +30,12 @@
       y: header.height + chart.height - 2 * margin,
     },
     breakpoints: {
-      left: {
+      origin: {
         x: left.width,
         y: header.height + chart.height - breakpoint.zag,
       },
-      right: {
-        x: left.width + chart.width,
+      end: {
+        x: left.width + chart.width - breakpoint.width,
         y: header.height + chart.height - breakpoint.zag,
       },
     },
@@ -76,11 +76,11 @@
   on:mouseover={() => $help.setFocus('date')}
   on:mouseleave={$help.loseFocus}
   on:click={toggleDateLine} />
-{#if $products.showLeftBreakpoint}
-  <BreakPoint origin={dimensions.breakpoints.left} />
+{#if $products.scaleX.showOriginBreakpoint}
+  <BreakPoint origin={dimensions.breakpoints.origin} />
 {/if}
-{#if $products.showRightBreakpoint}
-  <BreakPoint origin={dimensions.breakpoints.right} />
+{#if $products.scaleX.showEndBreakpoint}
+  <BreakPoint origin={dimensions.breakpoints.end} />
 {/if}
 {#if $help.currentFocus === 'date'}
   <text {...dimensions.tooltip}>{toolTipText}</text>

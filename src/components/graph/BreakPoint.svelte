@@ -4,11 +4,11 @@
   export let origin;
 
   const { zig, zag, width, height } = breakpoint;
-  const bounds = {
-    x: 0,
-    y: 0,
-    width,
-    height,
+  const coords = {
+    x1: 0,
+    y1: zag,
+    x2: 5 * zig,
+    y2: zag
   };
   const points = `0, ${zag} ${zig},${zag} ${zig * 2},0 ${zig * 3},${zag *
     2} ${zig * 4},${zag}, ${zig * 5}, ${zag}`;
@@ -16,9 +16,10 @@
 </script>
 
 <style>
-  rect {
-    fill: white;
-    opacity: 1;
+  line {
+    stroke: white;
+    stroke-width: 3;
+    padding: 5px;
   }
   polyline {
     stroke: black;
@@ -31,6 +32,6 @@
 </style>
 
 <g {transform}>
-  <rect {...bounds} />
+  <line {...coords} />
   <polyline {points} />
 </g>

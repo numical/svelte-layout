@@ -12,7 +12,6 @@
     left,
     right,
   } from '../../common/svgDimensions';
-  import { calculateScale } from './calculateScale';
   import { start, PINCH, SWIPE } from '../../gestures/gestureManager';
   import { graph } from '../../stores/graphManager';
   import { layout } from '../../stores/layoutManager';
@@ -32,8 +31,6 @@
         width:${$layout.graphWidth}%;
         transition: width ${$layout.transition}s;
      `;
-
-  $: scale = calculateScale($products);
 </script>
 
 <style>
@@ -57,11 +54,11 @@
   preserveAspectRatio="none"
   on:touchstart={pinch}>
   <YAxis />
-  <YGridLines {scale} />
+  <YGridLines />
   <XAxis />
-  <XGridLines {scale} />
+  <XGridLines />
   {#each $products.visible as product}
-    <Product {product} {scale} />
+    <Product {product} />
   {/each}
-  <DateLine {scale} />
+  <DateLine />
 </svg>
