@@ -1,4 +1,7 @@
-import { fromEventToPinchCoords, fromSVGCoordsToInterval } from '../common/coords';
+import {
+  fromEventToPinchCoords,
+  fromSVGCoordsToInterval,
+} from '../common/coords';
 import visible from './visible';
 
 let debounce;
@@ -18,27 +21,33 @@ const pinch = state => {
       ...state,
       minInterval: 0,
       maxInterval: totalIntervals,
-      visible: all
-    }
+      showLeftBreakpoint: false,
+      showRightBreakpoint: false,
+      visible: all,
+    };
   }
-  const midInterval = fromSVGCoordsToInterval({ x: p2.x1 + 0.5 * (p2.x1 - p2.x2) });
+  const midInterval = fromSVGCoordsToInterval({
+    x: p2.x1 + 0.5 * (p2.x1 - p2.x2),
+  });
   const min = Math.floor(midInterval - range / 2);
   const pinched = {
     minInterval: min,
-    maxInterval: min + range
+    maxInterval: min + range,
   };
-  if (pinched.minInterval < 0) {
+  if (pinched.minInterval <= 0) {
     pinched.minInterval = 0;
     pinched.maxInterval = range;
   }
-  if (pinched.maxInterval  > totalIntervals) {
+  if (pinched.maxInterval > totalIntervals) {
     pinched.minInterval = totalIntervals - range;
-    pinched.maxInterval  = totalIntervals;
+    pinched.maxInterval = totalIntervals;
   }
-  return  {
+  pinched.showLeftBreakpoint = pinched.minInterval !== 0;
+  pinched.showRightBreakpoint = pinched.maxInterval !== totalIntervals;
+  return {
     ...state,
     ...pinched,
-    visible: visible(all, pinched.minInterval, pinched.maxInterval)
+    visible: visible(all, pinched.minInterval, pinched.maxInterval),
   };
 };
 
@@ -47,7 +56,7 @@ export default (products, event) => {
     debounce.endEvent = event;
   } else {
     debounce = {
-      startEvent: event
+      startEvent: event,
     };
     setTimeout(() => {
       products.update(pinch);
@@ -55,4 +64,3 @@ export default (products, event) => {
     }, 32);
   }
 };
-

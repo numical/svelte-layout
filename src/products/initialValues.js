@@ -17,6 +17,8 @@ export default () => {
     highlighted: undefined,
     minInterval: 0,
     maxInterval: intervals,
-    totalIntervals: intervals
+    showLeftBreakpoint: false,
+    showRightBreakpoint: false,
+    totalIntervals: intervals,
   };
-}
+};

@@ -1,13 +1,14 @@
 <script>
   import { help } from '../../stores/helpManager';
   import { graph } from '../../stores/graphManager';
+  import { products } from '../../products/productPresenter';
   import {
     breakpoint,
     chart,
     footer,
     header,
     left,
-    margin
+    margin,
   } from '../../common/svgDimensions';
   import BreakPoint from './BreakPoint.svelte';
 
@@ -31,13 +32,13 @@
     breakpoints: {
       left: {
         x: left.width,
-        y: header.height + chart.height - breakpoint.zag
+        y: header.height + chart.height - breakpoint.zag,
       },
       right: {
         x: left.width + chart.width,
-        y: header.height + chart.height - breakpoint.zag
-      }
-    }
+        y: header.height + chart.height - breakpoint.zag,
+      },
+    },
   };
   const toggleDateLine = event => {
     $graph.updateDateLine($graph.dateLineX ? null : event);
@@ -45,8 +46,8 @@
 
   $: lineStyle = $help.currentFocus === 'date' ? 'stroke: darkorange' : '';
   $: toolTipText = $graph.dateLineX
-          ? 'click to hide date line'
-          : 'click to show date line';
+    ? 'click to hide date line'
+    : 'click to show date line';
 </script>
 
 <style>
@@ -75,8 +76,12 @@
   on:mouseover={() => $help.setFocus('date')}
   on:mouseleave={$help.loseFocus}
   on:click={toggleDateLine} />
-<BreakPoint origin={dimensions.breakpoints.left}/>
-<BreakPoint origin={dimensions.breakpoints.right}/>
+{#if $products.showLeftBreakpoint}
+  <BreakPoint origin={dimensions.breakpoints.left} />
+{/if}
+{#if $products.showRightBreakpoint}
+  <BreakPoint origin={dimensions.breakpoints.right} />
+{/if}
 {#if $help.currentFocus === 'date'}
   <text {...dimensions.tooltip}>{toolTipText}</text>
 {/if}

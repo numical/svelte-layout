@@ -24,7 +24,7 @@
 
   const pinch = start.bind(null, {
     [PINCH]: $products.pinch,
-    [SWIPE]: $layout.swipe
+    [SWIPE]: $layout.swipe,
   });
 
   $: style = `

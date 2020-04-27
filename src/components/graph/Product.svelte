@@ -42,10 +42,10 @@
   };
 
   $: points = product.data.reduce(
-          (points, value, interval) =>
-                  `${points} ${xOffset + interval * scale.x.intervalWidth},${yOffset -
-                  value * scale.y.unitHeight}`,
-          ''
+    (points, value, interval) =>
+      `${points} ${xOffset + interval * scale.x.intervalWidth},${yOffset -
+        value * scale.y.unitHeight}`,
+    ''
   );
 </script>
 

@@ -16,5 +16,5 @@ export const products = writable({
       highlighted: undefined,
     }));
   },
-  pinch: event => pinch(products, event)
+  pinch: event => pinch(products, event),
 });
