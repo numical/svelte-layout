@@ -1,4 +1,5 @@
-import { breakpoint, chart } from '../common/svgDimensions';
+import { breakpoint, chart, left } from '../common/svgDimensions';
+import { intervals } from '../data/personalFinancialModel';
 
 export default (minInterval, maxInterval, totalIntervals) => {
   const numIntervals = maxInterval - minInterval;
@@ -16,14 +17,25 @@ export default (minInterval, maxInterval, totalIntervals) => {
   intervals.push(maxInterval);
 
   const showOriginBreakpoint = minInterval !== 0;
+
   const showEndBreakpoint = maxInterval != totalIntervals;
+
   const chartWidth =
     chart.width -
     (showOriginBreakpoint ? breakpoint.width : 0) -
     (showEndBreakpoint ? breakpoint.width : 0);
+
+  const intervalWidth = chartWidth / numIntervals;
+
+  const fromSVGCoordsToInterval = ({ x }) => {
+    const interval = Math.floor((x - left.width) / intervalWidth);
+    return interval >= totalIntervals ? totalIntervals - 1 : interval;
+  };
+
   return {
+    fromSVGCoordsToInterval,
     intervals,
-    intervalWidth: chartWidth / numIntervals,
+    intervalWidth,
     showOriginBreakpoint,
     showEndBreakpoint,
   };

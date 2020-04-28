@@ -4,7 +4,6 @@
   import { products } from '../../products/productPresenter';
   import { format } from '../../common/currency';
   import { fromTodayToInterval, fromIntervalToText } from '../../common/dates';
-  import { fromSVGCoordsToInterval } from '../../common/coords';
 
   export let product;
   $: style =
@@ -22,7 +21,7 @@
         `
       : '';
   $: interval = $graph.dateLineX
-    ? fromSVGCoordsToInterval({ x: $graph.dateLineX })
+    ? $products.scaleX.fromSVGCoordsToInterval({ x: $graph.dateLineX })
     : fromTodayToInterval();
   $: label = $graph.dateLineX
     ? `Value at ${fromIntervalToText(interval)}:`

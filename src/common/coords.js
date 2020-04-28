@@ -51,8 +51,3 @@ export const fromEventToSVGCoords = event => {
   const coords = fromEventToDomCoords(event);
   return fromDomToSVGCoords(coords);
 };
-
-export const fromSVGCoordsToInterval = ({ x }) => {
-  const interval = Math.floor(((x - left.width) * intervals) / chart.width);
-  return interval >= intervals ? intervals - 1 : interval;
-};

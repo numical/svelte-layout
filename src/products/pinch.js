@@ -1,7 +1,5 @@
-import {
-  fromEventToPinchCoords,
-  fromSVGCoordsToInterval,
-} from '../common/coords';
+import { products } from '../products/productPresenter';
+import { fromEventToPinchCoords } from '../common/coords';
 import calcScaleX from './scaleX';
 import calcScaleY from './scaleY';
 import calcVisible from './visible';
@@ -28,7 +26,8 @@ const pinch = state => {
       visible: all,
     };
   }
-  const midInterval = fromSVGCoordsToInterval({
+  // THE PROBLEM LIES HERE!
+  const midInterval = state.scaleX.fromSVGCoordsToInterval({
     x: p2.x1 + 0.5 * (p2.x1 - p2.x2),
   });
   const min = Math.floor(midInterval - range / 2);
