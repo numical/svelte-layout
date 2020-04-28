@@ -8,12 +8,17 @@
     x1: 0,
     y1: zag,
     x2: 5 * zig,
-    y2: zag
+    y2: zag,
   };
   const points = `0, ${zag} ${zig},${zag} ${zig * 2},0 ${zig * 3},${zag *
     2} ${zig * 4},${zag}, ${zig * 5}, ${zag}`;
   const transform = `translate(${origin.x} ${origin.y})`;
 </script>
+
+<g {transform}>
+  <line {...coords}></line>
+  <polyline {points}></polyline>
+</g>
 
 <style>
   line {
@@ -30,8 +35,3 @@
     stroke: darkorange;
   }
 </style>
-
-<g {transform}>
-  <line {...coords} />
-  <polyline {points} />
-</g>

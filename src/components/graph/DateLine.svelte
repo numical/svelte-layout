@@ -47,6 +47,31 @@
   }));
 </script>
 
+{#if $graph.dateLineX}
+  <rect
+    {...dimensions.rect}
+    on:mousedown="{drag}"
+    on:touchstart="{drag}"
+  ></rect>
+  <line
+    {...dimensions.line}
+    on:mousedown="{drag}"
+    on:touchstart="{drag}"
+  ></line>
+  <text
+    {...dimensions.label}
+    class="label"
+    on:mousedown="{drag}"
+    on:touchstart="{drag}"
+  >
+    {fromIntervalToText(interval)}
+  </text>
+  {#each values as value}
+    <text {...value.dimensions} class="background">{value.text}</text>
+    <text {...value.dimensions} fill="{value.colour}">{value.text}</text>
+  {/each}
+{/if}
+
 <style>
   rect {
     opacity: 0;
@@ -72,19 +97,3 @@
     stroke-width: 0.5em;
   }
 </style>
-
-{#if $graph.dateLineX}
-  <rect {...dimensions.rect} on:mousedown={drag} on:touchstart={drag} />
-  <line {...dimensions.line} on:mousedown={drag} on:touchstart={drag} />
-  <text
-    {...dimensions.label}
-    class="label"
-    on:mousedown={drag}
-    on:touchstart={drag}>
-    {fromIntervalToText(interval)}
-  </text>
-  {#each values as value}
-    <text {...value.dimensions} class="background">{value.text}</text>
-    <text {...value.dimensions} fill={value.colour}>{value.text}</text>
-  {/each}
-{/if}

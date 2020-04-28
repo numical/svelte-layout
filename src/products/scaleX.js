@@ -17,14 +17,14 @@ export default (minInterval, maxInterval, totalIntervals) => {
 
   const showOriginBreakpoint = minInterval !== 0;
   const showEndBreakpoint = maxInterval != totalIntervals;
-  const chartWidth = chart.width
-    - (showOriginBreakpoint ? breakpoint.width : 0)
-    - (showEndBreakpoint ? breakpoint.width : 0);
+  const chartWidth =
+    chart.width -
+    (showOriginBreakpoint ? breakpoint.width : 0) -
+    (showEndBreakpoint ? breakpoint.width : 0);
   return {
     intervals,
     intervalWidth: chartWidth / numIntervals,
     showOriginBreakpoint,
-    showEndBreakpoint
+    showEndBreakpoint,
   };
 };
-

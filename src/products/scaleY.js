@@ -1,7 +1,9 @@
 import { chart } from '../common/svgDimensions';
 
 export default products => {
-  const maxProductValue = Math.max(...products.map(product => product.data).flat());
+  const maxProductValue = Math.max(
+    ...products.map(product => product.data).flat()
+  );
   const maxLines = 5;
   const multipliers = [1, 1, 2, 3, 4, 5, 8, 8, 10, 10, 10];
   const minimumInterval = maxProductValue / maxLines;

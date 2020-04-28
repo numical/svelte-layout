@@ -26,6 +26,6 @@ export default () => {
     scaleX,
     scaleY,
     totalIntervals,
-    visible
+    visible,
   };
 };

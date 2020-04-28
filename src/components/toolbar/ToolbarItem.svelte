@@ -4,6 +4,19 @@
   export let helpId;
 </script>
 
+<div
+  class="toolbarItem"
+  on:click="{onClick}"
+  on:mouseup|stopPropagation="{$help.loseFocus}"
+  on:mouseover="{() => $help.setFocus({ helpId })}"
+  on:mouseleave="{$help.loseFocus}"
+>
+  <span class="tooltip">
+    <slot name="tooltip" />
+  </span>
+  <slot name="icon" />
+</div>
+
 <style>
   .toolbarItem {
     position: relative;
@@ -33,15 +46,3 @@
     opacity: 1;
   }
 </style>
-
-<div
-  class="toolbarItem"
-  on:click={onClick}
-  on:mouseup|stopPropagation={$help.loseFocus}
-  on:mouseover={() => $help.setFocus({ helpId })}
-  on:mouseleave={$help.loseFocus}>
-  <span class="tooltip">
-    <slot name="tooltip" />
-  </span>
-  <slot name="icon" />
-</div>

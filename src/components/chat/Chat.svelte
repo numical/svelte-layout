@@ -33,6 +33,19 @@
   };
 </script>
 
+<div class="container" in:fade="{{ duration: 300 }}">
+  <div class="history" bind:this="{history}" use:scrollDown>
+    {#each historyItems as item, i}
+      <HistoryItem {item} isUser="{i % 2 === 0}" />
+    {/each}
+  </div>
+  <input
+    placeholder="next command..?"
+    style="{inputStyle}"
+    on:change="{addCommand}"
+  />
+</div>
+
 <style>
   .container {
     flex: 1 1 0;
@@ -59,15 +72,3 @@
     opacity: 1;
   }
 </style>
-
-<div class="container" in:fade={{ duration: 300 }}>
-  <div class="history" bind:this={history} use:scrollDown>
-    {#each historyItems as item, i}
-      <HistoryItem {item} isUser={i % 2 === 0} />
-    {/each}
-  </div>
-  <input
-    placeholder="next command..?"
-    style={inputStyle}
-    on:change={addCommand} />
-</div>

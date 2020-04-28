@@ -50,9 +50,13 @@ const pinch = state => {
   return {
     ...state,
     ...pinched,
-    scaleX: calcScaleX(pinched.minInterval, pinched.maxInterval, totalIntervals),
+    scaleX: calcScaleX(
+      pinched.minInterval,
+      pinched.maxInterval,
+      totalIntervals
+    ),
     scaleY: calcScaleY(visible),
-    visible
+    visible,
   };
 };
 

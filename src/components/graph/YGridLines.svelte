@@ -3,7 +3,8 @@
   import { chart, header, left, margin } from '../../common/svgDimensions';
 
   $: gridLines = $products.scaleY.intervals.map((value, index) => {
-    const y = header.height + chart.height - value * $products.scaleY.unitHeight;
+    const y =
+      header.height + chart.height - value * $products.scaleY.unitHeight;
     return {
       dimensions: {
         x1: left.width,
@@ -22,6 +23,11 @@
   });
 </script>
 
+{#each gridLines as gridLine}
+  <line {...gridLine.dimensions}></line>
+  <text {...gridLine.label.dimensions}>{gridLine.label.text}</text>
+{/each}
+
 <style>
   line {
     stroke: darkgrey;
@@ -33,8 +39,3 @@
     font-size: x-small;
   }
 </style>
-
-{#each gridLines as gridLine}
-  <line {...gridLine.dimensions} />
-  <text {...gridLine.label.dimensions}>{gridLine.label.text}</text>
-{/each}

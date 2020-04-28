@@ -33,6 +33,25 @@
      `;
 </script>
 
+<svg
+  id="svg"
+  {style}
+  width="100%"
+  height="100%"
+  {viewBox}
+  preserveAspectRatio="none"
+  on:touchstart="{pinch}"
+>
+  <YAxis />
+  <YGridLines />
+  <XAxis />
+  <XGridLines />
+  {#each $products.visible as product}
+    <Product {product} />
+  {/each}
+  <DateLine />
+</svg>
+
 <style>
   svg {
     position: absolute;
@@ -44,21 +63,3 @@
     touch-action: none;
   }
 </style>
-
-<svg
-  id="svg"
-  {style}
-  width="100%"
-  height="100%"
-  {viewBox}
-  preserveAspectRatio="none"
-  on:touchstart={pinch}>
-  <YAxis />
-  <YGridLines />
-  <XAxis />
-  <XGridLines />
-  {#each $products.visible as product}
-    <Product {product} />
-  {/each}
-  <DateLine />
-</svg>

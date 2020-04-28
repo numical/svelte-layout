@@ -3,6 +3,11 @@
   import ToggleChat from './ToggleContent.svelte';
 </script>
 
+<div>
+  <ToggleChat />
+  <ToggleOverlay />
+</div>
+
 <style>
   div {
     flex: none;
@@ -10,8 +15,3 @@
     justify-content: flex-end;
   }
 </style>
-
-<div>
-  <ToggleChat />
-  <ToggleOverlay />
-</div>

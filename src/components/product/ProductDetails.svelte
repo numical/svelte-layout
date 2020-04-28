@@ -29,6 +29,21 @@
     : "Today's value:";
 </script>
 
+<div class="container" {style}>
+  <div class="title" style="{titleStyle}">{product.name}</div>
+  <div class="values">
+    <div>Start value:</div>
+    <div>{format(product.data[0])}</div>
+    <div></div>
+    <div>{label}</div>
+    <div>{format(product.data[interval])}</div>
+    <div></div>
+    <div>End value:</div>
+    <div>{format(product.data[product.data.length - 1])}</div>
+    <div></div>
+  </div>
+</div>
+
 <style>
   .container {
     padding: 0.25rem;
@@ -48,18 +63,3 @@
     text-align: end;
   }
 </style>
-
-<div class="container" {style}>
-  <div class="title" style={titleStyle}>{product.name}</div>
-  <div class="values">
-    <div>Start value:</div>
-    <div>{format(product.data[0])}</div>
-    <div />
-    <div>{label}</div>
-    <div>{format(product.data[interval])}</div>
-    <div />
-    <div>End value:</div>
-    <div>{format(product.data[product.data.length - 1])}</div>
-    <div />
-  </div>
-</div>

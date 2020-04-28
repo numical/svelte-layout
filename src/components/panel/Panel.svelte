@@ -18,6 +18,12 @@
             transition: width ${$layout.transition}s`;
 </script>
 
+<main style="{mainStyle}">
+  <Toolbar />
+  <svelte:component this="{$layout.panelContent.component}" />
+  <Divider />
+</main>
+
 <style>
   main {
     position: absolute;
@@ -30,9 +36,3 @@
     transition: background-color 0.6s, border-radius 0.6s, margin 0.6s;
   }
 </style>
-
-<main style={mainStyle}>
-  <Toolbar />
-  <svelte:component this={$layout.panelContent.component} />
-  <Divider />
-</main>

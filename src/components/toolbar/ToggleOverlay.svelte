@@ -6,7 +6,7 @@
   import { layout } from '../../stores/layoutManager';
 </script>
 
-<ToolbarItem onClick={$layout.toggleOverlay} helpId="toggleOverlay">
+<ToolbarItem onClick="{$layout.toggleOverlay}" helpId="toggleOverlay">
   <div slot="tooltip">
     {#if $layout.overlayPanel}side-by-side{:else}overlay chat{/if}
   </div>

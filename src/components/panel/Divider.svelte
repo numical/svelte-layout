@@ -10,6 +10,16 @@
     `;
 </script>
 
+<div
+  class="divider"
+  style="{dividerStyle}"
+  on:mouseover="{() => $help.setFocus('divider')}"
+  on:mousedown="{drag}"
+  on:touchstart="{drag}"
+  on:mouseleave="{$help.loseFocus}"
+  on:touchend="{$help.loseFocus}"
+></div>
+
 <style>
   .divider {
     position: absolute;
@@ -22,12 +32,3 @@
     cursor: url(horizontalResize.png), col-resize;
   }
 </style>
-
-<div
-  class="divider"
-  style={dividerStyle}
-  on:mouseover={() => $help.setFocus('divider')}
-  on:mousedown={drag}
-  on:touchstart={drag}
-  on:mouseleave={$help.loseFocus}
-  on:touchend={$help.loseFocus} />

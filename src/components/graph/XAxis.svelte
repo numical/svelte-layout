@@ -2,6 +2,7 @@
   import { help } from '../../stores/helpManager';
   import { graph } from '../../stores/graphManager';
   import { products } from '../../products/productPresenter';
+  import { fromDomToSVGCoords } from '../../common/coords';
   import {
     breakpoint,
     chart,
@@ -25,10 +26,6 @@
       width: chart.width,
       height: footer.height * 2,
     },
-    tooltip: {
-      x: left.width + chart.width / 2,
-      y: header.height + chart.height - 2 * margin,
-    },
     breakpoints: {
       origin: {
         x: left.width,
@@ -40,15 +37,57 @@
       },
     },
   };
+
   const toggleDateLine = event => {
     $graph.updateDateLine($graph.dateLineX ? null : event);
   };
 
-  $: lineStyle = $help.currentFocus === 'date' ? 'stroke: darkorange' : '';
-  $: toolTipText = $graph.dateLineX
-    ? 'click to hide date line'
-    : 'click to show date line';
+  $: lineStyle =
+    $help.currentFocus === 'date' ? 'stroke: url(#highlightXAxis)' : 'black';
+  $: helpX = $help.currentPosition
+          ? fromDomToSVGCoords($help.currentPosition).x
+          : left.width + chart.width / 2;
+  $: gradientOffset = helpX / chart.width
+  $: tooltip = {
+    text: $graph.dateLineX
+      ? 'click to hide date line'
+      : 'click to show date line',
+    pos: {
+      x: helpX,
+      y: header.height + chart.height - 2 * margin,
+    },
+  };
 </script>
+
+<defs>
+  <linearGradient id="highlightXAxis" gradientUnits="userSpaceOnUse">
+    <stop stop-color="black" offset="0"></stop>
+    <stop stop-color="orange" offset={gradientOffset}></stop>
+    <stop stop-color="black" offset="1"></stop>
+  </linearGradient>
+</defs>
+<rect
+  {...dimensions.rect}
+  on:mouseover="{event => $help.setFocus('date', event)}"
+  on:mouseleave="{$help.loseFocus}"
+  on:click="{toggleDateLine}"
+></rect>
+<line
+  {...dimensions.line}
+  style="{lineStyle}"
+  on:mouseover="{event => $help.setFocus('date', event)}"
+  on:mouseleave="{$help.loseFocus}"
+  on:click="{toggleDateLine}"
+></line>
+{#if $products.scaleX.showOriginBreakpoint}
+  <BreakPoint origin="{dimensions.breakpoints.origin}" />
+{/if}
+{#if $products.scaleX.showEndBreakpoint}
+  <BreakPoint origin="{dimensions.breakpoints.end}" />
+{/if}
+{#if $help.currentFocus === 'date'}
+  <text {...tooltip.pos}>{tooltip.text}</text>
+{/if}
 
 <style>
   rect {
@@ -64,24 +103,3 @@
     font-size: x-small;
   }
 </style>
-
-<rect
-  {...dimensions.rect}
-  on:mouseover={() => $help.setFocus('date')}
-  on:mouseleave={$help.loseFocus}
-  on:click={toggleDateLine} />
-<line
-  {...dimensions.line}
-  style={lineStyle}
-  on:mouseover={() => $help.setFocus('date')}
-  on:mouseleave={$help.loseFocus}
-  on:click={toggleDateLine} />
-{#if $products.scaleX.showOriginBreakpoint}
-  <BreakPoint origin={dimensions.breakpoints.origin} />
-{/if}
-{#if $products.scaleX.showEndBreakpoint}
-  <BreakPoint origin={dimensions.breakpoints.end} />
-{/if}
-{#if $help.currentFocus === 'date'}
-  <text {...dimensions.tooltip}>{toolTipText}</text>
-{/if}

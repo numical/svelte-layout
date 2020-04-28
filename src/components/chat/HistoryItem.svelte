@@ -3,6 +3,14 @@
   export let isUser;
 </script>
 
+<div
+  class="{isUser ? 'historyItem userHistoryItem' : 'historyItem botHistoryItem'}"
+>
+  {#each item as line}
+    <div>{line}</div>
+  {/each}
+</div>
+
 <style>
   .historyItem {
     padding: 0.25rem;
@@ -16,10 +24,3 @@
     font-weight: bold;
   }
 </style>
-
-<div
-  class={isUser ? 'historyItem userHistoryItem' : 'historyItem botHistoryItem'}>
-  {#each item as line}
-    <div>{line}</div>
-  {/each}
-</div>

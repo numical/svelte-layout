@@ -10,7 +10,8 @@
 
   let endDisplay;
 
-  $: xOffset = left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
+  $: xOffset =
+    left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
   const yOffset = chart.height + header.height;
 
   const displayProduct = () =>
@@ -42,11 +43,19 @@
 
   $: points = product.data.reduce(
     (points, value, interval) =>
-      `${points} ${xOffset + interval * $products.scaleX.intervalWidth},${yOffset -
+      `${points} ${xOffset +
+        interval * $products.scaleX.intervalWidth},${yOffset -
         value * $products.scaleY.unitHeight}`,
     ''
   );
 </script>
+
+<polyline
+  {points}
+  stroke="{product.colour}"
+  on:mouseover="{mouseOver}"
+  on:mouseleave="{mouseLeave}"
+></polyline>
 
 <style>
   polyline {
@@ -57,9 +66,3 @@
     stroke: darkorange;
   }
 </style>
-
-<polyline
-  {points}
-  stroke={product.colour}
-  on:mouseover={mouseOver}
-  on:mouseleave={mouseLeave} />
