@@ -1,20 +1,32 @@
-import { products } from '../products/productPresenter';
 import { fromEventToPinchCoords } from '../common/coords';
 import calcScaleX from './scaleX';
 import calcScaleY from './scaleY';
 import calcVisible from './visible';
 
-let debounce;
+const isWheelEvent = event => event.deltaY !== undefined;
 
-const pinch = state => {
-  if (!debounce) return state;
-  const { startEvent, endEvent } = debounce;
-  if (!endEvent) return state;
-  const { all, minInterval, maxInterval, totalIntervals } = state;
-  const currentRange = maxInterval - minInterval;
+const calcWheelZoom = (state, event) => {
+  const { minInterval, maxInterval } = state;
+  const { deltaX, deltaY } = event;
+  const delta = deltaX === 0 ? deltaY : deltaX;
+  const ratio = delta > 0 ? 0.9 : 1.1;
+  const midInterval = Math.floor((maxInterval - minInterval) / 2);
+  return { ratio, midInterval };
+};
+
+const calcMouseZoom = (state, startEvent, endEvent) => {
   const p1 = fromEventToPinchCoords(startEvent);
   const p2 = fromEventToPinchCoords(endEvent);
   const ratio = (p1.x2 - p1.x1) / (p2.x2 - p2.x1);
+  const midInterval = state.scaleX.fromSVGCoordsToInterval({
+    x: p2.x1 + 0.5 * (p2.x1 - p2.x2),
+  });
+  return { ratio, midInterval };
+};
+
+const calcScale = (state, { ratio, midInterval }) => {
+  const { all, minInterval, maxInterval, totalIntervals } = state;
+  const currentRange = maxInterval - minInterval;
   const range = Math.ceil(currentRange * ratio);
   if (range > totalIntervals) {
     return {
@@ -26,10 +38,6 @@ const pinch = state => {
       visible: all,
     };
   }
-  // THE PROBLEM LIES HERE!
-  const midInterval = state.scaleX.fromSVGCoordsToInterval({
-    x: p2.x1 + 0.5 * (p2.x1 - p2.x2),
-  });
   const min = Math.floor(midInterval - range / 2);
   const pinched = {
     minInterval: min,
@@ -59,6 +67,23 @@ const pinch = state => {
   };
 };
 
+let debounce;
+
+const debouncedFn = products => () => {
+  if (!debounce) return;
+  const { startEvent, endEvent } = debounce;
+  if (!startEvent) return;
+  const isWheel = isWheelEvent(startEvent);
+  if (!isWheel && !endEvent) return;
+  products.update(state => {
+    const zoom = isWheel
+      ? calcWheelZoom(state, startEvent)
+      : calcMouseZoom(state, startEvent, endEvent);
+    return calcScale(state, zoom);
+  });
+  debounce = undefined;
+};
+
 export default (products, event) => {
   if (debounce) {
     debounce.endEvent = event;
@@ -66,9 +91,6 @@ export default (products, event) => {
     debounce = {
       startEvent: event,
     };
-    setTimeout(() => {
-      products.update(pinch);
-      debounce = undefined;
-    }, 32);
+    setTimeout(debouncedFn(products), 32);
   }
 };
