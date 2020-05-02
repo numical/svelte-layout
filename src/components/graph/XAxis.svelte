@@ -12,6 +12,8 @@
     margin,
   } from '../../common/svgDimensions';
   import BreakPoint from './BreakPoint.svelte';
+  import OriginBreakPoint from './OriginBreakPoint.svelte';
+  import EndBreakPoint from './EndBreakPoint.svelte';
 
   const dimensions = {
     line: {
@@ -43,15 +45,15 @@
   };
 
   $: lineStyle =
-    $help.currentFocus === 'date' ? 'stroke: url(#highlightXAxis)' : 'black';
+          $help.currentFocus === 'date' ? 'stroke: url(#highlightXAxis)' : 'black';
   $: helpX = $help.currentPosition
           ? fromDomToSVGCoords($help.currentPosition).x
           : left.width + chart.width / 2;
-  $: gradientOffset = helpX / chart.width
+  $: gradientOffset = helpX / chart.width;
   $: tooltip = {
     text: $graph.dateLineX
-      ? 'click to hide date line'
-      : 'click to show date line',
+            ? 'click to hide date line'
+            : 'click to show date line',
     pos: {
       x: helpX,
       y: header.height + chart.height - 2 * margin,
@@ -79,12 +81,8 @@
   on:mouseleave="{$help.loseFocus}"
   on:click="{toggleDateLine}"
 ></line>
-{#if $products.scaleX.showOriginBreakpoint}
-  <BreakPoint origin="{dimensions.breakpoints.origin}" />
-{/if}
-{#if $products.scaleX.showEndBreakpoint}
-  <BreakPoint origin="{dimensions.breakpoints.end}" />
-{/if}
+<OriginBreakPoint />
+<EndBreakPoint />
 {#if $help.currentFocus === 'date'}
   <text {...tooltip.pos}>{tooltip.text}</text>
 {/if}

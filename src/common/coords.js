@@ -39,12 +39,17 @@ export const fromEventToPinchCoords = event => {
   };
 };
 
-export const fromDomToSVGCoords = coords => {
+export const fromDomToSVGCoords = (coords, translate) => {
   const pt = getPoint();
   pt.x = coords.x;
   pt.y = coords.y;
   const { x, y, ...rest } = pt.matrixTransform(getMatrix());
-  return { x, y };
+  if (translate) {
+    const t = { x: 0, y: 0, ...translate };
+    return { x: x + t.x, y: y + t.y };
+  } else {
+    return { x, y };
+  }
 };
 
 export const fromEventToSVGCoords = event => {

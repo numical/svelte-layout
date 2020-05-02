@@ -51,8 +51,6 @@ const calcScale = (state, { ratio, midInterval }) => {
     pinched.minInterval = totalIntervals - range;
     pinched.maxInterval = totalIntervals;
   }
-  pinched.showLeftBreakpoint = pinched.minInterval !== 0;
-  pinched.showRightBreakpoint = pinched.maxInterval !== totalIntervals;
   const visible = calcVisible(all, pinched.minInterval, pinched.maxInterval);
   return {
     ...state,
