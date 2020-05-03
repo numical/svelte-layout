@@ -6,20 +6,20 @@
   import { fromTodayToInterval, fromIntervalToText } from '../../common/dates';
 
   export let product;
-  $: style =
-    product === $products.highlighted
-      ? `
+  $: highlight =
+    $products.highlighted && product.id === $products.highlighted.id;
+  $: style = highlight
+    ? `
                 background-color: darkorange;
                 border-radius: ${$layout.overlayPanel ? '0.25rem' : '0'};
                 border: solid ${product.colour};
               `
-      : '';
-  $: titleStyle =
-    product === $products.highlighted
-      ? `
+    : '';
+  $: titleStyle = highlight
+    ? `
             color: ${product.colour}
         `
-      : '';
+    : '';
   $: interval = $graph.dateLineX
     ? $products.scaleX.fromSVGCoordsToInterval({ x: $graph.dateLineX })
     : fromTodayToInterval();
