@@ -6,13 +6,14 @@ export default (state, desiredMin, desiredMax) => {
   const { all, totalIntervals } = state;
   // min range is 12 << assuming months
   const range = desiredMax - desiredMin > 12 ? desiredMax - desiredMin : 12;
-  if (range > totalIntervals) {
+  if (range >= totalIntervals) {
     return {
       ...state,
       minInterval: 0,
       maxInterval: totalIntervals,
       scaleX: calcScaleX(0, totalIntervals, totalIntervals),
       scaleY: calcScaleY(all),
+      showZoomWindow: false,
       visible: all,
     };
   } else {
@@ -33,6 +34,7 @@ export default (state, desiredMin, desiredMax) => {
         totalIntervals
       ),
       scaleY: calcScaleY(visible),
+      showZoomWindow: true,
       visible,
     }
   }

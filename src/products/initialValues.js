@@ -24,7 +24,10 @@ export default () => {
     minInterval,
     maxInterval,
     scaleX,
+    scaleXForAll: scaleX,
     scaleY,
+    scaleYForAll: scaleY,
+    showZoomWindow: false,
     totalIntervals,
     visible,
   };

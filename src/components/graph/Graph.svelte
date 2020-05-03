@@ -1,10 +1,11 @@
 <script>
   import DateLine from './DateLine.svelte';
-  import Product from './Product.svelte';
-  import XAxis from './XAxis.svelte';
+  import DynamicXAxis from './XAxis.svelte';
+  import DynamicProduct from './Product.svelte';
   import YAxis from './YAxis.svelte';
   import XGridLines from './XGridLines.svelte';
   import YGridLines from './YGridLines.svelte';
+  import ZoomWindow from '../zoom/ZoomWindow.svelte';
   import {
     chart,
     header,
@@ -44,12 +45,13 @@
 >
   <YAxis />
   <YGridLines />
-  <XAxis />
+  <DynamicXAxis />
   <XGridLines />
   {#each $products.visible as product}
-    <Product {product} />
+    <DynamicProduct {product} />
   {/each}
   <DateLine />
+  <ZoomWindow />
 </svg>
 
 <style>
