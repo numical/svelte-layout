@@ -49,18 +49,19 @@
 
 ## React vs Svelte
 
-|                  |          React           |                   Svelte                    |
-| :--------------: | :----------------------: | :-----------------------------------------: |
-|    structure     |        components        |                 components                  |
-|      model       |       single state       |                   **not**                   |
-|     runtime      |       virtual DOM        |         architecture compiled away          |
-|    data flow     | uni-directional: `props` |   uni-directional data flow: `export let`   |
-|     globals      |        `Context`         |                   `Store`                   |
-|      mixin       |         `useXXX`         | 'reactive declarations' - weird syntax `$:` |
-|   composition    |        `children`        |                   `slots`                   |
-| API surface area |           big!           |                pretty small                 |
-|     tooling      |           good           |                   minimal                   |
-|  documentation   |        excellent         |                  excellent                  |
+|                  |             React             |                   Svelte                    |
+| :--------------: | :---------------------------: | :-----------------------------------------: |
+|    structure     |          components           |                 components                  |
+|      model       |         single state          |                   **not**                   |
+|     runtime      |          virtual DOM          |         architecture compiled away          |
+|    data flow     |   uni-directional: `props`    |   uni-directional data flow: `export let`   |
+|     globals      |           `Context`           |                   `Store`                   |
+|      mixin       |           `useXXX`            | 'reactive declarations' - weird syntax `$:` |
+|   composition    |          `children`           |                   `slots`                   |
+| API surface area |             big!              |                pretty small                 |
+|     tooling      |             good              |                   minimal                   |
+|  documentation   |           excellent           |                  excellent                  |
+|     approach     | find/create a react component |          how leverage web platform?          |
 
 ## Demo
 
@@ -73,10 +74,10 @@
 ## Links
 
 - first demo:
-    - repo: https://github.com/numical/svelte-start
+  - repo: https://github.com/numical/svelte-start
 - second demo
-    - web: https://svelte-layout.now.sh/
-    - repo: https://github.com/numical/svelte-layout
+  - web: https://svelte-layout.now.sh/
+  - repo: https://github.com/numical/svelte-layout
 
 ## Constraints / Observations
 
