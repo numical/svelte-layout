@@ -15,8 +15,7 @@
     height: chart.height,
   };
   const style = `transform: translate(${left.width * 2}px,${header.height *
-  2}px) scale(0.15) `;
-
+    2}px) scale(0.15) `;
 </script>
 
 {#if $products.showZoomWindow}
@@ -24,7 +23,9 @@
     <ZoomXAxis />
     <YAxis />
     {#each $products.all as product}
-      <ZoomProduct {product} />
+      {#if product.visible}
+        <ZoomProduct {product} />
+      {/if}
     {/each}
     <ZoomFilterLeft />
     <ZoomFilterRight />

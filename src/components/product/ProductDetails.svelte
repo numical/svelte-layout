@@ -1,4 +1,12 @@
+<svelte:head>
+  <link
+          rel="stylesheet"
+          href="https://unpkg.com/carbon-components@10.9.0/css/carbon-components.min.css"
+  />
+</svelte:head>
+
 <script>
+  import { ToggleSmall } from 'carbon-components-svelte';
   import { graph } from '../../stores/graphManager';
   import { layout } from '../../stores/layoutManager';
   import { products } from '../../products/productPresenter';
@@ -6,6 +14,10 @@
   import { fromTodayToInterval, fromIntervalToText } from '../../common/dates';
 
   export let product;
+
+  const toggleVisibility = () => $products.toggleVisibility(product);
+  const getToggled = () => product.visible;
+
   $: highlight =
     $products.highlighted && product.id === $products.highlighted.id;
   $: style = highlight
@@ -29,7 +41,12 @@
 </script>
 
 <div class="container" {style}>
-  <div class="title" style="{titleStyle}">{product.name}</div>
+  <div class="header">
+    <div class="toggle">
+      <ToggleSmall toggled="{getToggled()}" labelA="" labelB="" on:change={toggleVisibility}/>
+    </div>
+    <div class="title" style="{titleStyle}">{product.name}</div>
+  </div>
   <div class="values">
     <div>Start value:</div>
     <div>{format(product.data[0])}</div>
@@ -49,9 +66,19 @@
     margin-bottom: 0.5rem;
     color: white;
   }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .toggle {
+    flex: none;
+    padding: 0.25rem;
+  }
   .title {
     font-weight: bold;
     padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
   }
   .values {
     display: grid;

@@ -2,6 +2,8 @@ import { writable } from 'svelte/store';
 import initialValues from './initialValues';
 import pinch from './pinch';
 import affectIntervalChange from './affectIntervalChange';
+import calcVisible from './visible';
+import scaleY from './scaleY';
 
 export const products = writable({
   ...initialValues(),
@@ -38,4 +40,15 @@ export const products = writable({
       )
     });
   },
+  toggleVisibility: product => {
+    products.update(state => {
+      product.visible = !product.visible;
+      const visible =  calcVisible(state.all, state.minInterval, state.maxInterval);
+      return {
+        ...state,
+        // scaleY: scaleY(visible),
+        visible
+      }
+    });
+  }
 });
