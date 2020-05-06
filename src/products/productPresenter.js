@@ -46,7 +46,7 @@ export const products = writable({
       const visible =  calcVisible(state.all, state.minInterval, state.maxInterval);
       return {
         ...state,
-        // scaleY: scaleY(visible),
+        scaleY: scaleY(visible),
         visible
       }
     });

@@ -7,6 +7,7 @@
   import ZoomXAxis from './ZoomXAxis.svelte';
   import ZoomFilterLeft from './ZoomFilterLeft.svelte';
   import ZoomFilterRight from './ZoomFilterRight.svelte';
+  import ZoomFilterTop from './ZoomFilterTop.svelte';
 
   const rectProps = {
     x: 0,
@@ -15,7 +16,7 @@
     height: chart.height,
   };
   const style = `transform: translate(${left.width * 2}px,${header.height *
-    2}px) scale(0.15) `;
+  2}px) scale(0.15) `;
 </script>
 
 {#if $products.showZoomWindow}
@@ -29,6 +30,7 @@
     {/each}
     <ZoomFilterLeft />
     <ZoomFilterRight />
+    <ZoomFilterTop />
   </g>
 {/if}
 

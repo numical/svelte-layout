@@ -5,7 +5,8 @@
     "pretty": "prettier --write 'src/**/*.js' 'src/**/*.svelte'",
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "test": "tap src/**/*.test.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",
@@ -22,5 +23,8 @@
     "carbon-components-svelte": "^0.5.1",
     "sirv-cli": "^0.4.4",
     "svelte-material-icons": "^1.0.3"
+  },
+  "dependencies": {
+    "tap": "^14.10.7"
   }
 }
