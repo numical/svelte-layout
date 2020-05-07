@@ -4,9 +4,13 @@ const round = (ratioRoundingFn, value) => {
     return value;
   } else {
     const ratio = value / magnitude;
-    const fudge = ratio < 2 ? 0.75 : 1;
-    const roundedRatio = ratioRoundingFn(ratio);
-    return magnitude * roundedRatio * fudge;
+    if (ratio === 1) {
+      return value;
+    } else if (ratio < 2) {
+      return magnitude + ratioRoundingFn((ratio - 1) * magnitude) ;
+    } else {
+      return magnitude * ratioRoundingFn(ratio);
+    }
   }
 }
 
