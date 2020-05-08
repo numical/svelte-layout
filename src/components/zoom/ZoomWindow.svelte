@@ -5,9 +5,7 @@
   import { products } from '../../products/productPresenter';
   import ZoomProduct from './ZoomProduct.svelte';
   import ZoomXAxis from './ZoomXAxis.svelte';
-  import ZoomFilterLeft from './ZoomFilterLeft.svelte';
-  import ZoomFilterRight from './ZoomFilterRight.svelte';
-  import ZoomFilterTop from './ZoomFilterTop.svelte';
+  import ZoomFilter from './ZoomFilter.svelte';
 
   const rectProps = {
     x: 0,
@@ -28,9 +26,7 @@
         <ZoomProduct {product} />
       {/if}
     {/each}
-    <ZoomFilterLeft />
-    <ZoomFilterRight />
-    <ZoomFilterTop />
+    <ZoomFilter />
   </g>
 {/if}
 

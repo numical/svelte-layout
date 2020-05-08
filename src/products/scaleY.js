@@ -3,7 +3,7 @@ import { chart } from '../common/svgDimensions';
 
 export default products => {
   const allValues = products.map(product => product.data).flat();
-  const maxValue = roundUpNicely( Math.max(...allValues));
+  const maxValue = roundUpNicely(Math.max(...allValues));
   const minValue = roundDownNicely(Math.min(...allValues));
   const maxLines = 8;
   const multipliers = [1, 1, 2, 3, 4, 5, 8, 8, 10, 10, 10];
@@ -24,4 +24,3 @@ export default products => {
     unitHeight: chart.height / max,
   };
 };
-
