@@ -18,7 +18,7 @@
 </script>
 
 {#if $products.showZoomWindow}
-  <g {style} transition:fade="{{ duration: 600 }}">
+  <g {style} transition:fade>
     <ZoomXAxis />
     <YAxis />
     {#each $products.all as product}

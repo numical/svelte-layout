@@ -44,7 +44,7 @@
 {#if $help.currentFocus === props.helpId}
   <text
           {...tooltip.pos}
-          in:fade="{{ duration: 300 }}"
+          transition:fade
           text-anchor={tooltip.textAnchor}
   >
     {tooltip.text}

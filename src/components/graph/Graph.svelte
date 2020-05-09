@@ -47,7 +47,7 @@
   <YGridLines />
   <XAxis />
   <XGridLines />
-  {#each $products.visible as product}
+  {#each $products.visible as product (product.id)}
     <Product {product} />
   {/each}
   <DateLine />

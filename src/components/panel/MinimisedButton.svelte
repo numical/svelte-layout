@@ -6,7 +6,7 @@
   export let tooltipStyle;
 </script>
 
-<div {style} transition:fade="{{ duration: 600 }}" on:click="{onClick}">
+<div {style} transition:fade on:click="{onClick}">
   <span style="{tooltipStyle}">{tooltip}</span>
   <slot />
 </div>

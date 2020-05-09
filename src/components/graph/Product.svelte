@@ -1,4 +1,5 @@
 <script>
+  import { fade } from 'svelte/transition';
   import { help } from '../../stores/helpManager';
   import { layout } from '../../stores/layoutManager';
   import { products } from '../../products/productPresenter';
@@ -58,6 +59,7 @@
   stroke="{product.colour}"
   on:mouseover="{mouseOver}"
   on:mouseleave="{mouseLeave}"
+  transition:fade
 ></polyline>
 
 <style>

@@ -1,4 +1,5 @@
 <script>
+  import { fade } from 'svelte/transition';
   import { products } from '../../products/productPresenter';
   import {
     breakpoint,
@@ -29,6 +30,7 @@
         },
         text: value % 1000 === 0 ? `£${value / 1000}k` : `£${value}`,
       },
+      value: value + index + 1
     };
   });
   $: visibleGridLines = $products.scaleY.showBreakpoint
@@ -36,9 +38,9 @@
     : gridLines;
 </script>
 
-{#each visibleGridLines as gridLine}
-  <line {...gridLine.dimensions}></line>
-  <text {...gridLine.label.dimensions}>{gridLine.label.text}</text>
+{#each visibleGridLines as gridLine (gridLine.value)}
+    <line {...gridLine.dimensions} transition:fade=></line>
+    <text {...gridLine.label.dimensions} transition:fade>{gridLine.label.text}</text>
 {/each}
 
 <style>
