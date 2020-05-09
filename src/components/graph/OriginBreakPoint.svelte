@@ -1,7 +1,7 @@
 <script>
   import { products } from '../../products/productPresenter';
   import { breakpoint, chart, header, left } from '../../common/svgDimensions';
-  import BreakPoint from './BreakPoint.svelte'
+  import HorizontalBreakPoint from './HorizontalBreakPoint.svelte'
 
   const props = {
     helpId: 'breakpoint-origin',
@@ -19,5 +19,5 @@
 </script>
 
 {#if $products.scaleX.showOriginBreakpoint}
-  <BreakPoint {props} />
+  <HorizontalBreakPoint {props} />
 {/if}

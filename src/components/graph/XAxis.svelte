@@ -11,7 +11,7 @@
     left,
     margin,
   } from '../../common/svgDimensions';
-  import BreakPoint from './BreakPoint.svelte';
+  import BreakPoint from './HorizontalBreakPoint.svelte';
   import OriginBreakPoint from './OriginBreakPoint.svelte';
   import EndBreakPoint from './EndBreakPoint.svelte';
 
@@ -93,7 +93,7 @@
   }
   line {
     stroke: black;
-    stroke-width: 2;
+    stroke-width: 1;
     padding: 5px;
   }
   text {

@@ -12,7 +12,10 @@
 
   $: xOffset =
     left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
-  const yOffset = chart.height + header.height;
+  $: yOffset =
+    header.height +
+    chart.height -
+    ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
 
   const displayProduct = () =>
     $layout.panelContent !== info
@@ -45,7 +48,7 @@
     (points, value, interval) =>
       `${points} ${xOffset +
         interval * $products.scaleX.intervalWidth},${yOffset -
-        value * $products.scaleY.unitHeight}`,
+        (value - $products.scaleY.min) * $products.scaleY.unitHeight}`,
     ''
   );
 </script>

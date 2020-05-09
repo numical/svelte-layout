@@ -67,7 +67,7 @@
   }
   polyline {
     stroke: black;
-    stroke-width: 2;
+    stroke-width: 1;
     fill: none;
   }
   polyline:hover {

@@ -1,5 +1,5 @@
-import { roundDownNicely, roundUpNicely } from '../common/rounding';
-import { chart } from '../common/svgDimensions';
+import { roundUpBroadly, roundDownNicely, roundUpNicely } from '../common/rounding';
+import { breakpoint, chart } from '../common/svgDimensions';
 
 export default products => {
   const allValues = products.map(product => product.data).flat();
@@ -8,19 +8,20 @@ export default products => {
   const maxLines = 8;
   const multipliers = [1, 1, 2, 3, 4, 5, 8, 8, 10, 10, 10];
   const minimumInterval = (maxValue - minValue) / maxLines;
-  const magnitude = Math.pow(10, Math.floor(Math.log10(minimumInterval)));
-  const residual = Math.ceil(minimumInterval / magnitude);
-  const interval = magnitude * multipliers[residual];
+  const interval = roundUpBroadly(minimumInterval);
   const numLines = Math.ceil(maxValue / interval);
   const intervals = Array.from(
     { length: numLines },
     (_, index) => (index + 1) * interval
   );
   const max = intervals[intervals.length - 1];
+  const totalHeight = minimumInterval > 0 ? chart.height - breakpoint.height : chart.height;
   return {
     interval,
     intervals,
+    min: minValue,
     max,
-    unitHeight: chart.height / max,
+    showBreakpoint: minValue > 0,
+    unitHeight: totalHeight / (max - minValue),
   };
 };

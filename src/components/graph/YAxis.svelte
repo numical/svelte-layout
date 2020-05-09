@@ -1,5 +1,6 @@
 <script>
   import { chart, header, left } from '../../common/svgDimensions';
+  import VerticalBreakPoint from './VerticalBreakPoint.svelte';
 
   const dimensions = {
     x1: left.width,
@@ -10,6 +11,7 @@
 </script>
 
 <line {...dimensions}></line>
+<VerticalBreakPoint />
 
 <style>
   line {

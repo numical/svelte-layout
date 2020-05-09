@@ -26,5 +26,5 @@ export const breakpoint = {
   zig: 5,
   zag: 10,
   width: 25,
-  height: 20,
+  height: 60,
 };

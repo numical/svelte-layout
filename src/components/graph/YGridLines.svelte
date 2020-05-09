@@ -1,10 +1,20 @@
 <script>
   import { products } from '../../products/productPresenter';
-  import { chart, header, left, margin } from '../../common/svgDimensions';
+  import {
+    breakpoint,
+    chart,
+    header,
+    left,
+    margin,
+  } from '../../common/svgDimensions';
 
+  $: yOffset =
+    header.height +
+    chart.height -
+    ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
   $: gridLines = $products.scaleY.intervals.map((value, index) => {
     const y =
-      header.height + chart.height - value * $products.scaleY.unitHeight;
+      yOffset - (value - $products.scaleY.min) * $products.scaleY.unitHeight;
     return {
       dimensions: {
         x1: left.width,
@@ -21,9 +31,12 @@
       },
     };
   });
+  $: visibleGridLines = $products.scaleY.showBreakpoint
+    ? gridLines.filter(gl => gl.dimensions.y1 <= header.height + chart.height)
+    : gridLines;
 </script>
 
-{#each gridLines as gridLine}
+{#each visibleGridLines as gridLine}
   <line {...gridLine.dimensions}></line>
   <text {...gridLine.label.dimensions}>{gridLine.label.text}</text>
 {/each}
