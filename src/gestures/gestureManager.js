@@ -1,4 +1,4 @@
-import { fromEventToDomCoords } from '../common/coords';
+import { writable } from 'svelte/store';
 import { identifySwipe } from './swipes';
 
 export const DRAG = Symbol('drag');
@@ -11,9 +11,9 @@ const SWIPE_OR_DRAG = Symbol('swipe or drag');
 
 const isPinch = event => event.touches && event.touches.length === 2;
 
-const isWheel = event => event.deltaX !== undefined;
-
 let currentGesture = undefined;
+
+export const debug = writable();
 
 export const start = (actions, startEvent) => {
   if (!currentGesture || currentGesture.type === WHEEL) {
@@ -25,6 +25,7 @@ export const start = (actions, startEvent) => {
       startEvent,
       type: UNKNOWN,
     };
+    debug.update(() => 'Start indeterminate gesture');
   }
 };
 
@@ -34,6 +35,7 @@ export const wheel = (actions, event) => {
       actions,
       type: WHEEL,
     }
+    debug.update(() => 'Wheel gesture');
   } else {
     const { actions, type } = currentGesture;
     if (type === WHEEL && actions[WHEEL]) {
@@ -48,15 +50,19 @@ export const move = moveEvent => {
     if (currentGesture.type === UNKNOWN) {
       if (isPinch(moveEvent)) {
         currentGesture.type = PINCH;
+        debug.update(() => 'Move - determine pinch');
       } else {
         currentGesture.type = SWIPE_OR_DRAG;
+        debug.update(() => 'Move - determine swipe or drag');
       }
     }
     switch (currentGesture.type) {
       case PINCH:
+        debug.update(() => 'Move - pinch');
         actions[PINCH] && actions[PINCH](moveEvent);
         break;
       case SWIPE_OR_DRAG:
+        debug.update(() => 'Move - swipe or drag');
         actions[DRAG] && actions[DRAG](moveEvent);
         break;
       default:
@@ -73,4 +79,5 @@ export const stop = stopEvent => {
     }
   }
   currentGesture = undefined;
+  debug.update(() => undefined);
 };

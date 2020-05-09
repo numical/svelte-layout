@@ -6,9 +6,13 @@
   import { start, move, stop, wheel, PINCH, SWIPE, WHEEL } from '../gestures/gestureManager';
   import MinimisedLeft from './panel/MinimisedLeft.svelte';
   import MinimisedRight from './panel/MinimisedRight.svelte';
+  import GestureDisplay from './debug/GestureDisplay.svelte';
 
   const swipe = start.bind(null, { [SWIPE]: $layout.swipe });
-  const pinch = wheel.bind(null, { [WHEEL]: $products.pinch })
+  const pinch = wheel.bind(null, { [WHEEL]: $products.pinch });
+
+  const debugGestures = false;
+
 </script>
 
 <main
@@ -20,6 +24,9 @@
   on:touchend="{stop}"
   on:wheel={pinch}
 >
+  {#if debugGestures}
+    <GestureDisplay />
+  {/if}
   <MinimisedLeft />
   <Graph />
   <Panel />
