@@ -4,9 +4,9 @@
 
   $: zoomBounds = {
     x1:
-      left.width + $products.minInterval * $products.scaleXForAll.intervalWidth,
+      left.width + $products.scaleX.minInterval * $products.scaleXForAll.intervalWidth,
     x2:
-      left.width + $products.maxInterval * $products.scaleXForAll.intervalWidth,
+      left.width + $products.scaleX.maxInterval * $products.scaleXForAll.intervalWidth,
     y1: (1 - $products.scaleY.max / $products.scaleYForAll.max) * chart.height,
     y2: ($products.scaleY.min / $products.scaleYForAll.max) * chart.height,
   };

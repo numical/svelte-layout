@@ -22,7 +22,7 @@ export const products = writable({
   pinch: event => pinch(products, event),
   scrollLeft: () => {
     products.update(state => {
-      const { minInterval, maxInterval } = state;
+      const { minInterval, maxInterval } = state.scaleX;
       return affectIntervalChange(
         state,
         2 * minInterval - maxInterval,
@@ -32,7 +32,7 @@ export const products = writable({
   },
   scrollRight: () => {
     products.update(state => {
-      const { minInterval, maxInterval } = state;
+      const { minInterval, maxInterval } = state.scaleX;
       return affectIntervalChange(
         state,
         maxInterval,
@@ -43,7 +43,9 @@ export const products = writable({
   toggleVisibility: product => {
     products.update(state => {
       product.visible = !product.visible;
-      const visible =  calcVisible(state.all, state.minInterval, state.maxInterval);
+      const { all, scaleX } = state;
+      const { minInterval, maxInterval } = scaleX;
+      const visible =  calcVisible(all, minInterval, maxInterval);
       return {
         ...state,
         scaleY: scaleY(visible),

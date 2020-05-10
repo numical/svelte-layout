@@ -3,7 +3,7 @@
   import { graph } from '../../stores/graphManager';
   import { products } from '../../products/productPresenter';
   import { fromIntervalToText } from '../../common/dates';
-  import { chart, header, left, margin } from '../../common/svgDimensions';
+  import { breakpoint, chart, header, left, margin } from '../../common/svgDimensions';
   import { format } from '../../common/currency';
 
   const drag = start.bind(null, { [DRAG]: $graph.updateDateLine });
@@ -33,16 +33,17 @@
       y: header.height + chart.height + margin,
     },
   };
+  $: yOffset =
+          header.height +
+          chart.height -
+          ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
   $: values = $products.visible.map((product, index) => ({
     colour: product.colour,
     dimensions: {
       x,
-      y:
-        header.height +
-        chart.height -
-        product.data[interval] * $products.scaleY.unitHeight,
+      y: yOffset - (product.data[interval - $products.scaleX.minInterval + 1] * $products.scaleY.unitHeight)
     },
-    text: format(product.data[interval]),
+    text: format(product.data[interval - $products.scaleX.minInterval + 1]),
   }));
 </script>
 
@@ -65,7 +66,7 @@
   >
     {fromIntervalToText(interval)}
   </text>
-  {#each values as value}
+  {#each values as value (value.text)}
     <text {...value.dimensions} class="background">{value.text}</text>
     <text {...value.dimensions} fill="{value.colour}">{value.text}</text>
   {/each}

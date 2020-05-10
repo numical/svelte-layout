@@ -14,7 +14,7 @@
     const x =
       left.width +
       ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0) +
-      (interval - $products.minInterval) * $products.scaleX.intervalWidth;
+      (interval - $products.scaleX.minInterval) * $products.scaleX.intervalWidth;
     const y = header.height + chart.height;
     return {
       dimensions: {

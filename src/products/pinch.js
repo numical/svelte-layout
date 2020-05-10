@@ -4,7 +4,7 @@ import affectIntervalChange from './affectIntervalChange';
 const isWheelEvent = event => event.deltaY !== undefined;
 
 const calcWheelZoom = (state, event) => {
-  const { minInterval, maxInterval } = state;
+  const { minInterval, maxInterval } = state.scaleX;
   const { deltaX, deltaY } = event;
   const delta = deltaX === 0 ? deltaY : deltaX;
   const ratio = delta > 0 ? 0.9 : 1.1;
@@ -24,7 +24,7 @@ const calcMouseZoom = (state, startEvent, endEvent) => {
 };
 
 const calcScale = (state, zoomFn, startEvent, endEvent) => {
-  const { all, minInterval, maxInterval, totalIntervals } = state;
+  const { minInterval, maxInterval } = state.scaleX;
   const { ratio, midInterval } = zoomFn(state, startEvent, endEvent);
   const currentRange = maxInterval - minInterval;
   const range = Math.ceil(currentRange * ratio);

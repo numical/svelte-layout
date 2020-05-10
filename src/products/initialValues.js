@@ -21,8 +21,6 @@ export default () => {
     all,
     dateLineX: 0,
     highlighted: undefined,
-    minInterval,
-    maxInterval,
     scaleX,
     scaleXForAll: scaleX,
     scaleY,

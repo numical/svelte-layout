@@ -9,8 +9,6 @@ export default (state, desiredMin, desiredMax) => {
   if (range >= totalIntervals) {
     return {
       ...state,
-      minInterval: 0,
-      maxInterval: totalIntervals,
       scaleX: calcScaleX(0, totalIntervals, totalIntervals),
       scaleY: calcScaleY(all),
       showZoomWindow: false,
@@ -26,8 +24,6 @@ export default (state, desiredMin, desiredMax) => {
     const visible = calcVisible(all, minInterval, maxInterval);
     return {
       ...state,
-      minInterval,
-      maxInterval,
       scaleX: calcScaleX(
         minInterval,
         maxInterval,

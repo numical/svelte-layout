@@ -6,7 +6,6 @@
 {#if $debug}
   <div out:fade>{$debug}</div>
 {/if}
-}
 
 <style>
   div {

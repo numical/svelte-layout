@@ -6,6 +6,7 @@
   import ZoomProduct from './ZoomProduct.svelte';
   import ZoomXAxis from './ZoomXAxis.svelte';
   import ZoomFilter from './ZoomFilter.svelte';
+  import ZoomDateLine from './ZoomDateLine.svelte';
 
   const rectProps = {
     x: 0,
@@ -26,6 +27,7 @@
         <ZoomProduct {product} />
       {/if}
     {/each}
+    <ZoomDateLine />
     <ZoomFilter />
   </g>
 {/if}
