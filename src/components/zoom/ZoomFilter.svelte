@@ -1,4 +1,5 @@
 <script>
+  import { help } from '../../stores/helpManager';
   import { products } from '../../products/productPresenter';
   import { chart, header, left } from '../../common/svgDimensions';
 
@@ -35,16 +36,17 @@
     width: zoomBounds.x2 - zoomBounds.x1,
     height: zoomBounds.y2,
   };
+  $: style = $help.currentFocus === 'zoomWindow' ? 'fill: darkorange' : 'fill: lightgrey';
 </script>
 
-<rect {...lft}></rect>
-<rect {...right}></rect>
-<rect {...top}></rect>
-<rect {...bottom} ></rect>
+<rect {...lft} {style}></rect>
+<rect {...right} {style}></rect>
+<rect {...top} {style}></rect>
+<rect {...bottom} {style}></rect>
 
 <style>
   rect {
-    fill: lightgrey;
     opacity: 0.3;
+    transition: fill 0.6s;
   }
 </style>

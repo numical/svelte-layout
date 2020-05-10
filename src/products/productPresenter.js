@@ -20,6 +20,12 @@ export const products = writable({
     }));
   },
   pinch: event => pinch(products, event),
+  resetZoom: () => {
+    products.update(state => {
+      const { totalIntervals } = state;
+      return affectIntervalChange(state, 0, totalIntervals);
+    });
+  },
   scrollLeft: () => {
     products.update(state => {
       const { minInterval, maxInterval } = state.scaleX;
