@@ -3,7 +3,13 @@
   import { graph } from '../../stores/graphManager';
   import { products } from '../../products/productPresenter';
   import { fromIntervalToText } from '../../common/dates';
-  import { breakpoint, chart, header, left, margin } from '../../common/svgDimensions';
+  import {
+    breakpoint,
+    chart,
+    header,
+    left,
+    margin,
+  } from '../../common/svgDimensions';
   import { format } from '../../common/currency';
 
   const drag = start.bind(null, { [DRAG]: $graph.updateDateLine });
@@ -14,7 +20,6 @@
       : $graph.dateLineX > left.width + chart.width
       ? left.width + chart.width
       : $graph.dateLineX;
-  $: interval = $products.scaleX.fromSVGCoordsToInterval({ x });
   $: dimensions = {
     rect: {
       x: x - 12,
@@ -33,15 +38,20 @@
       y: header.height + chart.height + margin,
     },
   };
+  $: interval = $products.scaleX.fromSVGCoordsToInterval({ x });
   $: yOffset =
-          header.height +
-          chart.height -
-          ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
+    header.height +
+    chart.height -
+    ($products.scaleY.showBreakpoint ? breakpoint.height : 0) +
+    $products.scaleY.min;
   $: values = $products.visible.map((product, index) => ({
     colour: product.colour,
     dimensions: {
       x,
-      y: yOffset - (product.data[interval - $products.scaleX.minInterval + 1] * $products.scaleY.unitHeight)
+      y:
+        yOffset -
+        product.data[interval - $products.scaleX.minInterval + 1] *
+          $products.scaleY.unitHeight,
     },
     text: format(product.data[interval - $products.scaleX.minInterval + 1]),
   }));
