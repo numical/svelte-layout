@@ -54,9 +54,11 @@
     * functionality vs bling
     * what scale, prevent user getting lost  
     * animate changes / transitions
+      * product appearance
+      * y axis labels
 1. Discoverable
    * help system
    * minimal vs distracting 
    * single orange element - does not work for touch
-1. Elephant in the room
+1. Finally: Elephant in the room
     * a conversational interface
