@@ -43,19 +43,18 @@
   $: yOffset =
     header.height +
     chart.height -
-    ($products.scaleY.showBreakpoint ? breakpoint.height : 0) +
-    $products.scaleY.min;
-  $: values = $products.visible.map((product, index) => ({
-    colour: product.colour,
-    dimensions: {
-      x,
-      y:
-        yOffset -
-        product.data[interval - $products.scaleX.minInterval + 1] *
-          $products.scaleY.unitHeight,
-    },
-    text: format(product.data[interval - $products.scaleX.minInterval + 1]),
-  }));
+    ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
+  $: values = $products.visible.map((product, index) => {
+    const value = product.data[interval - $products.scaleX.minInterval + 1];
+    return {
+      colour: product.colour,
+      dimensions: {
+        x,
+        y: yOffset - (value - $products.scaleY.min) * $products.scaleY.unitHeight
+      },
+      text: format(value)
+    };
+  });
   $: colour = $help.currentFocus === 'dateline' ? 'darkorange;' : 'black';
 </script>
 
