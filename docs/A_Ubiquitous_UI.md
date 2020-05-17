@@ -53,6 +53,7 @@
 1. Purpose
     * functionality vs bling
     * what scale, prevent user getting lost  
+    * animate changes / transitions
 1. Discoverable
    * help system
    * minimal vs distracting 

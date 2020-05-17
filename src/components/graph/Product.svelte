@@ -52,14 +52,20 @@
         (value - $products.scaleY.min) * $products.scaleY.unitHeight}`,
     ''
   );
+
+  const draw = () => ({
+    duration: 1000,
+    css: (t, u) => `stroke-dasharray: 1000; stroke-dashoffset: ${u * 1000};`,
+  });
 </script>
 
 <polyline
   {points}
+  pathLength="1000"
   stroke="{product.colour}"
   on:mouseover="{mouseOver}"
   on:mouseleave="{mouseLeave}"
-  transition:fade
+  transition:draw
 ></polyline>
 
 <style>
