@@ -6,17 +6,11 @@
   import { info } from '../panel/panelContents';
   import { breakpoint, chart, header, left } from '../../common/svgDimensions';
   import { delayedAction } from '../../common/delayedAction';
+  import { generateProductPoints } from './generateProductPoints';
 
   export let product;
 
   let endDisplay;
-
-  $: xOffset =
-    left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
-  $: yOffset =
-    header.height +
-    chart.height -
-    ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
 
   const displayProduct = () =>
     $layout.panelContent !== info
@@ -44,19 +38,19 @@
     $help.loseFocus();
     endDisplay();
   };
-
-  $: points = product.data.reduce(
-    (points, value, interval) =>
-      `${points} ${xOffset +
-        interval * $products.scaleX.intervalWidth},${yOffset -
-        (value - $products.scaleY.min) * $products.scaleY.unitHeight}`,
-    ''
-  );
-
   const draw = () => ({
     duration: 1000,
     css: (t, u) => `stroke-dasharray: 1000; stroke-dashoffset: ${u * 1000};`,
   });
+
+  $: xOffset =
+          left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
+  $: yOffset =
+          header.height +
+          chart.height -
+          ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
+  $: points = generateProductPoints(product.data, xOffset, yOffset, $products);
+
 </script>
 
 <polyline
