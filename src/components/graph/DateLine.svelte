@@ -1,7 +1,8 @@
 <script>
-  import { start, DRAG } from '../../gestures/gestureManager';
+  import { help } from '../../stores/helpManager';
   import { graph } from '../../stores/graphManager';
   import { products } from '../../products/productPresenter';
+  import { start, DRAG } from '../../gestures/gestureManager';
   import { fromIntervalToText } from '../../common/dates';
   import {
     breakpoint,
@@ -55,6 +56,7 @@
     },
     text: format(product.data[interval - $products.scaleX.minInterval + 1]),
   }));
+  $: colour = $help.currentFocus === 'dateline' ? 'darkorange;' : 'black';
 </script>
 
 {#if $graph.dateLineX}
@@ -62,17 +64,23 @@
     {...dimensions.rect}
     on:mousedown="{drag}"
     on:touchstart="{drag}"
+    on:mouseover="{event => $help.setFocus('dateline', event)}"
+    on:mouseleave="{$help.loseFocus}"
   ></rect>
   <line
     {...dimensions.line}
+    style="{`stroke : ${colour}`}"
     on:mousedown="{drag}"
     on:touchstart="{drag}"
+    on:mouseover="{event => $help.setFocus('dateline', event)}"
   ></line>
   <text
     {...dimensions.label}
+    style="{`fill: ${colour}`}"
     class="label"
     on:mousedown="{drag}"
     on:touchstart="{drag}"
+    on:mouseover="{event => $help.setFocus('dateline', event)}"
   >
     {fromIntervalToText(interval)}
   </text>
@@ -88,8 +96,8 @@
     cursor: url(horizontalResize.png), col-resize;
   }
   line {
-    stroke: darkorange;
-    stroke-width: 2;
+    stroke-width: 1;
+    stroke-dasharray: 4 1;
     cursor: url(horizontalResize.png), col-resize;
   }
   text {

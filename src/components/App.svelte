@@ -11,7 +11,7 @@
   const swipe = start.bind(null, { [SWIPE]: $layout.swipe });
   const pinch = wheel.bind(null, { [WHEEL]: $products.pinch });
 
-  const debugGestures = true;
+  const debugGestures = false;
 
 </script>
 

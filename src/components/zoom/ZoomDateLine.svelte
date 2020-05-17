@@ -19,7 +19,7 @@
 
 <style>
   line {
-    stroke: darkorange;
+    stroke: black;
     stroke-width: 2;
   }
 </style>
