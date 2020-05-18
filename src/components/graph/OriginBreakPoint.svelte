@@ -1,11 +1,12 @@
 <script>
   import { products } from '../../products/productPresenter';
   import { breakpoint, chart, header, left } from '../../common/svgDimensions';
+  import { SwipeLeft } from '../../gestures/swipes';
   import HorizontalBreakPoint from './HorizontalBreakPoint.svelte'
 
   const props = {
     helpId: 'breakpoint-origin',
-    onClick: $products.scrollLeft,
+    onClick: () => $products.scroll(SwipeLeft),
     translate: {
       x: left.width,
       y: header.height + chart.height - breakpoint.zag,

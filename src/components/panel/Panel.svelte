@@ -1,9 +1,12 @@
 <script>
   import { layout } from '../../stores/layoutManager';
+  import { start, SWIPE } from '../../gestures/gestureManager';
   import Toolbar from '../toolbar/Toolbar.svelte';
   import Divider from './Divider.svelte';
 
-  $: mainStyle = $layout.overlayPanel
+  const swipe = start.bind(null, { [SWIPE]: $layout.swipe });
+
+  $: style = $layout.overlayPanel
     ? ` ${$layout.restorePanelPosition.panelPos}: 0;
             width:calc(${$layout.panelWidth}% - 0.5rem);
             background-color:rgb(0,0,0,0.75);
@@ -18,7 +21,7 @@
             transition: width ${$layout.transition}s`;
 </script>
 
-<main style="{mainStyle}">
+<main {style} on:mousedown="{swipe}" on:touchstart="{swipe}">
   <Toolbar />
   <svelte:component this="{$layout.panelContent.component}" />
   <Divider />

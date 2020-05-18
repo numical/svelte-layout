@@ -8,7 +8,7 @@
   import MinimisedRight from './panel/MinimisedRight.svelte';
   import GestureDisplay from './debug/GestureDisplay.svelte';
 
-  const swipe = start.bind(null, { [SWIPE]: $layout.swipe });
+
   const pinch = wheel.bind(null, { [WHEEL]: $products.pinch });
 
   const debugGestures = false;
@@ -16,8 +16,6 @@
 </script>
 
 <main
-  on:mousedown="{swipe}"
-  on:touchstart="{swipe}"
   on:mousemove="{move}"
   on:touchmove="{move}"
   on:mouseup="{stop}"

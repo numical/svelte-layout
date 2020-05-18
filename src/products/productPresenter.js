@@ -4,6 +4,7 @@ import pinch from './pinch';
 import affectIntervalChange from './affectIntervalChange';
 import calcVisible from './visible';
 import scaleY from './scaleY';
+import { InvalidSwipe, SwipeLeft, SwipeRight } from '../gestures/swipes';
 
 export const products = writable({
   ...initialValues(),
@@ -26,24 +27,13 @@ export const products = writable({
       return affectIntervalChange(state, 0, totalIntervals);
     });
   },
-  scrollLeft: () => {
+  scroll: swipe => {
+    if (swipe === InvalidSwipe) return;
     products.update(state => {
       const { minInterval, maxInterval } = state.scaleX;
-      return affectIntervalChange(
-        state,
-        2 * minInterval - maxInterval,
-        minInterval
-      )
-    });
-  },
-  scrollRight: () => {
-    products.update(state => {
-      const { minInterval, maxInterval } = state.scaleX;
-      return affectIntervalChange(
-        state,
-        maxInterval,
-        2 * maxInterval - minInterval
-      )
+      const desiredMin = (swipe === SwipeLeft) ? 2 * minInterval - maxInterval : maxInterval;
+      const desiredMax = (swipe === SwipeLeft) ? minInterval : 2 * maxInterval - minInterval
+      return affectIntervalChange(state,desiredMin, desiredMax);
     });
   },
   toggleVisibility: product => {

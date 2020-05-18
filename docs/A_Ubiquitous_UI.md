@@ -12,10 +12,11 @@
 * don't conflate Javascript with Web (which is Javascript on the DOM)
 * options:
  * hybrid - Electron / Phone Gap / Cordova etc.
- * 'virtual DOM's' - React / Rect Native / Reactt for Windows!
+ * 'virtual DOM's' - React / React Native / Reactt for Windows!
+ * WebView on mobiles
  * maybe java led the way wit Java ME, Java SE, Java EE
  
- 
+
  ## What
  * UUI
  * application posture? **sovereign** (transient,daemonic, auxiliary)
