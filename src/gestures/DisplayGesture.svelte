@@ -1,9 +1,10 @@
 <script>
   import { fade } from 'svelte/transition';
-  import { debug } from '../../gestures/gestureManager';
+  import { settings } from '../settings/settings';
+  import { debug } from './gestureManager';
 </script>
 
-{#if $debug}
+{#if $settings['gesture.display'] && $debug}
   <div out:fade>{$debug}</div>
 {/if}
 

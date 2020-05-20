@@ -1,8 +1,6 @@
 import { getCurvePoints } from '../../common/getCurvePoints';
 
-const smooth = true;
-
-const raw = (data, xOffset, yOffset, products) => data.reduce(
+export const raw = (data, xOffset, yOffset, products) => data.reduce(
   (points, value, interval) =>
     `${points} ${xOffset +
     interval * products.scaleX.intervalWidth},${yOffset -
@@ -10,7 +8,7 @@ const raw = (data, xOffset, yOffset, products) => data.reduce(
   ''
 );
 
-const smoothed = (data, xOffset, yOffset, products) => {
+export const smoothed = (data, xOffset, yOffset, products) => {
   const rawValues = data.reduce((raw, value, interval) => {
     raw.push(xOffset + interval * products.scaleX.intervalWidth);
     raw.push(
@@ -25,5 +23,3 @@ const smoothed = (data, xOffset, yOffset, products) => {
     ''
   );
 }
-
-export const generateProductPoints = smooth ? smoothed : raw;

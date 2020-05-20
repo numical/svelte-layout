@@ -3,10 +3,11 @@
   import { help } from '../../stores/helpManager';
   import { layout } from '../../stores/layoutManager';
   import { products } from '../../products/productPresenter';
+  import { settings } from '../../settings/settings';
   import { info } from '../panel/panelContents';
   import { breakpoint, chart, header, left } from '../../common/svgDimensions';
   import { delayedAction } from '../../common/delayedAction';
-  import { generateProductPoints } from './generateProductPoints';
+  import { raw, smoothed } from './generateProductPoints';
 
   export let product;
 
@@ -38,10 +39,10 @@
     $help.loseFocus();
     endDisplay();
   };
-  const draw = () => ({
+  const draw = () => $settings['component.graph.product.animate'] ? {
     duration: 1000,
     css: (t, u) => `stroke-dasharray: 1000; stroke-dashoffset: ${u * 1000};`,
-  });
+  } : undefined;
 
   $: xOffset =
           left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
@@ -49,7 +50,8 @@
           header.height +
           chart.height -
           ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
-  $: points = generateProductPoints(product.data, xOffset, yOffset, $products);
+  $: generateFn = $settings['component.graph.product.smoothed'] ? smoothed : raw;
+  $: points = generateFn(product.data, xOffset, yOffset, $products);
 
 </script>
 

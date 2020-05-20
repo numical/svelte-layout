@@ -1,17 +1,13 @@
 <script>
   import Graph from './graph/Graph.svelte';
   import Panel from './panel/Panel.svelte';
-  import { layout } from '../stores/layoutManager';
   import { products } from '../products/productPresenter';
-  import { start, move, stop, wheel, PINCH, SWIPE, WHEEL } from '../gestures/gestureManager';
+  import { move, stop, wheel, WHEEL } from '../gestures/gestureManager';
   import MinimisedLeft from './panel/MinimisedLeft.svelte';
   import MinimisedRight from './panel/MinimisedRight.svelte';
-  import GestureDisplay from './debug/GestureDisplay.svelte';
-
+  import GestureDisplay from '../gestures/DisplayGesture.svelte';
 
   const pinch = wheel.bind(null, { [WHEEL]: $products.pinch });
-
-  const debugGestures = false;
 
 </script>
 
@@ -22,9 +18,7 @@
   on:touchend="{stop}"
   on:wheel={pinch}
 >
-  {#if debugGestures}
-    <GestureDisplay />
-  {/if}
+  <GestureDisplay />
   <MinimisedLeft />
   <Graph />
   <Panel />
