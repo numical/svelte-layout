@@ -15,7 +15,6 @@
   div {
     position: absolute;
     top: 50vh;
-    width: 5vmin;
     border: none;
     border-radius: 0.25rem;
     color: white;

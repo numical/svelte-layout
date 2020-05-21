@@ -1,10 +1,10 @@
 <script>
   import ToggleOverlay from './ToggleOverlay.svelte';
-  import ToggleChat from './ToggleContent.svelte';
+  import ToggleContent from './ToggleContent.svelte';
 </script>
 
 <div>
-  <ToggleChat />
+  <ToggleContent />
   <ToggleOverlay />
 </div>
 

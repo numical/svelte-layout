@@ -1,5 +1,5 @@
 <script>
-  import MenuLeft from 'svelte-material-icons/MenuLeft.svelte';
+  import ArrowLeft32 from 'carbon-icons-svelte/lib/ArrowLeft32'
   import MinimisedButton from './MinimisedButton.svelte';
   import { layout } from '../../stores/layoutManager';
   import { iconProps } from '../../common/iconProps';
@@ -20,6 +20,6 @@
 
 {#if visible}
   <MinimisedButton {onClick} {style} {tooltipStyle} {tooltip}>
-    <MenuLeft {...iconProps} />
+    <ArrowLeft32 {...iconProps} />
   </MinimisedButton>
 {/if}

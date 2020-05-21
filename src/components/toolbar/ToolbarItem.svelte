@@ -20,8 +20,6 @@
 <style>
   .toolbarItem {
     position: relative;
-    width: 5vmin;
-    height: 5vmin;
     margin-left: 0.25vw;
     border-radius: 0.25em;
     padding: 0.25rem;

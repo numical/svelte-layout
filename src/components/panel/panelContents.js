@@ -1,16 +1,17 @@
-import Chat from '../chat/Chat.svelte';
-import ChatOutline from 'svelte-material-icons/ChatOutline.svelte';
+import Chat32 from 'carbon-icons-svelte/lib/Chat32'
+import ChartLine32 from 'carbon-icons-svelte/lib/ChartLine32'
 import ProductList from '../product/ProductList.svelte';
-import CurrencyGbp from 'svelte-material-icons/CurrencyGbp.svelte';
+import Chat from '../chat/Chat.svelte';
+
 
 export const chat = {
-  icon: CurrencyGbp,
+  icon: ChartLine32,
   tooltip: 'show products',
   component: Chat,
 };
 
 export const info = {
-  icon: ChatOutline,
+  icon: Chat32,
   tooltip: 'show chatbot',
   component: ProductList,
 };

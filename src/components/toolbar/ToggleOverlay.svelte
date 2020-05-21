@@ -1,6 +1,6 @@
 <script>
-  import Pin from 'svelte-material-icons/Pin.svelte';
-  import PinOutline from 'svelte-material-icons/PinOutline.svelte';
+  import Notebook32  from 'carbon-icons-svelte/lib/Notebook32'
+  import OpenPanelFilledRight32 from 'carbon-icons-svelte/lib/OpenPanelFilledRight32'
   import ToolbarItem from './ToolbarItem.svelte';
   import { iconProps } from '../../common/iconProps';
   import { layout } from '../../stores/layoutManager';
@@ -12,9 +12,9 @@
   </div>
   <div slot="icon">
     {#if $layout.overlayPanel}
-      <Pin {...iconProps} />
+      <OpenPanelFilledRight32 {...iconProps} />
     {:else}
-      <PinOutline {...iconProps} />
+      <Notebook32 {...iconProps} />
     {/if}
   </div>
 </ToolbarItem>
