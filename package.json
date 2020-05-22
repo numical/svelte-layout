@@ -11,6 +11,8 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
+    "carbon-components-svelte": "^0.5.1",
+    "carbon-icons-svelte": "^10.10.2",
     "eslint": "^6.8.0",
     "eslint-plugin-svelte3": "^2.7.3",
     "prettier": "^1.19.1",
@@ -19,12 +21,9 @@
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0",
-    "carbon-components-svelte": "^0.5.1",
     "sirv-cli": "^0.4.4",
-    "svelte-material-icons": "^1.0.3"
-  },
-  "dependencies": {
+    "svelte": "^3.0.0",
     "tap": "^14.10.7"
-  }
+  },
+  "dependencies": {}
 }

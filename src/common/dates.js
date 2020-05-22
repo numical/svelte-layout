@@ -1,4 +1,4 @@
-import { intervals } from '../data/personalFinancialModel';
+import { intervals } from '../products/personalFinancialModel';
 
 const months = [
   'Jan',

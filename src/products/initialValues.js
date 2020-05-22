@@ -1,4 +1,4 @@
-import { getProducts, intervals } from '../data/personalFinancialModel';
+import { getProducts, intervals } from './personalFinancialModel';
 import calcScaleX from './scaleX';
 import calcScaleY from './scaleY';
 import calcVisible from './visible';

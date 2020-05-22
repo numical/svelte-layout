@@ -1,5 +1,5 @@
 import { chart, left } from './svgDimensions';
-import { intervals } from '../data/personalFinancialModel';
+import { intervals } from '../products/personalFinancialModel';
 
 let svg;
 let pt;
