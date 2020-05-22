@@ -1,7 +1,7 @@
 export const meta = {
   'component.graph.product.animate': {
     isBoolean: true,
-    defaultValue: false,
+    defaultValue: true,
     description: 'Animate appearance/disappearance of product plot.'
   },
   'component.graph.product.smoothed': {
@@ -11,7 +11,7 @@ export const meta = {
   },
   'gesture.display': {
     isBoolean: true,
-    defaultValue: true,
+    defaultValue: false,
     description: 'Display gestures.'
   }
 }

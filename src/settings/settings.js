@@ -6,6 +6,13 @@ const initialiseValue = (meta, [key, { defaultValue }]) => {
   return meta;
 }
 
-export const settings = writable(Object.entries(meta).reduce(initialiseValue, { meta }));
+const base = {
+  meta,
+  set: (key, value) => settings.update( state => ({
+    ...state,
+    [key]: value
+  }))
+}
 
-export const getMeta = setting => meta[setting];
+export const settings = writable(Object.entries(meta).reduce(initialiseValue, base));
+
