@@ -8,7 +8,7 @@
   class="toolbarItem"
   on:click="{onClick}"
   on:mouseup|stopPropagation="{$help.loseFocus}"
-  on:mouseover="{() => $help.setFocus({ helpId })}"
+  on:mouseover="{() => $help.setFocus(helpId)}"
   on:mouseleave="{$help.loseFocus}"
 >
   <span class="tooltip">
@@ -23,9 +23,6 @@
     margin-left: 0.25vw;
     border-radius: 0.25em;
     padding: 0.25rem;
-  }
-  .toolbarItem:hover {
-    background-color: darkorange;
   }
   .toolbarItem .tooltip {
     visibility: hidden;
