@@ -18,12 +18,14 @@
       ? delayedAction(
           300,
           () => {
+            const initialPanelContent = $layout.panelContent;
             $products.highlightProduct(product);
-            $layout.togglePanelContent();
+            $layout.setPanelContent(productList);
+            return initialPanelContent;
           },
-          () => {
+          initialPanelContent => {
             $products.noHighlight();
-            $layout.togglePanelContent();
+            $layout.setPanelContent(initialPanelContent);
           }
         )
       : delayedAction(
@@ -39,20 +41,25 @@
     $help.loseFocus();
     endDisplay();
   };
-  const draw = () => $settings['component.graph.product.animate'] ? {
-    duration: 1000,
-    css: (t, u) => `stroke-dasharray: 1000; stroke-dashoffset: ${u * 1000};`,
-  } : undefined;
+  const draw = () =>
+    $settings['component.graph.product.animate']
+      ? {
+          duration: 1000,
+          css: (t, u) =>
+            `stroke-dasharray: 1000; stroke-dashoffset: ${u * 1000};`,
+        }
+      : undefined;
 
   $: xOffset =
-          left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
+    left.width + ($products.scaleX.showOriginBreakpoint ? breakpoint.width : 0);
   $: yOffset =
-          header.height +
-          chart.height -
-          ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
-  $: generateFn = $settings['component.graph.product.smoothed'] ? smoothed : raw;
+    header.height +
+    chart.height -
+    ($products.scaleY.showBreakpoint ? breakpoint.height : 0);
+  $: generateFn = $settings['component.graph.product.smoothed']
+    ? smoothed
+    : raw;
   $: points = generateFn(product.data, xOffset, yOffset, $products);
-
 </script>
 
 <polyline

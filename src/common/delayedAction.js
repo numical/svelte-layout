@@ -4,9 +4,10 @@ const completed = Symbol('completed');
 
 export const delayedAction = (delay, doAction, undoAction) => {
   let state = waiting;
+  let undoArgs = undefined;
   setTimeout(() => {
     if (state === waiting) {
-      doAction();
+      undoArgs = doAction();
       state = completed;
     }
   }, delay);
@@ -17,7 +18,7 @@ export const delayedAction = (delay, doAction, undoAction) => {
         break;
       case completed:
         if (undoAction) {
-          undoAction();
+          undoAction(undoArgs);
         }
         break;
     }
