@@ -1,6 +1,7 @@
 <script>
   import { ToggleSmall } from 'carbon-components-svelte';
   import { settings } from '../settings';
+  import { help } from '../../help/helpManager';
 
   export let key;
 
@@ -15,9 +16,15 @@
   />
 </svelte:head>
 
-<ToggleSmall
-  labelA=""
-  labelB=""
-  toggled="{getToggled()}"
-  on:change="{toggle}"
-/>
+<div
+  on:mouseup|stopPropagation="{$help.loseFocus}"
+  on:mouseover="{() => $help.setFocus('settings')}"
+  on:mouseleave="{$help.loseFocus}"
+>
+  <ToggleSmall
+    labelA=""
+    labelB=""
+    toggled="{getToggled()}"
+    on:change="{toggle}"
+  />
+</div>
