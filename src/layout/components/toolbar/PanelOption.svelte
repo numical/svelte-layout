@@ -1,6 +1,5 @@
 <script>
   import ToolbarItem from './ToolbarItem.svelte';
-  import { iconProps } from '../../../common/iconProps';
   import { layout } from '../../layoutManager';
   import { help } from '../../../help/helpManager';
 

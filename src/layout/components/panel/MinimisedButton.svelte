@@ -38,7 +38,6 @@
     <svelte:component this="{icon}" style="{iconStyle}" />
   </div>
 {/if}
-}
 
 <style>
   div {
