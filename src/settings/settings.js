@@ -26,7 +26,7 @@ const initial = {
   ...Object.entries(meta).reduce(initialiseValue, {})
 };
 
-// in cse setting keys change, don't just blindly copy in stored values
+// in case setting keys change, don't just blindly copy in stored values
 Object.entries(getSettings()).forEach(([key, value]) => {
   if (initial[key] !== undefined) {
     initial[key] = value;

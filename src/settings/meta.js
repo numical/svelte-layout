@@ -1,4 +1,9 @@
 export const meta = {
+  'app.show.intro': {
+    isBoolean: true,
+    defaultValue: true,
+    description: 'Show introductory animation.'
+  },
   'component.graph.product.animate': {
     isBoolean: true,
     defaultValue: true,
