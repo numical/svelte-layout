@@ -1,4 +1,4 @@
-const storageAvailable = require('storage-available');
+import storageAvailable from 'storage-available';
 const enabled = storageAvailable('localStorage');
 
 const settingsKey = 'settings';

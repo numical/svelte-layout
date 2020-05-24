@@ -4,7 +4,7 @@
   import { debug } from '../gestureManager';
 </script>
 
-{#if $settings['gesture.display'] && $debug}
+{#if $settings['gesture.display'] && !$settings['app.show.intro'] && $debug}
   <div out:fade>{$debug}</div>
 {/if}
 

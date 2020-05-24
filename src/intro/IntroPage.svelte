@@ -1,4 +1,5 @@
 <script>
+  import { fade } from 'svelte/transition';
   import { settings } from '../settings/settings';
   import steps from './steps';
 
@@ -12,11 +13,12 @@
   };
 
   const close = () => {
+    step = 0;
     $settings.set('app.show.intro', false);
   };
 </script>
 
-<main>
+<main transition:fade={{duration: 1000}}>
 
   <div class="step">
     <svelte:component this="{steps[step]}" {next} />
