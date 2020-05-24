@@ -1,12 +1,13 @@
 import { getCurvePoints } from '../common/getCurvePoints';
 
-export const raw = (data, xOffset, yOffset, products) => data.reduce(
-  (points, value, interval) =>
-    `${points} ${xOffset +
-    interval * products.scaleX.intervalWidth},${yOffset -
-    (value - products.scaleY.min) * products.scaleY.unitHeight}`,
-  ''
-);
+export const raw = (data, xOffset, yOffset, products) =>
+  data.reduce(
+    (points, value, interval) =>
+      `${points} ${xOffset +
+        interval * products.scaleX.intervalWidth},${yOffset -
+        (value - products.scaleY.min) * products.scaleY.unitHeight}`,
+    ''
+  );
 
 export const smoothed = (data, xOffset, yOffset, products) => {
   const rawValues = data.reduce((raw, value, interval) => {
@@ -22,4 +23,4 @@ export const smoothed = (data, xOffset, yOffset, products) => {
       index % 2 === 1 ? `${points} ${smoothed[index - 1]},${value}` : points,
     ''
   );
-}
+};

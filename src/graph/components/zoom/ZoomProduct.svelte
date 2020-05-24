@@ -4,7 +4,7 @@
 
   export let product;
 
-  const xOffset = left.width
+  const xOffset = left.width;
   const yOffset = chart.height + header.height;
 
   $: points = product.data.reduce(
@@ -16,10 +16,7 @@
   );
 </script>
 
-<polyline
-  {points}
-  stroke="{product.colour}"
-></polyline>
+<polyline {points} stroke="{product.colour}"></polyline>
 
 <style>
   polyline {

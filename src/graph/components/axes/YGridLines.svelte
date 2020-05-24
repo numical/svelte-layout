@@ -30,7 +30,7 @@
         },
         text: value % 1000 === 0 ? `£${value / 1000}k` : `£${value}`,
       },
-      value: value + index + 1
+      value: value + index + 1,
     };
   });
   $: visibleGridLines = $products.scaleY.showBreakpoint
@@ -39,8 +39,10 @@
 </script>
 
 {#each visibleGridLines as gridLine (gridLine.value)}
-    <line {...gridLine.dimensions} transition:fade=></line>
-    <text {...gridLine.label.dimensions} transition:fade>{gridLine.label.text}</text>
+  <line {...gridLine.dimensions} transition:fade></line>
+  <text {...gridLine.label.dimensions} transition:fade>
+    {gridLine.label.text}
+  </text>
 {/each}
 
 <style>

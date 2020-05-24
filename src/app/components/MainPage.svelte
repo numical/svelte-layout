@@ -8,7 +8,6 @@
   import GestureDisplay from '../../gestures/components/DisplayGesture.svelte';
 
   const pinch = wheel.bind(null, { [WHEEL]: $products.pinch });
-
 </script>
 
 <main
@@ -16,7 +15,7 @@
   on:touchmove="{move}"
   on:mouseup="{stop}"
   on:touchend="{stop}"
-  on:wheel={pinch}
+  on:wheel="{pinch}"
 >
   <GestureDisplay />
   <MinimisedLeft />

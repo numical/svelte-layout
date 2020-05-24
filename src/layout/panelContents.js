@@ -1,5 +1,5 @@
-import Chat32 from 'carbon-icons-svelte/lib/Chat32'
-import ChartLine32 from 'carbon-icons-svelte/lib/ChartLine32'
+import Chat32 from 'carbon-icons-svelte/lib/Chat32';
+import ChartLine32 from 'carbon-icons-svelte/lib/ChartLine32';
 import Settings32 from 'carbon-icons-svelte/lib/Settings32';
 import Chat from '../chat/components/Chat.svelte';
 import ProductList from '../products/components/ProductList.svelte';

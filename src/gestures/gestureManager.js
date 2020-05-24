@@ -34,7 +34,7 @@ export const wheel = (actions, event) => {
     currentGesture = {
       actions,
       type: WHEEL,
-    }
+    };
     debug.update(() => 'Wheel gesture');
   } else {
     const { actions, type } = currentGesture;
@@ -42,7 +42,7 @@ export const wheel = (actions, event) => {
       actions[WHEEL](event);
     }
   }
-}
+};
 
 export const move = moveEvent => {
   if (currentGesture) {

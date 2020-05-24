@@ -24,14 +24,10 @@ export default (state, desiredMin, desiredMax) => {
     const visible = calcVisible(all, minInterval, maxInterval);
     return {
       ...state,
-      scaleX: calcScaleX(
-        minInterval,
-        maxInterval,
-        totalIntervals
-      ),
+      scaleX: calcScaleX(minInterval, maxInterval, totalIntervals),
       scaleY: calcScaleY(visible),
       showZoomWindow: true,
       visible,
-    }
+    };
   }
-}
+};

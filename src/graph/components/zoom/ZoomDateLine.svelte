@@ -3,7 +3,9 @@
   import { products } from '../../../products/productPresenter';
   import { chart, header, left } from '../../../common/svgDimensions';
 
-  $: interval = $products.scaleX.fromSVGCoordsToInterval( { x: $graph.dateLineX });
+  $: interval = $products.scaleX.fromSVGCoordsToInterval({
+    x: $graph.dateLineX,
+  });
   $: x = $products.scaleXForAll.intervalWidth * interval + left.width;
   $: dimensions = {
     x1: x,

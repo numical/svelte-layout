@@ -1,4 +1,8 @@
-import { roundUpBroadly, roundDownNicely, roundUpNicely } from '../common/rounding';
+import {
+  roundUpBroadly,
+  roundDownNicely,
+  roundUpNicely,
+} from '../common/rounding';
 import { breakpoint, chart } from '../common/svgDimensions';
 
 export default products => {
@@ -15,7 +19,8 @@ export default products => {
     (_, index) => (index + 1) * interval
   );
   const max = intervals[intervals.length - 1];
-  const totalHeight = minimumInterval > 0 ? chart.height - breakpoint.height : chart.height;
+  const totalHeight =
+    minimumInterval > 0 ? chart.height - breakpoint.height : chart.height;
   return {
     interval,
     intervals,

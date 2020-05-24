@@ -45,15 +45,15 @@
   };
 
   $: lineStyle =
-          $help.currentFocus === 'date' ? 'stroke: url(#highlightXAxis)' : 'black';
+    $help.currentFocus === 'date' ? 'stroke: url(#highlightXAxis)' : 'black';
   $: helpX = $help.currentPosition
-          ? fromDomToSVGCoords($help.currentPosition).x
-          : left.width + chart.width / 2;
+    ? fromDomToSVGCoords($help.currentPosition).x
+    : left.width + chart.width / 2;
   $: gradientOffset = helpX / chart.width;
   $: tooltip = {
     text: $graph.dateLineX
-            ? 'click to hide date line'
-            : 'click to show date line',
+      ? 'click to hide date line'
+      : 'click to show date line',
     pos: {
       x: helpX,
       y: header.height + chart.height - 2 * margin,
@@ -64,7 +64,7 @@
 <defs>
   <linearGradient id="highlightXAxis" gradientUnits="userSpaceOnUse">
     <stop stop-color="black" offset="0"></stop>
-    <stop stop-color="orange" offset={gradientOffset}></stop>
+    <stop stop-color="orange" offset="{gradientOffset}"></stop>
     <stop stop-color="black" offset="1"></stop>
   </linearGradient>
 </defs>

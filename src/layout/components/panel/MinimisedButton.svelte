@@ -12,11 +12,12 @@
 
   const helpId = 'minimisedButton';
 
-  $: iconStyle = $help.currentFocus === helpId
-          ? 'fill:darkorange; transition: fill 0.6s'
-          : $layout.panelPosition === minimised
-          ? 'fill: black;'
-          : 'fill: white;';
+  $: iconStyle =
+    $help.currentFocus === helpId
+      ? 'fill:darkorange; transition: fill 0.6s'
+      : $layout.panelPosition === minimised
+      ? 'fill: black;'
+      : 'fill: white;';
   $: visible =
     ($layout.panelPosition === minimised &&
       $layout.restorePanelPosition === restorePosition) ||

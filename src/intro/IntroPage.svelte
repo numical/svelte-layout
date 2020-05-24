@@ -9,7 +9,7 @@
     if (step === steps.length) {
       close();
     }
-  }
+  };
 
   const close = () => {
     $settings.set('app.show.intro', false);
@@ -23,7 +23,7 @@
   </div>
 
   <div class="close">
-    <a href="#" on:click={close}>Skip intro</a>
+    <a href="#" on:click="{close}">Skip intro</a>
   </div>
 
 </main>

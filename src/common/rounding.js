@@ -4,8 +4,8 @@ const round = (roundFn, granularity, value) => {
   return value === magnitude
     ? value
     : value % magnitude === 0
-      ? value
-      : roundFn(value * granularity / magnitude) * (magnitude) / granularity;
+    ? value
+    : (roundFn((value * granularity) / magnitude) * magnitude) / granularity;
 };
 
 export const roundUpBroadly = round.bind(null, Math.ceil, 1);

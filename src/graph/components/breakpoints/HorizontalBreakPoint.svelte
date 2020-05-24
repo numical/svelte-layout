@@ -25,9 +25,9 @@
 
   $: tooltip = {
     ...props.tooltip,
-    pos:  $help.currentPosition
-            ? fromDomToSVGCoords($help.currentPosition, props.tooltip.translate)
-            : { x: 0, y: zag - chart.height /2 }
+    pos: $help.currentPosition
+      ? fromDomToSVGCoords($help.currentPosition, props.tooltip.translate)
+      : { x: 0, y: zag - chart.height / 2 },
   };
 </script>
 
@@ -36,17 +36,13 @@
     {...rectProps}
     on:mouseenter="{event => $help.setFocus(props.helpId, event)}"
     on:mouseleave="{$help.loseFocus}"
-    on:click={props.onClick}
+    on:click="{props.onClick}"
   ></rect>
   <line {...lineProps}></line>
   <polyline {points}></polyline>
 </g>
 {#if $help.currentFocus === props.helpId}
-  <text
-          {...tooltip.pos}
-          transition:fade
-          text-anchor={tooltip.textAnchor}
-  >
+  <text {...tooltip.pos} transition:fade text-anchor="{tooltip.textAnchor}">
     {tooltip.text}
   </text>
 {/if}

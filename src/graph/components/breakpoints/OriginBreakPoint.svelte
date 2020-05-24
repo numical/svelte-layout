@@ -1,8 +1,13 @@
 <script>
   import { products } from '../../../products/productPresenter';
-  import { breakpoint, chart, header, left } from '../../../common/svgDimensions';
+  import {
+    breakpoint,
+    chart,
+    header,
+    left,
+  } from '../../../common/svgDimensions';
   import { SwipeLeft } from '../../../gestures/swipes';
-  import HorizontalBreakPoint from './HorizontalBreakPoint.svelte'
+  import HorizontalBreakPoint from './HorizontalBreakPoint.svelte';
 
   const props = {
     helpId: 'breakpoint-origin',
@@ -12,9 +17,9 @@
       y: header.height + chart.height - breakpoint.zag,
     },
     tooltip: {
-      text: "<< click to scroll left",
+      text: '<< click to scroll left',
       textAnchor: 'start',
-      translate: { x: 15, y: 25 }
+      translate: { x: 15, y: 25 },
     },
   };
 </script>

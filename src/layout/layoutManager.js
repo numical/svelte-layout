@@ -43,7 +43,7 @@ export const layout = writable({
   setPanelContent: panelContent => {
     layout.update(state => ({
       ...state,
-      panelContent
+      panelContent,
     }));
   },
   toggleOverlay: () => {

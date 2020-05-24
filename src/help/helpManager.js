@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { fromEventToDomCoords } from '../common/coords'
+import { fromEventToDomCoords } from '../common/coords';
 
 export const help = writable({
   currentFocus: 'default',
@@ -8,12 +8,12 @@ export const help = writable({
     help.update(state => ({
       ...state,
       currentFocus: focus,
-      currentPosition: event ? fromEventToDomCoords(event) : undefined
+      currentPosition: event ? fromEventToDomCoords(event) : undefined,
     })),
   loseFocus: () =>
     help.update(state => ({
       ...state,
       currentFocus: 'default',
-      currentPosition: undefined
+      currentPosition: undefined,
     })),
 });

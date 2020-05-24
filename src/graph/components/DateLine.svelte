@@ -50,9 +50,11 @@
       colour: product.colour,
       dimensions: {
         x,
-        y: yOffset - (value - $products.scaleY.min) * $products.scaleY.unitHeight
+        y:
+          yOffset -
+          (value - $products.scaleY.min) * $products.scaleY.unitHeight,
       },
-      text: format(value)
+      text: format(value),
     };
   });
   $: colour = $help.currentFocus === 'dateline' ? 'darkorange;' : 'black';

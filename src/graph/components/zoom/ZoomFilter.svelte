@@ -5,9 +5,11 @@
 
   $: zoomBounds = {
     x1:
-      left.width + $products.scaleX.minInterval * $products.scaleXForAll.intervalWidth,
+      left.width +
+      $products.scaleX.minInterval * $products.scaleXForAll.intervalWidth,
     x2:
-      left.width + $products.scaleX.maxInterval * $products.scaleXForAll.intervalWidth,
+      left.width +
+      $products.scaleX.maxInterval * $products.scaleXForAll.intervalWidth,
     y1: (1 - $products.scaleY.max / $products.scaleYForAll.max) * chart.height,
     y2: ($products.scaleY.min / $products.scaleYForAll.max) * chart.height,
   };
@@ -36,7 +38,10 @@
     width: zoomBounds.x2 - zoomBounds.x1,
     height: zoomBounds.y2,
   };
-  $: style = $help.currentFocus === 'zoomWindow' ? 'fill: darkorange' : 'fill: lightgrey';
+  $: style =
+    $help.currentFocus === 'zoomWindow'
+      ? 'fill: darkorange'
+      : 'fill: lightgrey';
 </script>
 
 <rect {...lft} {style}></rect>

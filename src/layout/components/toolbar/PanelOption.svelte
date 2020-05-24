@@ -5,7 +5,10 @@
 
   export let panelContent;
 
-  $: style = $help.currentFocus === panelContent.helpId ? 'fill: darkorange; transition: fill 0.6s' : 'fill: white;';
+  $: style =
+    $help.currentFocus === panelContent.helpId
+      ? 'fill: darkorange; transition: fill 0.6s'
+      : 'fill: white;';
 </script>
 
 {#if $layout.panelContent !== panelContent}

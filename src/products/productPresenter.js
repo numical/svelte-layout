@@ -31,9 +31,11 @@ export const products = writable({
     if (swipe === InvalidSwipe) return;
     products.update(state => {
       const { minInterval, maxInterval } = state.scaleX;
-      const desiredMin = (swipe === SwipeLeft) ? 2 * minInterval - maxInterval : maxInterval;
-      const desiredMax = (swipe === SwipeLeft) ? minInterval : 2 * maxInterval - minInterval
-      return affectIntervalChange(state,desiredMin, desiredMax);
+      const desiredMin =
+        swipe === SwipeLeft ? 2 * minInterval - maxInterval : maxInterval;
+      const desiredMax =
+        swipe === SwipeLeft ? minInterval : 2 * maxInterval - minInterval;
+      return affectIntervalChange(state, desiredMin, desiredMax);
     });
   },
   toggleVisibility: product => {
@@ -41,12 +43,12 @@ export const products = writable({
       product.visible = !product.visible;
       const { all, scaleX } = state;
       const { minInterval, maxInterval } = scaleX;
-      const visible =  calcVisible(all, minInterval, maxInterval);
+      const visible = calcVisible(all, minInterval, maxInterval);
       return {
         ...state,
         scaleY: scaleY(visible),
-        visible
-      }
+        visible,
+      };
     });
-  }
+  },
 });

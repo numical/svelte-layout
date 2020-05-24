@@ -1,10 +1,3 @@
-<svelte:head>
-  <link
-          rel="stylesheet"
-          href="https://unpkg.com/carbon-components@10.9.0/css/carbon-components.min.css"
-  />
-</svelte:head>
-
 <script>
   import { ToggleSmall } from 'carbon-components-svelte';
   import { graph } from '../../graph/graphManager';
@@ -40,10 +33,21 @@
     : "Today's value:";
 </script>
 
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/carbon-components@10.9.0/css/carbon-components.min.css"
+  />
+</svelte:head>
 <div class="container" {style}>
   <div class="header">
     <div class="toggle">
-      <ToggleSmall toggled="{getToggled()}" labelA="" labelB="" on:change={toggleVisibility}/>
+      <ToggleSmall
+        toggled="{getToggled()}"
+        labelA=""
+        labelB=""
+        on:change="{toggleVisibility}"
+      />
     </div>
     <div class="title" style="{titleStyle}">{product.name}</div>
   </div>
