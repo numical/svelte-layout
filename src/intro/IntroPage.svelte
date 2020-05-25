@@ -20,11 +20,11 @@
 
 <main transition:fade={{duration: 1000}}>
 
-  <div class="step">
+  <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
     <svelte:component this="{steps[step]}" {next} />
-  </div>
+  </svg>
 
-  <div class="close">
+  <div>
     <a href="#" on:click="{close}">Skip intro</a>
   </div>
 
@@ -34,16 +34,14 @@
   main {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-flow: column nowrap;
   }
-  .step {
-    flex: 1 1 0;
+  svg {
+    height: calc(100% - 2rem);
+    width: 100%;
   }
-  .close {
-    flex: none;
+  div {
+    height: 2rem;
     text-align: center;
-    padding: 1rem;
   }
   a:hover {
     color: darkorange;
