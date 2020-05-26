@@ -1,5 +1,6 @@
 <script>
   import { fade } from 'svelte/transition';
+  import Timeline from './Timeline';
   export let next;
 
   const borderProps = {
@@ -18,40 +19,29 @@
     x: 500,
     y: 480,
   };
-  
+
   const showMsg = msg => () => {
     textMsg = msg;
     textStyle = 'animation: intro-text-appear 2s linear;';
-  }
-  const hideMsg = () => textStyle = 'animation: intro-text-disappear 1s linear;';
-
-  const timeLine = {
-    4: showMsg('This is a line.'),
-    7: hideMsg,
-    8: showMsg('Not very interesting is it?'),
-    10: hideMsg,
-    11: showMsg("Let's make it more interesting"),
-    13: hideMsg,
-    14: showMsg("Let's make it about money."),
-    16: hideMsg,
-    17: showMsg("Let's make it about your money.")
   };
 
-  const tick = () => setTimeout(() => {
-    clockTick += 1;
-    if(timeLine[clockTick]) {
-      timeLine[clockTick]();
-    }
-    if (clockTick < 20) {
-      tick();
-    }
-  }, 1000);
+  const hideMsg = () =>
+    (textStyle = 'animation: intro-text-disappear 0.5s linear;');
 
-  let textMsg =  '';
+  let textMsg = '';
   let textStyle = 'opacity: 0;';
-  let clockTick = 0;
 
-  tick();
+  new Timeline()
+    .plus(40, showMsg('This is a line.'))
+    .plus(30, hideMsg)
+    .plus(5, showMsg('Not very interesting is it?'))
+    .plus(20, hideMsg)
+    .plus(5, showMsg("Let's make it more interesting"))
+    .plus(20, hideMsg)
+    .plus(5, showMsg("Let's make it about money."))
+    .plus(20, hideMsg)
+    .plus(5, showMsg("Let's make it about your money."))
+    .start();
 </script>
 
 <polyline {...borderProps}></polyline>
