@@ -20,7 +20,7 @@
 
 <main transition:fade={{duration: 1000}}>
 
-  <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
+  <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid">
     <svelte:component this="{steps[step]}" {next} />
   </svg>
 
@@ -37,7 +37,7 @@
   }
   svg {
     height: calc(100% - 2rem);
-    width: 100%;
+    width: 100%
   }
   div {
     height: 2rem;

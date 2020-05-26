@@ -18,34 +18,45 @@
     x: 500,
     y: 480,
   };
+  
+  const showMsg = msg => () => {
+    textMsg = msg;
+    textStyle = 'animation: intro-text-appear 2s linear;';
+  }
+  const hideMsg = () => textStyle = 'animation: intro-text-disappear 1s linear;';
 
-  const words = [
-    'This is a line.',
-    'This is a line.',:wq
+  const timeLine = {
+    4: showMsg('This is a line.'),
+    7: hideMsg,
+    8: showMsg('Not very interesting is it?'),
+    10: hideMsg,
+    11: showMsg("Let's make it more interesting"),
+    13: hideMsg,
+    14: showMsg("Let's make it about money."),
+    16: hideMsg,
+    17: showMsg("Let's make it about your money.")
+  };
 
-    'This is a line.',
-    'This is a line.',
-    'Not very interesting is it?',
-    "Let's make it more interesting",
-    "Let's make it about money.",
-    "Let's make it about your money.",
-  ];
-
-  let clockTick = 0;
-
-  let tick = () => setTimeout(() => {
+  const tick = () => setTimeout(() => {
     clockTick += 1;
-    if (clockTick < 7) {
+    if(timeLine[clockTick]) {
+      timeLine[clockTick]();
+    }
+    if (clockTick < 20) {
       tick();
     }
-  }, 2000);
-  tick();
+  }, 1000);
 
+  let textMsg =  '';
+  let textStyle = 'opacity: 0;';
+  let clockTick = 0;
+
+  tick();
 </script>
 
 <polyline {...borderProps}></polyline>
 <line {...lineProps}></line>
-<text {...textProps}>{words[clockTick]}</text>
+<text {...textProps} style="{textStyle}">{textMsg}</text>
 
 <style>
   polyline {
@@ -67,8 +78,6 @@
   text {
     text-anchor: middle;
     font-size: x-large;
-    opacity: 0;
-    animation: text-appear 8s linear;
     animation-fill-mode: forwards;
   }
   @keyframes border-appear {
@@ -92,14 +101,6 @@
     100% {
       stroke: black;
       stroke-dashoffset: 0;
-    }
-  }
-  @keyframes text-appear {
-    75% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
     }
   }
 </style>
