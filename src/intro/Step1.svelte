@@ -3,21 +3,61 @@
   import Timeline from './Timeline';
   export let next;
 
-  const borderProps = {
-    points: '10,10 10,990, 990,990 990,10 10,10',
-    fill: 'none',
-  };
-
-  const lineProps = {
-    x1: 100,
-    x2: 900,
-    y1: 500,
-    y2: 500,
-  };
-
-  const textProps = {
-    x: 500,
-    y: 480,
+  const props = {
+    border: {
+      points: '10,10 10,990, 990,990 990,10 10,10',
+      fill: 'none',
+    },
+    line: {
+      x1: 50,
+      x2: 950,
+      y1: 500,
+      y2: 500,
+      class: 'line'
+    },
+    text: {
+      x: 500,
+      y: 480,
+      class: 'mainText'
+    },
+    xAxis: {
+      x1: 50,
+      x2: 950,
+      y1: 950,
+      y2: 950,
+      class: 'line'
+    },
+    yAxis: {
+      x1: 50,
+      x2: 50,
+      y1: 950,
+      y2: 50,
+      class: 'line'
+    },
+    xAxisArrow: {
+      x1: 950,
+      y1: 950,
+      x2: 940,
+      y2: 960,
+      class: 'arrow'
+    },
+    yAxisArrow: {
+      x1: 50,
+      y1: 50,
+      x2: 40,
+      y2: 60,
+      class: 'arrow'
+    },
+    currency: {
+      x: 35,
+      y: 80,
+      class: 'label'
+    },
+    time: {
+      x: 895,
+      y: 965,
+      class: 'label'
+    }
   };
 
   const showMsg = msg => () => {
@@ -28,25 +68,45 @@
   const hideMsg = () =>
     (textStyle = 'animation: intro-text-disappear 0.5s linear;');
 
+  const incrementSubStep = description => () => (subStep = subStep + 1);
+
   let textMsg = '';
   let textStyle = 'opacity: 0;';
+  let subStep = 0;
 
   new Timeline()
-    .plus(40, showMsg('This is a line.'))
+    .plus(20, incrementSubStep('show line and text'))
+    .plus(20, showMsg('This is a line.'))
     .plus(30, hideMsg)
     .plus(5, showMsg('Not very interesting is it?'))
     .plus(20, hideMsg)
-    .plus(5, showMsg("Let's make it more interesting"))
+    .plus(5, showMsg("Let's make it more interesting:"))
     .plus(20, hideMsg)
     .plus(5, showMsg("Let's make it about money."))
     .plus(20, hideMsg)
     .plus(5, showMsg("Let's make it about your money."))
+    .plus(10, incrementSubStep('show axes'))
+    .plus(10, incrementSubStep('add axes labels'))
     .start();
 </script>
 
-<polyline {...borderProps}></polyline>
-<line {...lineProps}></line>
-<text {...textProps} style="{textStyle}">{textMsg}</text>
+<polyline {...props.border}></polyline>
+{#if subStep > 0}
+  <line {...props.line}></line>
+  <text {...props.text} style="{textStyle}">{textMsg}</text>
+{/if}
+}
+{#if subStep > 1}
+  <line {...props.xAxis}></line>
+  <line {...props.yAxis}></line>
+{/if}
+}
+{#if subStep > 2}
+  <line {...props.xAxisArrow}></line>
+  <line {...props.yAxisArrow}></line>
+  <text {...props.currency}>£</text>
+  <text {...props.time}>years</text>
+{/if}
 
 <style>
   polyline {
@@ -57,18 +117,43 @@
     animation: border-appear 2s linear;
     animation-fill-mode: forwards;
   }
-  line {
+  .line {
     stroke: darkorange;
     stroke-width: 2;
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-appear 8s linear;
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: line-appear 4s linear;
     animation-fill-mode: forwards;
   }
-  text {
+  .mainText {
     text-anchor: middle;
     font-size: x-large;
     animation-fill-mode: forwards;
+  }
+  .arrow {
+    stroke-width: 2;
+    opacity: 0;
+    animation: arrow-appear 2s linear;
+    animation-fill-mode: forwards;
+  }
+  .label {;
+    opacity: 0;
+    animation: label-appear 2s linear;
+    animation-fill-mode: forwards;
+  }
+  @keyframes line-appear {
+    0% {
+      stroke: darkorange;
+      stroke-dashoffset: 900;
+    }
+    50% {
+      stroke: darkorange;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      animation: label-appear 2s linear;
+      animation-fill-mode: forwards;
+    }
   }
   @keyframes border-appear {
     to {
@@ -76,21 +161,37 @@
     }
   }
   @keyframes line-appear {
-    37.5% {
+    0% {
       stroke: darkorange;
-      stroke-dashoffset: 800;
+      stroke-dashoffset: 900;
     }
-    62.5% {
-      stroke: darkorange;
-      stroke-dashoffset: 0;
-    }
-    75% {
+    50% {
       stroke: darkorange;
       stroke-dashoffset: 0;
     }
     100% {
       stroke: black;
       stroke-dashoffset: 0;
+    }
+  }
+  @keyframes arrow-appear {
+    0% {
+      stroke: darkorange;
+      opacity: 0
+    }
+    100% {
+      stroke: black;
+      opacity: 1
+    }
+  }
+  @keyframes label-appear {
+    0% {
+      color: darkorange;
+      opacity: 0
+    }
+    100% {
+      color: black;
+      opacity: 1
     }
   }
 </style>
