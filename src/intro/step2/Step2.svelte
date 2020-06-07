@@ -3,8 +3,8 @@
 </script>
 
 <div>
-  <h1>Step 2/h1>
-  <h2>TBD/h2>
+  <h1>Step 2</h1>
+  <h2>TBD</h2>
   <a href="#" on:click="{next}">Start App</a>
 </div>
 

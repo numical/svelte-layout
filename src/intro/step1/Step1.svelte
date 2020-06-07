@@ -34,8 +34,8 @@
                   'animation: deemphasise-text 2s ease-out; animation-fill-mode: forwards;');
 
   const tilt = () => {
-    lineStyle = 'transition: 2s linear; rotate: -45deg; scale: 1.41;';
-    textStyle = 'transition: 2s linear; rotate: -45deg;';
+    lineStyle = 'transition: 2s linear; transform: rotate(-45deg) scale(1.41);';
+    textStyle = 'transition: 2s linear; transform: rotate(-45deg);';
   };
 
   const dim = () => {
