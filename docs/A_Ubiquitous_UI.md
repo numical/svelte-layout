@@ -41,25 +41,29 @@
     * either orientation
       * lots of faff vertical vs horizontal
       * use of overlays and opacity instead
- 1. I vs O
+    * **LESSON #1**: live within your real estate (lesson from TB)
+    * **LESSON #2**: progressive disclosure
+ 1. Gestures
     * easy switching
     * drag fine but swipe much better
- 1. Gestures
     * spectrum: mouse > touch pad > touch screen
     * spectrum: hover > click > drag > pinch
     * multi-input - user decides!
     * wild west (no reliable library)
-    * discipline - heirarchy
-      * what is swipe for?
+    * **LESSON #3**: discipline: hierachy 
+    * **LESSON #4**: roll your own
 1. Purpose
     * functionality vs bling
     * what scale, prevent user getting lost  
     * animate changes / transitions
       * product appearance
       * y axis labels
+    * **LESSON #5**: what helps user as opposed to what wows them (as opposed to what wows the dev)
 1. Discoverable
    * help system
    * minimal vs distracting 
    * single orange element - does not work for touch
+    * **LESSON #6**: 'active' (discoverable) vs 'passive' (familiarity)
+    * **LESSON #7**: hard - no solution for touch-first interfaces yet 
 1. Finally: Elephant in the room
     * a conversational interface
