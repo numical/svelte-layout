@@ -3,9 +3,9 @@
 </script>
 
 <div>
-  <h1>Intro Page</h1>
-  <h2>Step 3</h2>
-  <a href="#" on:click="{next}">>></a>
+  <h1>Step 2/h1>
+  <h2>TBD/h2>
+  <a href="#" on:click="{next}">Start App</a>
 </div>
 
 <style>

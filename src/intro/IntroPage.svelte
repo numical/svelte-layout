@@ -19,31 +19,12 @@
 </script>
 
 <main transition:fade={{duration: 1000}}>
-
-  <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid">
-    <svelte:component this="{steps[step]}" {next} />
-  </svg>
-
-  <div>
-    <a href="#" on:click="{close}">Skip intro</a>
-  </div>
-
+  <svelte:component this="{steps[step]}" {next} {close} />
 </main>
 
 <style>
   main {
     width: 100%;
     height: 100%;
-  }
-  svg {
-    height: calc(100% - 2rem);
-    width: 100%
-  }
-  div {
-    height: 2rem;
-    text-align: center;
-  }
-  a:hover {
-    color: darkorange;
   }
 </style>
