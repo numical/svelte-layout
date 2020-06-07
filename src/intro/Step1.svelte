@@ -66,16 +66,16 @@
     } else {
       textMsg = [msg, '', ''];
     }
-    textStyle = 'animation: intro-text-appear 2s linear;';
+    textStyle = 'animation: text-appear 2s linear;';
   };
 
   const hideMsg = () =>
-    (textStyle = 'animation: intro-text-disappear 0.5s linear;');
+    (textStyle = 'animation: text-disappear 0.5s linear;');
 
   const incrementSubStep = description => () => (subStep = subStep + 1);
 
   const deEmphasiseText = () =>
-          (emphasisTextStyle = 'animation: intro-deemphasise-text 2s ease-out; animation-fill-mode: forwards;');
+          (emphasisTextStyle = 'animation: deemphasise-text 2s ease-out; animation-fill-mode: forwards;');
 
   let textMsg = ['', '', ''];
   let textStyle = 'opacity: 0;';
@@ -209,6 +209,32 @@
     100% {
       color: black;
       opacity: 1;
+    }
+  }
+  @keyframes -global-text-appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes -global-text-disappear {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes -global-deemphasise-text {
+    0% {
+      fill: darkorange;
+      font-weight: bold;
+    }
+    100% {
+      fill: black;
+      font-weight: normal;
     }
   }
 </style>

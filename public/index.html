@@ -7,8 +7,21 @@
     <title>Svelte Layout Demo</title>
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/global.css" />
     <link rel="stylesheet" href="/build/bundle.css" />
+
+    <style>
+      html,
+      body {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        box-sizing: border-box;
+      }
+    </style>
 
     <script defer src="/build/bundle.js"></script>
   </head>
