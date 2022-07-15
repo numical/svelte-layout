@@ -23,7 +23,7 @@
     "rollup-plugin-terser": "^5.1.2",
     "sirv-cli": "^0.4.4",
     "storage-available": "^1.1.0",
-    "svelte": "^3.0.0",
+    "svelte": "^3.49.0",
     "tap": "^14.10.7"
   },
   "dependencies": {}
